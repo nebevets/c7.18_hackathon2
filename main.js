@@ -24,7 +24,7 @@ $(document).ready(initializeApp);
 /**  Define all global variables here.  **/
 const player = {};
 let clueImg = {};
-let guessImg = {};
+let guessImg;
 const clarifai = new Clarifai.App({apiKey: '51996ceba79e4ddb90fe027b1cc20be4'});
 
 let canvas;
@@ -477,10 +477,7 @@ function handleImage(){
 		img = new Image();
 		img.src = event.target.result;
 		let clarifaiBase64Obj = {'base64': img.src.substr( ( img.src.indexOf('4')+2 ) )}
-		clarifai.models.predict(Clarifai.GENERAL_MODEL, clarifaiBase64Obj).then(
-			function(response){
-				console.log('Call Worked', response);
-			});
+		guessImg = sendToClarifai(clarifaiBase64Obj);
 	}
 	reader.readAsDataURL(event.target.files[0]);
 }
