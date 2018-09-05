@@ -128,8 +128,11 @@ function createCluesOnDom(clueObj){
 	});
 	let newUl = $('<ul>');
 	let newLi1 = $('<li>', {
-		'text': 'This is currently filler text FIXME'
+		'text': 'Here are your clues:'
 	});
+
+  let newOl = $('<ol>');
+
 	let newFileForm = $('<div>', {
 		'class': 'form-group'
 	});
@@ -158,7 +161,12 @@ function createCluesOnDom(clueObj){
 
 
 
-
+  for(var i = 0; i < 5; i++) {
+    newOl.append($('<li>', {
+      text: clueImg[i].name
+    }))
+  };
+  newLi1.append(newOl);
 	newUl.append(newLi1);
 	newFileForm.append(newLabel, newInput);
 	newButtonForm.append(newUploadButton, newLeaderBoardButton);
@@ -525,19 +533,3 @@ function addPlayerToLeaderBoard(playerObj){
 	newRow.append(newPlayerName, newPlayerScore);
 	return newRow
 }
-/****************************************************************************************************
-* description: Send image data to Clarifai to anaylyze image
- * @param: URL as a string
- * @return: Image anaylysis array
- */
-// function sendToClarifai(link, imgArray) {
-//   clarifai.models.predict(Clarifai.GENERAL_MODEL, link).then(
-//     response => {
-//       let clarifaiResponse = response;
-//       let imageAnalysis = clarifaiResponse.outputs[0].data.concepts;
-//       console.log(imageAnaylysis)
-//       imgArray = imageAnalysis;
-//     }
-//   );
-// }
-/****************************************************************************************************/
