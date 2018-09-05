@@ -477,7 +477,10 @@ function handleImage(){
 		img = new Image();
 		img.src = event.target.result;
 		let clarifaiBase64Obj = {'base64': img.src.substr( ( img.src.indexOf('4')+2 ) )}
-		guessImg = sendToClarifai(clarifaiBase64Obj);
+		clarifai.models.predict(Clarifai.GENERAL_MODEL, clarifaiBase64Obj).then(
+			function(response){
+				guessImg = response;
+			});
 	}
 	reader.readAsDataURL(event.target.files[0]);
 }
