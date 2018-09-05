@@ -23,7 +23,7 @@ $(document).ready(initializeApp);
 
 /**  Define all global variables here.  **/
 const player = {};
-let clueImg = {};
+let clueImg;
 let guessImg = {};
 const clarifai = new Clarifai.App({apiKey: '51996ceba79e4ddb90fe027b1cc20be4'});
 
@@ -50,7 +50,7 @@ Randy Dang
 
 */
 function initializeApp(){
-	
+
 	canvas = $('#imageCanvas');
 	ctx = canvas[0].getContext('2d');
 	addEventHandlers();
@@ -114,7 +114,7 @@ function getImageDataFromWatson(img){
  * @param: clueObj
  * @return: none
  */
-function createCluesOnDom(clueObj){  
+function createCluesOnDom(clueObj){
 	let newCluesContainer = $('<div>', {
 		class: 'cluesPage form-group'
 	});
@@ -174,12 +174,12 @@ function createCluesOnDom(clueObj){
  * @return:
  */
 
-function instructionsPage(){  
+function instructionsPage(){
 	let newLandingPageContainer = $('<div>', {
 		'class': 'landingPage form-group'
 	});
 	let newInstructions = $('<h4>', {
-		text: `This is a image based scavenger hunt game. IBM's AI, Watson, will pick an random image from Flickr's database, and evaluate the image. 
+		text: `This is a image based scavenger hunt game. IBM's AI, Watson, will pick an random image from Flickr's database, and evaluate the image.
 				You will see the evaluation from Watson, and then you must send Watson a picture that you believe best represents his initial evaluation.
 				You will receive points, depending on how similar your image evaluation is to the original image evaluation. Good luck on the hunt!`,
 		class: 'instructions'
@@ -214,7 +214,7 @@ function instructionsPage(){
 	newLandingPageContainer.append(newInstructions, newPlayerForm, newButtonForm);
 	$('.container').append(newLandingPageContainer);
 
-  getImageDataFromWatson();    
+  getImageDataFromWatson();
 
 }
 /****************************************************************************************************
@@ -359,6 +359,16 @@ function getRandomImageFromFlickr(){
       let flickrImgURL = `https://farm${randomPhoto.farm}.staticflickr.com/${randomPhoto.server}/${randomPhoto.id}_${randomPhoto.secret}.jpg`
 
       console.log(flickrImgURL);
+
+      clarifai.models.predict(Clarifai.GENERAL_MODEL, flickrImgURL).then(
+        response => {
+          let clarifaiResponse = response;
+          console.log(clarifaiResponse.outputs[0].data.concepts)
+          clueImg = clarifaiResponse.outputs[0].data.concepts;
+        }
+      )
+
+      // sendToClarifai(flickrImgURL, clueImg);
     }
   }
   $.ajax(flickrConfig);
@@ -500,13 +510,13 @@ function decompressImageOnCanvas(){
  * @param:
  * @return:
  */
-function addPlayerToLeaderBoard(playerObj){  
+function addPlayerToLeaderBoard(playerObj){
 	let newRow = $('<div>', {
 		'class': 'row'
 	});
 	let newPlayerName = $('<div>', {
 		'class': 'col-xs-6',
-		'text': playerObj.name  
+		'text': playerObj.name
 	});
 	let newPlayerScore = $('<div>', {
 		'class': 'col-xs-6',
@@ -516,16 +526,18 @@ function addPlayerToLeaderBoard(playerObj){
 	return newRow
 }
 /****************************************************************************************************
-* description:
- * @param:
- * @return:
+* description: Send image data to Clarifai to anaylyze image
+ * @param: URL as a string
+ * @return: Image anaylysis array
  */
-// function (){  
-   
-  
-
-
-
-
+// function sendToClarifai(link, imgArray) {
+//   clarifai.models.predict(Clarifai.GENERAL_MODEL, link).then(
+//     response => {
+//       let clarifaiResponse = response;
+//       let imageAnalysis = clarifaiResponse.outputs[0].data.concepts;
+//       console.log(imageAnaylysis)
+//       imgArray = imageAnalysis;
+//     }
+//   );
 // }
 /****************************************************************************************************/
