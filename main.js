@@ -422,7 +422,7 @@ function updatePlayerScore(){
  * @return: none
  */
 function waitingModal(){
-  getTrumpQuote();
+  getQuote();
 
 
 
@@ -431,9 +431,9 @@ function waitingModal(){
 /****************************************************************************************************
 * description:
  * @param: none
- * @return: trumpQuote
+ * @return: Quote
  */
-function getTrumpQuote(){
+function getQuote(){
 
 
 
@@ -471,7 +471,7 @@ function receiveDataFromFirebase(){
  */
 function handleImage(){
 
-	let img;
+  	let img;
 	let reader = new FileReader();
 	reader.onload = function(event){
 		img = new Image();
