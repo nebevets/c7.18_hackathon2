@@ -134,6 +134,7 @@ function createCluesOnDom(clueObj){
 	let newInput = $('<input>', {
 		'class': 'form-control',
 		'type': 'file',
+		'id': 'uploadFile',
 		'name': 'uploadFile'
 	});
 	let newButtonForm = $('<div>', {
@@ -360,12 +361,41 @@ function getRandomImageFromFlickr(){
  * @param:
  * @return:
  */
-function getLeaderBoardModal(){
+function getLeaderBoardPage(){
+	let newLeaderBoardPage = $('<div>', {
+		'class': 'leaderBoard'
+	});
+	let firstRow = $('<div>', {
+		'class': 'row'
+	});
+	let nameH3 = $('<h3>', {
+		'class': 'col-xs-6',
+		'text': 'Name'
+	});
+	let statsH3 = $('<h3>', {
+		'class': 'col-xs-6',
+		'text': 'Stats'
+	});
+	let buttonRow = $('<div>', {
+		'class': 'row'
+	});
+	let buttonCol = $('<div>', {
+		'class': 'col-xs-12'
+	})
+	let getClueButton = $('<button>', {
+		'class': 'getClue btn btn-default',
+		'text': 'Get New Clue'
+	});
 
-
-
-
-
+	buttonCol.append(getClueButton);
+	buttonRow.append(buttonCol);
+	firstRow.append(nameH3, statsH3);
+	newLeaderBoardPage.append(firstRow);
+	newLeaderBoardPage.append(addPlayerToLeaderBoard({name: 'John Doe', score: '78%'}));
+	newLeaderBoardPage.append(addPlayerToLeaderBoard({name: 'Saul Goodman', score: '88%'}));
+	newLeaderBoardPage.append(addPlayerToLeaderBoard({name: 'Sally Dogood', score: '99%'}));
+	newLeaderBoardPage.append(buttonRow);
+	$('.container').append(newLeaderBoardPage)
 }
 /****************************************************************************************************
 * description:
@@ -458,14 +488,21 @@ function decompressImageOnCanvas(){
  * @param:
  * @return:
  */
-// function (){  
-   
-  
-
-
-
-
-// }
+function addPlayerToLeaderBoard(playerObj){  
+	let newRow = $('<div>', {
+		'class': 'row'
+	});
+	let newPlayerName = $('<div>', {
+		'class': 'col-xs-6',
+		'text': playerObj.name  
+	});
+	let newPlayerScore = $('<div>', {
+		'class': 'col-xs-6',
+		'text': playerObj.score
+	});
+	newRow.append(newPlayerName, newPlayerScore);
+	return newRow
+}
 /****************************************************************************************************
 * description:
  * @param:
