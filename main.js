@@ -246,10 +246,72 @@ function compareClueImgToGuessImg(clueImgObj, guessImgObj){
  * @param: none
  * @return: none
  */
-function getResultsModal(){
+function getResultsPage(){
+	let newResultsPage = $('<div>', {
+		'class': 'resultsPage'
+	});
+	let firstRow = $('<div>', {
+		'class': 'row'
+	});
+	let clueCol = $('<div>', {
+		'class': 'col-sm-4'
+	});
+	let clueThumbnail = $('<div>', {
+		'class':'thumbnail'
+	});
+	let clueImg = $('<img>', {
+		'src': 'clue.jpgFIXME',
+		'alt': 'your clue'
+	});
+	let clueCaption = $('<div>', {
+		'class': 'caption'
+	});
+	let cluePara = $('<p>', {
+		'text': 'This was your clue...'
+	});
+	let userCol = $('<div>', {
+		'class': 'col-sm-4'
+	});
+	let userThumbnail = $('<div>', {
+		'class':'thumbnail'
+	});
+	let userImg = $('<img>', {
+		'src': 'found.jpgFIXME',
+		'alt': 'you found'
+	});
+	let userCaption = $('<div>', {
+		'class': 'caption'
+	});
+	let userPara = $('<p>', {
+		'text': 'This is what you found...'
+	});
+	let secondRow = $('<div>', {
+		'class': 'row'
+	});
+	let buttonCol = $('<div>', {
+		'class': 'col-sm-8'
+	});
+	let getClueButton = $('<button>', {
+		'type': 'button',
+		'class': 'getClue btn btn-default',
+		'text': 'Get New Clue'
+	});
+	let newLeaderBoardButton = $('<button>', {
+		'class': 'leaderBoard btn btn-info',
+		'text': 'Leader Board'
+	});
 
-
-
+	clueCaption.append(cluePara)
+	clueThumbnail.append(clueImg, clueCaption);
+	clueCol.append(clueThumbnail);
+	userCaption.append(userPara)
+	userThumbnail.append(userImg, userCaption);
+	userCol.append(userThumbnail);
+	firstRow.append(clueCol, userCol);
+	buttonCol.append(getClueButton, newLeaderBoardButton);
+	secondRow.append(buttonCol);
+	newResultsPage.append(firstRow, secondRow);
+	$('.container').append(newResultsPage);
 
 
 }
@@ -396,45 +458,25 @@ function decompressImageOnCanvas(){
  * @param:
  * @return:
  */
-<<<<<<< HEAD
 // function (){  
    
   
-=======
-// function (){
->>>>>>> 65b4998edb1701fe413e45dae88f3353c54ba646
 
 
 
 
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 65b4998edb1701fe413e45dae88f3353c54ba646
 // }
 /****************************************************************************************************
 * description:
  * @param:
  * @return:
  */
-<<<<<<< HEAD
 // function (){  
    
   
-=======
-// function (){
->>>>>>> 65b4998edb1701fe413e45dae88f3353c54ba646
 
 
-
-
-<<<<<<< HEAD
-// }
-/****************************************************************************************************/
-=======
 
 
 // }
 /****************************************************************************************************/
->>>>>>> 65b4998edb1701fe413e45dae88f3353c54ba646
