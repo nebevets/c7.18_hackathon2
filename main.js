@@ -109,10 +109,51 @@ function getImageDataFromWatson(img){
  * @return: none
  */
 function createCluesOnDom(clueObj){  
-    
-  
+	let newCluesContainer = $('<div>', {
+		class: 'cluesPage form-group'
+	});
+	let newInstructions = $('<h3>', {
+		'class': 'instructions form-group',
+		'text': 'Use the clues below to find an item. Once you have located it, take a photo of it for upload.',
+	});
+	let newClues = $('<div>', {
+		'class': 'clues form-group'
+	});
+	let newUl = $('<ul>');
+	let newLi1 = $('<li>', {
+		'text': 'This is currently filler text FIXME'
+	});
+	let newFileForm = $('<div>', {
+		'class': 'form-group'
+	});
+	let newLabel = $('<label>', {
+		'class': 'control-label',
+		'for': 'uploadFile',
+		'text': 'Select your file here: '
+	});
+	let newInput = $('<input>', {
+		'class': 'form-control',
+		'type': 'file',
+		'name': 'uploadFile'
+	});
+	let newButtonForm = $('<div>', {
+		'class': 'form-group'
+	});
+	let newUploadButton = $('<button>', {
+		'class': 'upload btn btn-default',
+		'text': 'Upload'
+	});
+	let newLeaderBoardButton = $('<button>', {
+		'class': 'leaderBoard btn btn-info',
+		'text': 'Leader Board'
+	});
 
-
+	newUl.append(newLi1);
+	newFileForm.append(newLabel, newInput);
+	newButtonForm.append(newUploadButton, newLeaderBoardButton);
+	newClues.append(newUl);
+	newCluesContainer.append(newInstructions, newClues, newFileForm, newButtonForm);
+	$('.container').append(newCluesContainer);
 
 }
 /****************************************************************************************************
@@ -309,25 +350,25 @@ function decompressImageOnCanvas(){
  * @param:
  * @return: 
  */
-function (){  
+// function (){  
    
   
 
 
 
 
-}
+// }
 /****************************************************************************************************
 * description:
  * @param:
  * @return: 
  */
-function (){  
+// function (){  
    
   
 
 
 
 
-}
+// }
 /****************************************************************************************************/
