@@ -335,21 +335,17 @@ function resultsModalButtonHandler(){
  */
 function getRandomImageFromFlickr(){
   const apiKey = "2bcd2e195e7ea98f459f7bd6bdde6a29";
-  let searchKeyWord = "dog";
+  let searchKeyWordList = ["dog", "cat", "platypus", "micky_mouse", "disneyland"];
+  let randomKeyWord = searchKeyWordList[Math.floor(Math.random() * searchKeyWordList.length + 1)]
 
   const flickrConfig = {
-    url: `https://api.flickr.com/services/rest?method=flickr.photos.search&api_key=${apiKey}&format=json&nojsoncallback=1&text=${searchKeyWord}`,
+    url: `https://api.flickr.com/services/rest?method=flickr.photos.search&api_key=${apiKey}&format=json&nojsoncallback=1&text=${randomKeyWord}&per_page=5`,
     success: result => {
       let searchResults = result.photos.photo;
-      console.log(searchResults);
+      let randomPhoto = searchResults[Math.floor(Math.random() * searchResults.length + 1)]
+      console.log(randomPhoto);
 
-      let specificPhotoInfo = {};
-      specificPhotoInfo.farm = searchResults[0].farm;
-      specificPhotoInfo.server = searchResults[0].server;
-      specificPhotoInfo.id = searchResults[0].id;
-      specificPhotoInfo.secret = searchResults[0].secret;
-
-      let flickrImgURL = `https://farm${specificPhotoInfo.farm}.staticflickr.com/${specificPhotoInfo.server}/${specificPhotoInfo.id}_${specificPhotoInfo.secret}.jpg`
+      let flickrImgURL = `https://farm${randomPhoto.farm}.staticflickr.com/${randomPhoto.server}/${randomPhoto.id}_${randomPhoto.secret}.jpg`
 
       console.log(flickrImgURL);
     }
