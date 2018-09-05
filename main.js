@@ -121,6 +121,13 @@ function createCluesOnDom(clueObj){
  * @return: 
  */
 function instructionsModal(){  
+	var newPara = $('<p>', {
+		text: `This is a image based scavenger hunt game. IBM's AI, Watson, will pick an random image from Flickr's database, and evaluate the image. 
+				You will see the evaluation from Watson, and then you must send Watson a picture that you believe best represents his initial evaluation.
+				You will receive points, depending on how similar your image evaluation is to the original image evaluation. Good luck on the hunt!`,
+		class: 'instructions'
+	});
+	$('.modal-body').append(newPara)
   getImageDataFromWatson();    
 
 
