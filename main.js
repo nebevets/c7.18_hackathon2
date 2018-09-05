@@ -474,7 +474,6 @@ function handleImage(){
 	let img;
 	let reader = new FileReader();
 	reader.onload = function(event){
-		debugger;
 		img = new Image();
 		img.src = event.target.result;
 		let clarifaiBase64Obj = {'base64': img.src.substr( ( img.src.indexOf('4')+2 ) )}
