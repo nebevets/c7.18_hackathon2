@@ -432,8 +432,7 @@ function updatePlayerScore(){
  * @param: none
  * @return: none
  */
-function waitingModal(){
-  getQuote();
+function waitingModal(quote){
 
 
 
@@ -442,15 +441,19 @@ function waitingModal(){
 /****************************************************************************************************
 * description:
  * @param: none
- * @return: Quote
+ * @return: quote
  */
 function getQuote(){
-
-
-
-
-
-}
+	const quotesAndJokesConfig = {
+		datatype: 'json',
+		method: 'get',
+		url: `https://geek-jokes.sameerkumar.website/api`,
+		success: result => { 
+			waitingModal(result);
+		}
+	}
+	$.ajax(quotesAndJokesConfig);
+	}
 /****************************************************************************************************
 * description:
  * @param:
@@ -481,7 +484,6 @@ function receiveDataFromFirebase(){
  * @return: img base64
  */
 function handleImage(){
-
   	let img;
 	let reader = new FileReader();
 	reader.onload = function(event){
