@@ -16,22 +16,36 @@
     </head>
     <body>
         <div class="container">
-                <div class="cluesPage form-group">
-                        <h3 class="instructions form-group">Use the clues below to find an item. Once you have located it, take a photo of it for upload.</h3>
-                        <div class="clues form-group">
-                            <ul>
-                                <li>A black-handled screwdriver</li>
-                            </ul>
-                        </div>
-                        <div class="form-group">
-                            <label class="control-label" for="uploadFile">Select your file here: </label>
-                            <input class="form-control" type="file" name="uploadFile">
-                        </div>
-                        <div class="form-group">
-                            <button type="button" class="upload btn btn-default">Upload</button>
-                            <button type="button" class="leaderBoard btn btn-info">Leader Board</button>
-                        </div>
-                    </div>
+            <div class="landingPage form-group">
+                <h4 class="instructions form-group">This is a image based scavenger hunt game. IBM's AI, Watson, will pick an random image from Flickr's database, and evaluate the image. 
+                        You will see the evaluation from Watson, and then you must send Watson a picture that you believe best represents his initial evaluation.
+                        You will receive points, depending on how similar your image evaluation is to the original image evaluation. Good luck on the hunt!
+                </h4>
+                <div class="player form-group">
+                    <label class="control-label" for="playerName">Enter your name: </label>
+                    <input class="form-control" type="text" name="playerName">
+                </div>
+                <div class="form-group">
+                    <button type="button" class="goBtn btn btn-default">Go!</button>
+                    <button type="button" class="leaderBoard btn btn-info">Leader Board</button>
+                </div>
+            </div>
+            <div class="cluesPage form-group hidden">
+                <h3 class="instructions form-group">Use the clues below to find an item. Once you have located it, take a photo of it for upload.</h3>
+                <div class="clues form-group">
+                    <ul>
+                        <li>A black-handled screwdriver</li>
+                    </ul>
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="uploadFile">Select your file here: </label>
+                    <input class="form-control" type="file" name="uploadFile">
+                </div>
+                <div class="form-group">
+                    <button type="button" class="upload btn btn-default">Upload</button>
+                    <button type="button" class="leaderBoard btn btn-info">Leader Board</button>
+                </div>
+            </div>
         </div>
     </body>
 </html>
