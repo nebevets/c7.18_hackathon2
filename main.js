@@ -148,10 +148,12 @@ function createCluesOnDom(clueObj){
 		'class': 'form-group'
 	});
 	let newUploadButton = $('<button>', {
+		'type': 'button',
 		'class': 'upload btn btn-default',
 		'text': 'Upload'
 	});
 	let newLeaderBoardButton = $('<button>', {
+		'type': 'button',
 		'class': 'leaderBoard btn btn-info',
 		'text': 'Leader Board'
 	});
@@ -183,7 +185,7 @@ function instructionsPage(){
 		text: `This is a image based scavenger hunt game. IBM's AI, Watson, will pick an random image from Flickr's database, and evaluate the image.
 				You will see the evaluation from Watson, and then you must send Watson a picture that you believe best represents his initial evaluation.
 				You will receive points, depending on how similar your image evaluation is to the original image evaluation. Good luck on the hunt!`,
-		class: 'instructions'
+		class: 'instructions form-group'
 	});
 	let newPlayerForm = $('<div>', {
 		'class': 'player form-group'
@@ -202,11 +204,12 @@ function instructionsPage(){
 		'class': 'form-group'
 	});
 	let newGoBtn = $('<button>', {
-		'class': 'goBtn btn btn-default',
 		'type': 'button',
+		'class': 'goBtn btn btn-default',
 		'text': 'Go!'
 	});
 	let newLeaderBoardButton = $('<button>', {
+		'type': 'button',
 		'class': 'leaderBoard btn btn-info',
 		'text': 'Leader Board'
 	});
@@ -267,7 +270,7 @@ function getResultsPage(){
 		'class': 'row'
 	});
 	let clueCol = $('<div>', {
-		'class': 'col-sm-4'
+		'class': 'col-sm-6'
 	});
 	let clueThumbnail = $('<div>', {
 		'class':'thumbnail'
@@ -283,7 +286,7 @@ function getResultsPage(){
 		'text': 'This was your clue...'
 	});
 	let userCol = $('<div>', {
-		'class': 'col-sm-4'
+		'class': 'col-sm-6'
 	});
 	let userThumbnail = $('<div>', {
 		'class':'thumbnail'
@@ -302,7 +305,7 @@ function getResultsPage(){
 		'class': 'row'
 	});
 	let buttonCol = $('<div>', {
-		'class': 'col-sm-8'
+		'class': 'col-sm-12'
 	});
 	let getClueButton = $('<button>', {
 		'type': 'button',
@@ -310,6 +313,7 @@ function getResultsPage(){
 		'text': 'Get New Clue'
 	});
 	let newLeaderBoardButton = $('<button>', {
+		'type': 'button',
 		'class': 'leaderBoard btn btn-info',
 		'text': 'Leader Board'
 	});
@@ -401,6 +405,7 @@ function getLeaderBoardPage(){
 		'class': 'col-xs-12'
 	})
 	let getClueButton = $('<button>', {
+		'type': 'button',
 		'class': 'getClue btn btn-default',
 		'text': 'Get New Clue'
 	});
