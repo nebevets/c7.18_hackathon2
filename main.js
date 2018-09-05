@@ -25,13 +25,11 @@ $(document).ready(initializeApp);
 const player = {};
 let clueImg = {};
 let guessImg = {};
+const clarifai = new Clarifai.App({apiKey: '51996ceba79e4ddb90fe027b1cc20be4'});
 
+let canvas;
+let ctx;
 
-let imageLoader = $('#uploadFile');
-imageLoader.on('change', handleImage, false);
-let canvas = $('#imageCanvas');
-let ctx = canvas[0].getContext('2d');
-    
 
 
 
@@ -52,7 +50,10 @@ Randy Dang
 
 */
 function initializeApp(){
-  addEventHandlers();
+	
+	canvas = $('#imageCanvas');
+	ctx = canvas[0].getContext('2d');
+	addEventHandlers();
 
 
 
@@ -154,12 +155,17 @@ function createCluesOnDom(clueObj){
 		'text': 'Leader Board'
 	});
 
+
+
+
 	newUl.append(newLi1);
 	newFileForm.append(newLabel, newInput);
 	newButtonForm.append(newUploadButton, newLeaderBoardButton);
 	newClues.append(newUl);
 	newCluesContainer.append(newInstructions, newClues, newFileForm, newButtonForm);
 	$('.container').append(newCluesContainer);
+	let imageLoader = $('#uploadFile');
+	imageLoader.change(handleImage);
 
 }
 /****************************************************************************************************
@@ -463,15 +469,21 @@ function receiveDataFromFirebase(){
  * @param: none
  * @return: img base64
  */
-function compressImageOnCanvas(){
-  let img;
-  let reader = new FileReader();
-  reader.onload = function(event){
-    img = new Image();
-    img.src = event.target.result;
-  }
-  reader.readAsDataURL(event.target.files[0]);    
-  return img.src;
+function handleImage(){
+
+	let img;
+	let reader = new FileReader();
+	reader.onload = function(event){
+		debugger;
+		img = new Image();
+		img.src = event.target.result;
+		let clarifaiBase64Obj = {'base64': img.src.substr( ( img.src.indexOf('4')+2 ) )}
+		clarifai.models.predict(Clarifai.GENERAL_MODEL, clarifaiBase64Obj).then(
+			function(response){
+				console.log('Call Worked', response);
+			});
+	}
+	reader.readAsDataURL(event.target.files[0]);
 }
 /****************************************************************************************************
 * description:
