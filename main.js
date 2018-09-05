@@ -22,7 +22,7 @@ Ease of Use / Understanding : Was it easy to use the application / game, or if i
 $(document).ready(initializeApp);
 
 /**  Define all global variables here.  **/
-const player = {};
+const player = {name: null, score: 0};
 
 let clueImg;
 let guessImg;
@@ -250,11 +250,22 @@ function submitButtonHandler(event){
  * @param: clueImgObj and guessImgObj
  * @return:
  */
-function compareClueImgToGuessImg(clueImgObj, guessImgObj){
+function compareClueImgToGuessImg(clueImgArray, guessImgArray){
 
-
-
-
+	for( let outer = 0; outer < clueImgArray.length; outer++ ){
+		for( let inner = 0; inner < guessImgArray.length; inner++ ){
+			if( clueImgArray[ outer ].name === guessImgArray[ inner ].name ){
+				console.log(clueImgArray[outer].name, "is a match with", guessImgArray[inner].name);
+				player.score += 10;
+				if( clueImgArray[outer].value < guessImgArray[inner].value ){
+					player.score += (clueImgArray[outer].value / guessImgArray[inner].value) * 10
+				}
+				else{
+					player.score += (guessImgArray[outer].value / clueImgArray[inner].value) * 10
+				}
+			}
+		}
+	}
 
 }
 /****************************************************************************************************
