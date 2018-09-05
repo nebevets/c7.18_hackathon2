@@ -324,3 +324,13 @@ function (){
 
 }
 /****************************************************************************************************/
+
+	
+const app = new Clarifai.App({apiKey: '51996ceba79e4ddb90fe027b1cc20be4'});
+app.models.predict(Clarifai.GENERAL_MODEL, "URL").then(
+	function(response){
+		console.log('Call Worked', response);
+	},
+	function(err){
+		console.warn('Error contacting Clarifai');
+	});
