@@ -161,7 +161,7 @@ function createCluesOnDom(clueObj){
  * @param:
  * @return: 
  */
-function instructionsModal(){  
+function instructionsPage(){  
 	let newLandingPageContainer = $('<div>', {
 		'class': 'landingPage form-group'
 	});
