@@ -162,13 +162,45 @@ function createCluesOnDom(clueObj){
  * @return: 
  */
 function instructionsModal(){  
-	var newPara = $('<p>', {
+	let newLandingPageContainer = $('<div>', {
+		'class': 'landingPage form-group'
+	});
+	let newInstructions = $('<h4>', {
 		text: `This is a image based scavenger hunt game. IBM's AI, Watson, will pick an random image from Flickr's database, and evaluate the image. 
 				You will see the evaluation from Watson, and then you must send Watson a picture that you believe best represents his initial evaluation.
 				You will receive points, depending on how similar your image evaluation is to the original image evaluation. Good luck on the hunt!`,
 		class: 'instructions'
 	});
-	$('.modal-body').append(newPara)
+	let newPlayerForm = $('<div>', {
+		'class': 'player form-group'
+	});
+	let newLabel = $('<label>', {
+		'class': 'control-label',
+		'for': 'playerName',
+		'text': 'Enter your name: '
+	});
+	let newInput = $('<input>', {
+		'class': 'form-control',
+		'type': 'text',
+		'name': 'playerName'
+	});
+	let newButtonForm = $('<div>', {
+		'class': 'form-group'
+	});
+	let newGoBtn = $('<button>', {
+		'class': 'goBtn btn btn-default',
+		'type': 'button',
+		'text': 'Go!'
+	});
+	let newLeaderBoardButton = $('<button>', {
+		'class': 'leaderBoard btn btn-info',
+		'text': 'Leader Board'
+	});
+	newPlayerForm.append(newLabel, newInput);
+	newButtonForm.append(newGoBtn, newLeaderBoardButton);
+	newLandingPageContainer.append(newInstructions, newPlayerForm, newButtonForm);
+	$('.container').append(newLandingPageContainer);
+
   getImageDataFromWatson();    
 
 
