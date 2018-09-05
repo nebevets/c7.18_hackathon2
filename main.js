@@ -17,7 +17,7 @@ Innovative / Transformative : Did the project do something new and exciting? Was
 Ease of Use / Understanding : Was it easy to use the application / game, or if it was more complex, was the application or game able to provide you with tutorials or instructions that made understanding it a breeze.
 
 *****     7:00pm Thursday, September 6th, 2018    ******
-*/ 
+*/
 
 $(document).ready(initializeApp);
 
@@ -33,7 +33,7 @@ let guessImg = {};
 
 
 /***********************
-notes: 
+notes:
 Team 2
 Steve Benedict
 Gerald Blackmon
@@ -55,10 +55,10 @@ function initializeApp(){
 }
 
 /***************************************************************************************************
-* description: addClickHandlers for start button on plater star page, button for submit guess img, button to open leaderboard, button to go back to main page  
+* description: addClickHandlers for start button on plater star page, button for submit guess img, button to open leaderboard, button to go back to main page
 * @params: none
 * @returns: none
-*     
+*
 */
 function addEventHandlers(){
   submitButtonHandler();
@@ -72,21 +72,21 @@ function addEventHandlers(){
  * @param: none
  * @return: none
  */
-function getPlayerModal(){  
+function getPlayerModal(){
 
 
 
-  
-  
+
+
 }
 /****************************************************************************************************
-* description: 
+* description:
  * @param:
- * @return: 
+ * @return:
  */
-function playerModalButtonResponse(){  
-  instructionsModal();      
-  
+function playerModalButtonResponse(){
+  instructionsModal();
+
 
 
 
@@ -96,8 +96,8 @@ function playerModalButtonResponse(){
  * @param: img
  * @return: dataObj
  */
-function getImageDataFromWatson(img){  
-      
+function getImageDataFromWatson(img){
+
 
 
 
@@ -159,8 +159,9 @@ function createCluesOnDom(clueObj){
 /****************************************************************************************************
 * description: dom create instructions for game and allows time to send and receive data from servers, click to close, calls getImageDataFromWatson
  * @param:
- * @return: 
+ * @return:
  */
+
 function instructionsPage(){  
 	let newLandingPageContainer = $('<div>', {
 		'class': 'landingPage form-group'
@@ -203,16 +204,13 @@ function instructionsPage(){
 
   getImageDataFromWatson();    
 
-
-
-
 }
 /****************************************************************************************************
-* description: 
+* description:
  * @param: none
  * @return: none
  */
-function instructionsModalButtonResponse(){  
+function instructionsModalButtonResponse(){
   getImageDataFromWatson();
 
 
@@ -220,11 +218,11 @@ function instructionsModalButtonResponse(){
 
 }
 /****************************************************************************************************
-* description: 
+* description:
  * @param: event
  * @return: none
  */
-function submitButtonHandler(event){  
+function submitButtonHandler(event){
   getImageDataFromWatson();
 
 
@@ -234,10 +232,10 @@ function submitButtonHandler(event){
 /****************************************************************************************************
 * description: for in loop, compare keys and values gives points
  * @param: clueImgObj and guessImgObj
- * @return: 
+ * @return:
  */
-function compareClueImgToGuessImg(clueImgObj, guessImgObj){  
-      
+function compareClueImgToGuessImg(clueImgObj, guessImgObj){
+
 
 
 
@@ -248,8 +246,8 @@ function compareClueImgToGuessImg(clueImgObj, guessImgObj){
  * @param: none
  * @return: none
  */
-function getResultsModal(){  
-      
+function getResultsModal(){
+
 
 
 
@@ -260,7 +258,7 @@ function getResultsModal(){
  * @param: none
  * @return: none
  */
-function resultsModalButtonHandler(){  
+function resultsModalButtonHandler(){
   getImageDataFromWatson();
 
 
@@ -272,20 +270,36 @@ function resultsModalButtonHandler(){
  * @param: none
  * @return: Clue Image
  */
-function getRandomImageFromFlickr(){  
-      
+function getRandomImageFromFlickr(){
+  const apiKey = "2bcd2e195e7ea98f459f7bd6bdde6a29";
+  let searchKeyWord = "dog";
 
+  const flickrConfig = {
+    url: `https://api.flickr.com/services/rest?method=flickr.photos.search&api_key=${apiKey}&format=json&nojsoncallback=1&text=${searchKeyWord}`,
+    success: result => {
+      let searchResults = result.photos.photo;
+      console.log(searchResults);
 
+      let specificPhotoInfo = {};
+      specificPhotoInfo.farm = searchResults[0].farm;
+      specificPhotoInfo.server = searchResults[0].server;
+      specificPhotoInfo.id = searchResults[0].id;
+      specificPhotoInfo.secret = searchResults[0].secret;
 
+      let flickrImgURL = `https://farm${specificPhotoInfo.farm}.staticflickr.com/${specificPhotoInfo.server}/${specificPhotoInfo.id}_${specificPhotoInfo.secret}.jpg`
 
+      console.log(flickrImgURL);
+    }
+  }
+  $.ajax(flickrConfig);
 }
 /****************************************************************************************************
-* description: 
- * @param: 
- * @return: 
+* description:
+ * @param:
+ * @return:
  */
-function getLeaderBoardModal(){  
-      
+function getLeaderBoardModal(){
+
 
 
 
@@ -294,11 +308,11 @@ function getLeaderBoardModal(){
 /****************************************************************************************************
 * description:
  * @param:
- * @return: 
+ * @return:
  */
-function updatePlayerScore(){  
- 
-  
+function updatePlayerScore(){
+
+
 
 
 
@@ -308,7 +322,7 @@ function updatePlayerScore(){
  * @param: none
  * @return: none
  */
-function waitingModal(){  
+function waitingModal(){
   getTrumpQuote();
 
 
@@ -320,8 +334,20 @@ function waitingModal(){
  * @param: none
  * @return: trumpQuote
  */
-function getTrumpQuote(){  
-      
+function getTrumpQuote(){
+
+
+
+
+
+}
+/****************************************************************************************************
+* description:
+ * @param:
+ * @return:
+ */
+function sendDataToFirebase(){
+
 
 
 
@@ -330,23 +356,11 @@ function getTrumpQuote(){
 /****************************************************************************************************
 * description:
  * @param:
- * @return: 
+ * @return:
  */
-function sendDataToFirebase(){  
-   
-  
+function receiveDataFromFirebase(){
 
 
-
-}
-/****************************************************************************************************
-* description:
- * @param:
- * @return: 
- */
-function receiveDataFromFirebase(){  
-
-  
 
 
 
@@ -356,9 +370,9 @@ function receiveDataFromFirebase(){
  * @param: image
  * @return: compressedImage
  */
-function compressImageOnCanvas(){  
-   
-  
+function compressImageOnCanvas(){
+
+
 
 
 
@@ -369,9 +383,9 @@ function compressImageOnCanvas(){
  * @param: compressed Image
  * @return: image
  */
-function decompressImageOnCanvas(){  
-   
-  
+function decompressImageOnCanvas(){
+
+
 
 
 
@@ -380,27 +394,47 @@ function decompressImageOnCanvas(){
 /****************************************************************************************************
 * description:
  * @param:
- * @return: 
+ * @return:
  */
+<<<<<<< HEAD
 // function (){  
    
   
+=======
+// function (){
+>>>>>>> 65b4998edb1701fe413e45dae88f3353c54ba646
 
 
 
 
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 65b4998edb1701fe413e45dae88f3353c54ba646
 // }
 /****************************************************************************************************
 * description:
  * @param:
- * @return: 
+ * @return:
  */
+<<<<<<< HEAD
 // function (){  
    
   
+=======
+// function (){
+>>>>>>> 65b4998edb1701fe413e45dae88f3353c54ba646
 
 
+
+
+<<<<<<< HEAD
+// }
+/****************************************************************************************************/
+=======
 
 
 // }
 /****************************************************************************************************/
+>>>>>>> 65b4998edb1701fe413e45dae88f3353c54ba646
