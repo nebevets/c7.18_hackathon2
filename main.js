@@ -490,7 +490,7 @@ function handleImage(){
 		let clarifaiBase64Obj = {'base64': img.src.substr( ( img.src.indexOf('4')+2 ) )}
 		clarifai.models.predict(Clarifai.GENERAL_MODEL, clarifaiBase64Obj).then(
 			function(response){
-				guessImg = response;
+				guessImg = response.outputs[0].data.concepts;
 			});
 	}
 	reader.readAsDataURL(event.target.files[0]);
