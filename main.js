@@ -27,6 +27,11 @@ let clueImg = {};
 let guessImg = {};
 
 
+let imageLoader = $('#uploadFile');
+imageLoader.on('change', handleImage, false);
+let canvas = $('#imageCanvas');
+let ctx = canvas[0].getContext('2d');
+    
 
 
 
@@ -289,16 +294,18 @@ function receiveDataFromFirebase(){
 }
 /****************************************************************************************************
 * description:
- * @param: image
- * @return: compressedImage
+ * @param: none
+ * @return: img base64
  */
 function compressImageOnCanvas(){
-
-
-
-
-
-
+  let img;
+  let reader = new FileReader();
+  reader.onload = function(event){
+    img = new Image();
+    img.src = event.target.result;
+  }
+  reader.readAsDataURL(event.target.files[0]);    
+  return img.src;
 }
 /****************************************************************************************************
 * description:
@@ -306,9 +313,6 @@ function compressImageOnCanvas(){
  * @return: image
  */
 function decompressImageOnCanvas(){
-
-
-
 
 
 
