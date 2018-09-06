@@ -26,7 +26,7 @@ const player = {name: null, score: 0};
 
 let clueImg;
 let guessImg;
-const clarifai = new Clarifai.App({apiKey: '0927daa610244c38b8177a5974c19c4f'});
+const clarifai = new Clarifai.App({apiKey: '5aafb283e9f24178b93ae87ec9d7856c'});
 
 let canvas;
 let ctx;
@@ -116,6 +116,10 @@ function getImageDataFromWatson(img){
  * @return: none
  */
 function createCluesOnDom(clueObj){
+	let eyeSpyLogo = $('<img>', {
+		class: 'LogoImg',
+		src: 'assets/eyeSpyLogoBander.png',
+	});
 	let newCluesContainer = $('<div>', {
 		class: 'cluesPage form-group'
 	});
@@ -176,7 +180,7 @@ function createCluesOnDom(clueObj){
 	newButtonForm.append(newSkipButton, newLeaderBoardButton);
 	newClues.append(newUl);
 	newCluesContainer.append(newInstructions, newClues, newFileForm, newButtonForm);
-	$('.container').append(newCluesContainer);
+	$('.container').append(eyeSpyLogo, newCluesContainer);
 	let imageLoader = $('#uploadFile');
 	imageLoader.change(handleImage);
 
@@ -188,13 +192,18 @@ function createCluesOnDom(clueObj){
  */
 
 function instructionsPage(){
+	let eyeSpyLogo = $('<img>', {
+		class: 'LogoImg',
+		src: 'assets/eyeSpyLogoBander.png',
+	});
 	let newLandingPageContainer = $('<div>', {
 		'class': 'landingPage form-group'
 	});
 	let newInstructions = $('<h4>', {
-		text: `This is a image based scavenger hunt game. IBM's AI, Watson, will pick an random image from Flickr's database, and evaluate the image.
-				You will see the evaluation from Watson, and then you must send Watson a picture that you believe best represents his initial evaluation.
-				You will receive points, depending on how similar your image evaluation is to the original image evaluation. Good luck on the hunt!`,
+		text: `EyeSpy a image based scavenger hunt game. A random image is chosen and evaluated.
+				Clues are given to you based on this evaluation. You must find something that matches those clues,
+				take a picture, and upload it for evaluation. You receive points, depending on how similar your image
+				is to the original. Good luck on the hunt!`,
 		class: 'instructions form-group'
 	});
 	let newPlayerForm = $('<div>', {
@@ -232,7 +241,7 @@ function instructionsPage(){
 	newPlayerForm.append(newLabel, newInput);
 	newButtonForm.append(newGoBtn, newLeaderBoardButton);
 	newLandingPageContainer.append(newInstructions, newPlayerForm, newButtonForm);
-	$('.container').append(newLandingPageContainer);
+	$('.container').append(eyeSpyLogo, newLandingPageContainer);
 
   getImageDataFromWatson();
 
@@ -288,6 +297,10 @@ function compareClueImgToGuessImg(clueImgArray, guessImgArray){
  */
 function getResultsPage(){
 	compareClueImgToGuessImg(clueImg, guessImg);
+	let eyeSpyLogo = $('<img>', {
+		class: 'LogoImg',
+		src: 'assets/eyeSpyLogoBander.png',
+	});
 	let newResultsPage = $('<div>', {
 		'class': 'resultsPage'
 	});
@@ -362,14 +375,11 @@ function getResultsPage(){
 	buttonCol.append(getClueButton, newLeaderBoardButton);
 	secondRow.append(buttonCol);
 	newResultsPage.append(firstRow, secondRow);
-	$('.container').append(newResultsPage);
-	
 	guessedImgCanvas = $('#userImgCanvas');
 	ctx = guessedImgCanvas[0].getContext('2d');
 	guessedImgCanvas.height = clueImg.css('height');
 	ctx.drawImage(savedGameImages.guessImg, 0, 0);
-
-
+	$('.container').append(eyeSpyLogo, newResultsPage);
 }
 /****************************************************************************************************
 * description:
@@ -429,6 +439,10 @@ function getRandomImageFromFlickr(){
  * @return:
  */
 function getLeaderBoardPage(){
+	let eyeSpyLogo = $('<img>', {
+		class: 'LogoImg',
+		src: 'assets/eyeSpyLogoBander.png',
+	});
 	let newLeaderBoardPage = $('<div>', {
 		'class': 'leaderBoard'
 	});
@@ -467,7 +481,7 @@ function getLeaderBoardPage(){
 	newLeaderBoardPage.append(addPlayerToLeaderBoard({name: 'Saul Goodman', score: '88%'}));
 	newLeaderBoardPage.append(addPlayerToLeaderBoard({name: 'Sally Dogood', score: '99%'}));
 	newLeaderBoardPage.append(buttonRow);
-	$('.container').append(newLeaderBoardPage)
+	$('.container').append(eyeSpyLogo, newLeaderBoardPage)
 }
 /****************************************************************************************************
 * description:
