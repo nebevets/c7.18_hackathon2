@@ -193,9 +193,10 @@ function instructionsPage(){
 		'class': 'landingPage form-group'
 	});
 	let newInstructions = $('<h4>', {
-		text: `This is a image based scavenger hunt game. IBM's AI, Watson, will pick an random image from Flickr's database, and evaluate the image.
-				You will see the evaluation from Watson, and then you must send Watson a picture that you believe best represents his initial evaluation.
-				You will receive points, depending on how similar your image evaluation is to the original image evaluation. Good luck on the hunt!`,
+		text: `EyeSpy a image based scavenger hunt game. A random image is chosen and evaluated.
+				Clues are given to you based on this evaluation. You must find something that matches those clues,
+				take a picture, and upload it for evaluation. You receive points, depending on how similar your image
+				is to the original. Good luck on the hunt!`,
 		class: 'instructions form-group'
 	});
 	let newPlayerForm = $('<div>', {
