@@ -150,10 +150,11 @@ function createCluesOnDom(clueObj){
 	let newButtonForm = $('<div>', {
 		'class': 'form-group'
 	});
-	let newUploadButton = $('<button>', {
+	let newSkipButton = $('<button>', {
 		'type': 'button',
-		'class': 'upload btn btn-default',
-		'text': 'Upload'
+		'class': 'skip btn btn-default',
+		'text': 'Skip current clues',
+		'click': () => skipButtonHandler()
 	});
 	let newLeaderBoardButton = $('<button>', {
 		'type': 'button',
@@ -172,7 +173,7 @@ function createCluesOnDom(clueObj){
   newLi1.append(newOl);
 	newUl.append(newLi1);
 	newFileForm.append(newLabel, newInput);
-	newButtonForm.append(newUploadButton, newLeaderBoardButton);
+	newButtonForm.append(newSkipButton, newLeaderBoardButton);
 	newClues.append(newUl);
 	newCluesContainer.append(newInstructions, newClues, newFileForm, newButtonForm);
 	$('.container').append(newCluesContainer);
@@ -551,3 +552,14 @@ function addPlayerToLeaderBoard(playerObj){
 	newRow.append(newPlayerName, newPlayerScore);
 	return newRow
 }
+
+/****************************************************************************************************
+* description: Send image data to Clarifai to anaylyze image
+ * @param: none
+ * @return: none
+ */
+function skipButtonHandler() {
+	$('.container').empty();
+	getRandomImageFromFlickr();
+}
+/****************************************************************************************************/
