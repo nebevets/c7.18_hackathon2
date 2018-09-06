@@ -237,6 +237,7 @@ function instructionsModalButtonResponse(){
  */
 function submitButtonHandler(event){
   getImageDataFromWatson();
+  getQuote()
 
 
 
@@ -433,9 +434,17 @@ function updatePlayerScore(){
  * @return: none
  */
 function waitingModal(quote){
+	let eyeSpyLogo = $('<img>', {
+		class: 'quoteImg',
+		url: '../assets/eyeSpyLogoBander.png',
+	})
 
+	let quoteOfTheDay = $('<div>', {
+		class: 'quoteDiv',
+		text: quote,
+	})
 
-
+	modalBody.append(eyeSpyLogo, quoteOfTheDay);
 
 }
 /****************************************************************************************************
