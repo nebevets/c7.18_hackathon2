@@ -541,16 +541,16 @@ function receiveDataFromFirebase(){
  * @return: img base64
  */
 function handleImage(){
-  getQuote();
-  let img;
+  	getQuote();
+  	let img;
 	let reader = new FileReader();
-	reader.onload = function(event){
+	reader.onload = event => {
 		img = new Image();
 		img.src = event.target.result;
 		savedGameImages.guessImg = img;
-		let clarifaiBase64Obj = {'base64': img.src.substr( ( img.src.indexOf('4')+2 ) )}
+		let clarifaiBase64Obj = {'base64': img.src.substr( ( img.src.indexOf('4')+2 ) )};
 		clarifai.models.predict(Clarifai.GENERAL_MODEL, clarifaiBase64Obj).then(
-			function(response){
+			response => {
 				guessImg = response.outputs[0].data.concepts;
 			});
 	}
