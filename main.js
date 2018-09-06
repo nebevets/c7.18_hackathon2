@@ -200,10 +200,10 @@ function instructionsPage(){
 		'class': 'landingPage form-group'
 	});
 	let newInstructions = $('<h4>', {
-		text: `EyeSpy a image based scavenger hunt game. A random image is chosen and evaluated.
-				Clues are given to you based on this evaluation. You must find something that matches those clues,
-				take a picture, and upload it for evaluation. You receive points, depending on how similar your image
-				is to the original. Good luck on the hunt!`,
+		text: `Eye Spy is an image-based scavenger hunt game. A random image is chosen and evaluated.
+				Clues are given to you based on this information. You must find something that matches those clues,
+				take a picture and upload it for evaluation. You receive points, depending on how similar your image
+				is to the original. Good luck on your hunt!`,
 		class: 'instructions form-group'
 	});
 	let newPlayerForm = $('<div>', {
@@ -405,17 +405,21 @@ function getRandomImageFromFlickr(wordArray){
 	getQuote();
   const apiKey = "2bcd2e195e7ea98f459f7bd6bdde6a29";
   let searchKeyWordList = wordArray;
-  let randomKeyWord = searchKeyWordList[Math.floor(Math.random() * searchKeyWordList.length + 1)];
+  let randomKeyWord = searchKeyWordList[getRandomInt(0, searchKeyWordList.length-1)];
+  console.log(randomKeyWord);
 
   const flickrConfig = {
     url: `https://api.flickr.com/services/rest?method=flickr.photos.search&api_key=${apiKey}&format=json&nojsoncallback=1&text=${randomKeyWord}&per_page=5`,
     success: result => {
-      const randomPhoto = result.photos.photo[Math.floor(Math.random() * result.photos.photo.length + 1)]
+      const randomPhoto = result.photos.photo[getRandomInt(0, result.photos.photo.length-1)]
 
-      console.log(randomPhoto);
+      console.log(randomPhoto + "random photo");
       if(randomPhoto === undefined) {
-        $.ajax(flickrConfig);
-        return;
+		randomKeyWord = searchKeyWordList[getRandomInt(0, searchKeyWordList.length-1)];
+		console.log(randomKeyWord);
+		flickrConfig.url = `https://api.flickr.com/services/rest?method=flickr.photos.search&api_key=${apiKey}&format=json&nojsoncallback=1&text=${randomKeyWord}&per_page=5`;
+		$.ajax(flickrConfig);
+       // return;
       }
 
       let flickrImgURL = `https://farm${randomPhoto.farm}.staticflickr.com/${randomPhoto.server}/${randomPhoto.id}_${randomPhoto.secret}.jpg`
@@ -675,6 +679,7 @@ function getRandomWordsFromNYT(){
 
 			const wordArray = textBlock.split(' ');
 			let randomWordArray = wordArray.filter(word => word.length > minWordLength);
+			randomWordArray.push('meerkat');
 			getRandomImageFromFlickr(randomWordArray);
 		}
 	}
