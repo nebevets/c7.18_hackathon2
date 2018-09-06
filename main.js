@@ -118,7 +118,7 @@ function getImageDataFromWatson(img){
 function createCluesOnDom(clueObj){
 	let eyeSpyLogo = $('<img>', {
 		class: 'LogoImg',
-		src: 'assets/eyeSpyLogoBander.png',
+		src: 'assets/eyespylogo.png',
 	});
 	let newCluesContainer = $('<div>', {
 		class: 'cluesPage form-group'
@@ -194,7 +194,7 @@ function createCluesOnDom(clueObj){
 function instructionsPage(){
 	let eyeSpyLogo = $('<img>', {
 		class: 'LogoImg',
-		src: 'assets/eyeSpyLogoBander.png',
+		src: 'assets/eyespylogo.png',
 	});
 	let newLandingPageContainer = $('<div>', {
 		'class': 'landingPage form-group'
@@ -299,7 +299,7 @@ function getResultsPage(){
 
 	let eyeSpyLogo = $('<img>', {
 		class: 'LogoImg',
-		src: 'assets/eyeSpyLogoBander.png',
+		src: 'assets/eyespylogo.png',
 	});
 	let newResultsPage = $('<div>', {
 		'class': 'resultsPage'
@@ -442,7 +442,7 @@ function getRandomImageFromFlickr(){
 function getLeaderBoardPage(){
 	let eyeSpyLogo = $('<img>', {
 		class: 'LogoImg',
-		src: 'assets/eyeSpyLogoBander.png',
+		src: 'assets/eyespylogo.png',
 	});
 	let newLeaderBoardPage = $('<div>', {
 		'class': 'leaderBoard'
@@ -504,8 +504,8 @@ function updatePlayerScore(){
 function waitingModal(quote){
 	$('.modal-body').empty();
 	let eyeSpyLogo = $('<img>', {
-		class: 'quoteImg',
-		src: 'assets/eyeSpyLogoBander.png',
+		class: 'logoImg',
+		src: 'assets/eyespylogo.png',
 	})
 	$('.modal-title').text(`Hello ${player.name}, some entertainment while you're waiting`);
 	let quoteOfTheDay = $('<div>', {
