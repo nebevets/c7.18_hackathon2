@@ -218,7 +218,7 @@ function instructionsPage(){
         'type': 'button',
         'class': 'goBtn btn btn-default',
         'text': 'Go!',
-        'click': function(){
+        'click': () => {
             let playerName = $('.landingPage input').val();
             addPlayerToGame(playerName);
             $('.container').empty();
@@ -335,7 +335,11 @@ function getResultsPage(){
 	let getClueButton = $('<button>', {
 		'type': 'button',
 		'class': 'getClue btn btn-default',
-		'text': 'Get New Clue'
+		'text': 'Get New Clue',
+		'click': () => {
+			$('.container').empty();
+			getRandomImageFromFlickr();
+		}
 	});
 	let newLeaderBoardButton = $('<button>', {
 		'type': 'button',
@@ -437,7 +441,11 @@ function getLeaderBoardPage(){
 	let getClueButton = $('<button>', {
 		'type': 'button',
 		'class': 'getClue btn btn-default',
-		'text': 'Get New Clue'
+		'text': 'Get New Clue',
+		'click': () => {
+			$('.container').empty();
+			getRandomImageFromFlickr();
+		}
 	});
 
 	buttonCol.append(getClueButton);
