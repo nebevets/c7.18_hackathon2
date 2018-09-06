@@ -462,9 +462,17 @@ function updatePlayerScore(){
  * @return: none
  */
 function waitingModal(quote){
+	let eyeSpyLogo = $('<img>', {
+		class: 'quoteImg',
+		url: '../assets/eyeSpyLogoBander.png',
+	})
 
+	let quoteOfTheDay = $('<div>', {
+		class: 'quoteDiv',
+		text: quote,
+	})
 
-
+	modalBody.append(eyeSpyLogo, quoteOfTheDay);
 
 }
 /****************************************************************************************************
@@ -513,7 +521,8 @@ function receiveDataFromFirebase(){
  * @return: img base64
  */
 function handleImage(){
-  	let img;
+  getQuote();
+  let img;
 	let reader = new FileReader();
 	reader.onload = function(event){
 		img = new Image();
