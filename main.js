@@ -224,7 +224,7 @@ function instructionsPage(){
 	});
 	let newGoBtn = $('<button>', {
         'type': 'button',
-        'class': 'goBtn btn btn-default',
+        'class': 'goBtn btn btn-default col-xs-4 col-xs-push-2 col-sm-3 col-sm-push-2 col-md-3 col-md-push-2',
         'text': 'Go!',
         'click': () => {
             let playerName = $('.landingPage input').val();
@@ -234,7 +234,7 @@ function instructionsPage(){
     });
 	let newLeaderBoardButton = $('<button>', {
 		'type': 'button',
-		'class': 'leaderBoard btn btn-info',
+		'class': 'leaderBoard btn btn-info col-xs-4 col-xs-push-3 col-sm-3 col-sm-push-4 col-md-3 col-md-push-4',
 		'text': 'Leader Board',
 		'click': () => leaderboardButtonHandler()
 	});
@@ -634,7 +634,7 @@ function skipButtonHandler() {
  */
 // function imageResizer(){
 // 	let clueImage = $('.clueImage');
-// 	let 
+// 	let
 // 	if(  )
 // }
 /****************************************************************************************************
