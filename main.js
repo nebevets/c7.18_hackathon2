@@ -375,6 +375,7 @@ function resultsModalButtonHandler(){
  * @return: Clue Image
  */
 function getRandomImageFromFlickr(){
+	getQuote();
   const apiKey = "2bcd2e195e7ea98f459f7bd6bdde6a29";
   let searchKeyWordList = ["dog", "cat", "platypus", "micky_mouse", "disneyland", "people", "car", "nature", "sport", "office"];
   let randomKeyWord = searchKeyWordList[Math.floor(Math.random() * searchKeyWordList.length + 1)]
@@ -496,7 +497,7 @@ function getQuote(){
 		success: result => {
 			waitingModal(result);
 
-		
+
 		},
 		error: result => console.log('not working', result)
 	}
@@ -580,7 +581,7 @@ function addPlayerToLeaderBoard(playerObj){
 /****************************************************************************************************
 * description: sets playerName key of global player object, call getRandomImageFromFlickr
  * @param: playerName as string
- * @return: 
+ * @return:
  */
 function addPlayerToGame(playerName){
 	player.name = playerName || 'player1';
