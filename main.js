@@ -141,12 +141,12 @@ function createCluesOnDom(clueObj){
 		'class': 'form-group'
 	});
 	let newLabel = $('<label>', {
-		'class': 'control-label',
+		'class': 'control-label col-xs-12',
 		'for': 'uploadFile',
 		'text': 'Select your file here: '
 	});
 	let newInput = $('<input>', {
-		'class': 'form-control',
+		'class': 'form-control col-xs-4 col-md-1 col-lg-3',
 		'type': 'file',
 		'id': 'uploadFile',
 		'name': 'uploadFile'
@@ -156,13 +156,13 @@ function createCluesOnDom(clueObj){
 	});
 	let newSkipButton = $('<button>', {
 		'type': 'button',
-		'class': 'skip btn btn-default',
-		'text': 'Skip current clues',
+		'class': 'skip btn btn-default col-xs-12 col-sm-2 col-sm-push-1 col-md-4 col-md-push-1',
+		'text': 'Skip Clue',
 		'click': () => skipButtonHandler()
 	});
 	let newLeaderBoardButton = $('<button>', {
 		'type': 'button',
-		'class': 'leaderBoard btn btn-info',
+		'class': 'leaderBoard btn btn-info col-xs-12 col-sm-2 col-sm-push-1 col-md-4 col-md-push-2',
 		'text': 'Leader Board',
 		'click': () => leaderboardButtonHandler()
 	});
@@ -200,10 +200,10 @@ function instructionsPage(){
 		'class': 'landingPage form-group'
 	});
 	let newInstructions = $('<h4>', {
-		text: `EyeSpy a image based scavenger hunt game. A random image is chosen and evaluated.
-				Clues are given to you based on this evaluation. You must find something that matches those clues,
-				take a picture, and upload it for evaluation. You receive points, depending on how similar your image
-				is to the original. Good luck on the hunt!`,
+		text: `Eye Spy is an image-based scavenger hunt game. A random image is chosen and evaluated.
+				Clues are given to you based on this information. You must find something that matches those clues,
+				take a picture and upload it for evaluation. You receive points, depending on how similar your image
+				is to the original. Good luck on your hunt!`,
 		class: 'instructions form-group'
 	});
 	let newPlayerForm = $('<div>', {
@@ -224,7 +224,7 @@ function instructionsPage(){
 	});
 	let newGoBtn = $('<button>', {
         'type': 'button',
-        'class': 'goBtn btn btn-default col-xs-4 col-xs-push-2 col-sm-3 col-sm-push-2 col-md-3 col-md-push-2',
+        'class': 'goBtn btn btn-default col-xs-4 col-xs-push-1 col-sm-3 col-sm-push-2 col-md-3 col-md-push-2',
         'text': 'Go!',
         'click': () => {
             let playerName = $('.landingPage input').val();
@@ -398,24 +398,28 @@ function resultsModalButtonHandler(){
 }
 /****************************************************************************************************
 * description:
- * @param: wordArray, a randomList 
+ * @param: wordArray, a randomList
  * @return: Clue Image
  */
 function getRandomImageFromFlickr(wordArray){
 	getQuote();
   const apiKey = "2bcd2e195e7ea98f459f7bd6bdde6a29";
   let searchKeyWordList = wordArray;
-  let randomKeyWord = searchKeyWordList[Math.floor(Math.random() * searchKeyWordList.length + 1)];
+  let randomKeyWord = searchKeyWordList[getRandomInt(0, searchKeyWordList.length-1)];
+  console.log(randomKeyWord);
 
   const flickrConfig = {
     url: `https://api.flickr.com/services/rest?method=flickr.photos.search&api_key=${apiKey}&format=json&nojsoncallback=1&text=${randomKeyWord}&per_page=5`,
     success: result => {
-      const randomPhoto = result.photos.photo[Math.floor(Math.random() * result.photos.photo.length + 1)]
+      const randomPhoto = result.photos.photo[getRandomInt(0, result.photos.photo.length-1)]
 
-      console.log(randomPhoto);
+      console.log(randomPhoto + "random photo");
       if(randomPhoto === undefined) {
-        $.ajax(flickrConfig);
-        return;
+		randomKeyWord = searchKeyWordList[getRandomInt(0, searchKeyWordList.length-1)];
+		console.log(randomKeyWord);
+		flickrConfig.url = `https://api.flickr.com/services/rest?method=flickr.photos.search&api_key=${apiKey}&format=json&nojsoncallback=1&text=${randomKeyWord}&per_page=5`;
+		$.ajax(flickrConfig);
+       // return;
       }
 
       let flickrImgURL = `https://farm${randomPhoto.farm}.staticflickr.com/${randomPhoto.server}/${randomPhoto.id}_${randomPhoto.secret}.jpg`
@@ -682,11 +686,12 @@ function getRandomWordsFromNYT(){
 
 			const wordArray = textBlock.split(' ');
 			let randomWordArray = wordArray.filter(word => word.length > minWordLength);
+			randomWordArray.push('meerkat');
 			getRandomImageFromFlickr(randomWordArray);
 		}
 	}
 	$.ajax( ajaxOptions );
-} 
+}
 /****************************************************************************************************
  * description: getRandomInt takes a min and max number for a range of random ints to return
  * @param: min, max
