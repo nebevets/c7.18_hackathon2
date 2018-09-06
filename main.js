@@ -463,9 +463,10 @@ function updatePlayerScore(){
  * @return: none
  */
 function waitingModal(quote){
+	$('.modal-body').empty();
 	let eyeSpyLogo = $('<img>', {
 		class: 'quoteImg',
-		url: '../assets/eyeSpyLogoBander.png',
+		src: 'assets/eyeSpyLogoBander.png',
 	})
 
 	let quoteOfTheDay = $('<div>', {
@@ -473,7 +474,8 @@ function waitingModal(quote){
 		text: quote,
 	})
 
-	modalBody.append(eyeSpyLogo, quoteOfTheDay);
+	$('.modal-body').append(eyeSpyLogo, quoteOfTheDay);
+	$('#waitingModal').modal('show');
 
 }
 /****************************************************************************************************
@@ -488,7 +490,10 @@ function getQuote(){
 		url: `https://geek-jokes.sameerkumar.website/api`,
 		success: result => {
 			waitingModal(result);
-		}
+
+		
+		},
+		error: result => console.log('not working', result)
 	}
 	$.ajax(quotesAndJokesConfig);
 	}
