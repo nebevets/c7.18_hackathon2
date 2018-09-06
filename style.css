@@ -111,3 +111,20 @@ button.skip {
   border-bottom: 5px solid rgba(0, 0, 0, 0.25);
   border-right: 2px solid  rgba(0, 0, 0, 0.25);
 }
+
+.landingPage .form-control {
+  width: 50%;
+}
+
+.cluesPage > .form-group:nth-child(3) {
+  margin: auto;
+  margin-bottom: 1%;
+}
+
+.cluesPage .btn {
+  margin: 1%;
+}
+
+.cluesPage * {
+  text-align: center;
+}

@@ -61,7 +61,7 @@ function createCluesOnDom(clueObj){
 	});
     let newOl = $('<ol>');
 	let newFileForm = $('<div>', {
-		'class': 'form-group'
+		'class': 'form-group col-md-12'
 	});
 	let newLabel = $('<label>', {
 		'class': 'control-label col-xs-12',
@@ -79,13 +79,13 @@ function createCluesOnDom(clueObj){
 	});
 	let newSkipButton = $('<button>', {
 		'type': 'button',
-		'class': 'skip btn btn-default col-xs-12 col-sm-2 col-sm-push-1 col-md-4 col-md-push-1',
+		'class': 'skip btn btn-default col-xs-12 col-sm-4 col-sm-push-1 col-md-4 col-md-push-1',
 		'text': 'Skip Clue',
 		'click': () => skipButtonHandler()
 	});
 	let newLeaderBoardButton = $('<button>', {
 		'type': 'button',
-		'class': 'leaderBoard btn btn-info col-xs-12 col-sm-2 col-sm-push-1 col-md-4 col-md-push-2',
+		'class': 'leaderBoard btn btn-info col-xs-12 col-sm-4 col-sm-push-2 col-md-4 col-md-push-2',
 		'text': 'Leader Board',
 		'click': () => leaderboardButtonHandler()
 	});
@@ -455,7 +455,7 @@ function addPlayerToGame(playerName){
 	if(totalPlayersObj[playerName]){
 		player.score = totalPlayersObj[playerName].score;
 	}
-	else{ 
+	else{
 		totalPlayersObj[playerName] = {score: 0};
 	}
 	saveGameData();
