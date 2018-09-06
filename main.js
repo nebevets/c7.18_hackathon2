@@ -296,7 +296,7 @@ function compareClueImgToGuessImg(clueImgArray, guessImgArray){
  * @return: none
  */
 function getResultsPage(){
-	debugger;
+
 	let eyeSpyLogo = $('<img>', {
 		class: 'LogoImg',
 		src: 'assets/eyeSpyLogoBander.png',
