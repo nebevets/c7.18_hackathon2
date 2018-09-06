@@ -1,14 +1,19 @@
 body {
-  background-image: url("assets/city_noir1.jpg");
+  background-image: url("assets/city_of_noir.jpg");
+	background-repeat:no-repeat;
+	background-size: auto;
+	background-color: #000;
 	color: white;
 }
-#userImgCanvas{
-	width: 100%;
+.thumbnail>img{
 	height: auto;
+	width: auto;
+	max-height: 100%;
+	max-width: 100%;
 }
 .clueImage{
 	width: 100%;
-	height: auto;
+	height: 15%;
 }
 #waitingModal{
 	color: black;

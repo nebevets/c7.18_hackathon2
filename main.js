@@ -117,7 +117,7 @@ function getImageDataFromWatson(img){
  */
 function createCluesOnDom(clueObj){
 	let eyeSpyLogo = $('<img>', {
-		class: 'LogoImg',
+		class: 'logoImg',
 		src: 'assets/eyespylogo.png',
 	});
 	let newCluesContainer = $('<div>', {
@@ -193,7 +193,7 @@ function createCluesOnDom(clueObj){
 
 function instructionsPage(){
 	let eyeSpyLogo = $('<img>', {
-		class: 'LogoImg',
+		class: 'logoImg',
 		src: 'assets/eyespylogo.png',
 	});
 	let newLandingPageContainer = $('<div>', {
@@ -298,7 +298,7 @@ function compareClueImgToGuessImg(clueImgArray, guessImgArray){
 function getResultsPage(){
 
 	let eyeSpyLogo = $('<img>', {
-		class: 'LogoImg',
+		class: 'logoImg',
 		src: 'assets/eyespylogo.png',
 	});
 	let newResultsPage = $('<div>', {
@@ -330,8 +330,8 @@ function getResultsPage(){
 	let userThumbnail = $('<div>', {
 		'class':'thumbnail'
 	});
-	let userImg = $('<canvas>', {
-		'id': 'userImgCanvas',
+	let userImg = $('<img>', {
+		src: savedGameImages.guessImg.src,
 	});
 	let userCaption = $('<div>', {
 		'class': 'caption'
@@ -376,10 +376,6 @@ function getResultsPage(){
 	secondRow.append(buttonCol);
 	newResultsPage.append(firstRow, updateUser, secondRow);
 	$('.container').append(eyeSpyLogo, newResultsPage);
-	let guessedImgCanvas = $('#userImgCanvas');
-	ctx = guessedImgCanvas[0].getContext('2d');
-	guessedImgCanvas.height = clueImgElement.css('height');
-	ctx.drawImage(savedGameImages.guessImg, 0, 0);
 
 }
 /****************************************************************************************************
@@ -441,7 +437,7 @@ function getRandomImageFromFlickr(){
  */
 function getLeaderBoardPage(){
 	let eyeSpyLogo = $('<img>', {
-		class: 'LogoImg',
+		class: 'logoImg',
 		src: 'assets/eyespylogo.png',
 	});
 	let newLeaderBoardPage = $('<div>', {
@@ -631,3 +627,14 @@ function skipButtonHandler() {
 	$('.container').empty();
 	getRandomImageFromFlickr();
 }
+/****************************************************************************************************
+* description: resize the images on the results page to be responsive
+ * @param: none
+ * @return: none
+ */
+// function imageResizer(){
+// 	let clueImage = $('.clueImage');
+// 	let 
+// 	if(  )
+// }
+
