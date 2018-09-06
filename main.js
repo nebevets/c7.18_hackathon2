@@ -1,22 +1,12 @@
 /*
-Hackathon project involving the combination of different data sources into an application or game
-
-Requirements
-Combine at least 4 external resources via AJAX requests and present their information in an application
-Must be documented loosely on JSDOC standards
-Must be issue-managed via meistertask
-share the meistertask with daniel.paschal@learningfuze.com
-name your project 7.18 Team [your team number] Hackathon
-
-Judging Criteria
-Appeal : is it visually appealing / well put together
-Code Quality : is the code properly formatted, are variables and functions well defined and documented
-Presentation : How well is it presented during the unveiling session
-Task / Issue Management : How well was the development process documented / controlled. Were there well-defined issues, milestones, and project management
-Innovative / Transformative : Did the project do something new and exciting? Was it bold and tried to do things that haven't been done much. Did it combine the data sources together in a way that was more useful than either source by itself
-Ease of Use / Understanding : Was it easy to use the application / game, or if it was more complex, was the application or game able to provide you with tutorials or instructions that made understanding it a breeze.
-
-*****     7:00pm Thursday, September 6th, 2018    ******
+  project 7.18 Team 2 Hackathon
+  /***********************
+   notes:
+   Team 2
+    Steve Benedict
+    Gerald Blackmon
+    Jonathan Gallo
+    Randy Dang
 */
 
 $(document).ready(initializeApp);
@@ -27,91 +17,26 @@ let totalPlayersObj = {};
 let clueImg;
 let guessImg;
 const clarifai = new Clarifai.App({apiKey: 'f96e9dd06030485a9595af374d3e96da'});
-
 let canvas;
 let ctx;
 const savedGameImages = {guessImg: null, clueImg: null};
 let leaderboardFirebaseDB;
 
 
-
-
-
-/***********************
-notes:
-Team 2
-Steve Benedict
-Gerald Blackmon
-Jonathan Gallo
-Randy Dang
-
 /***************************************************************************************************
-* description: initializes the application, including adding click handlers and pulling in any data from the server, in later versions will...
+* description: initializes the application, including adding click handlers and pulling in any data
+* from the server
 * @params: none
 * @returns: none
-
 */
 function initializeApp(){
-
 	canvas = $('#imageCanvas');
-	addEventHandlers();
 	instructionsPage();
 	leaderboardFirebaseDB = new GenericFBModel('potato1nuget2flower', leaderBoardUpdated);
-
-
 }
 
-/***************************************************************************************************
-* description: addClickHandlers for start button on plater star page, button for submit guess img, button to open leaderboard, button to go back to main page
-* @params: none
-* @returns: none
-*
-*/
-function addEventHandlers(){
-
-
-
-
-
-}
 /****************************************************************************************************
-* description: dom create get player start page, calls instructions Modal
- * @param: none
- * @return: none
- */
-function getPlayerModal(){
-
-
-
-
-
-}
-/****************************************************************************************************
-* description:
- * @param:
- * @return:
- */
-function playerModalButtonResponse(){
-  instructionsModal();
-
-
-
-
-}
-/****************************************************************************************************
-* description:
- * @param: img
- * @return: dataObj
- */
-function getImageDataFromWatson(img){
-
-
-
-
-
-}
-/****************************************************************************************************
-* description:
+* description: creates the clue page
  * @param: clueObj
  * @return: none
  */
@@ -130,13 +55,11 @@ function createCluesOnDom(clueObj){
 	let newClues = $('<div>', {
 		'class': 'clues form-group'
 	});
-	let newUl = $('<ul>');
-	let newLi1 = $('<li>', {
+	//let newUl = $('<ul>');
+	let newH4 = $('<h4>', {
 		'text': 'Here are your clues:'
 	});
-
-  let newOl = $('<ol>');
-
+    let newOl = $('<ol>');
 	let newFileForm = $('<div>', {
 		'class': 'form-group'
 	});
@@ -166,27 +89,22 @@ function createCluesOnDom(clueObj){
 		'text': 'Leader Board',
 		'click': () => leaderboardButtonHandler()
 	});
-
-
-
-  for(var i = 0; i < 5; i++) {
-    newOl.append($('<li>', {
-      text: clueObj[i].name
-    }))
-  };
-  newLi1.append(newOl);
-	newUl.append(newLi1);
+	for(var i = 0; i < 5; i++) {
+		newOl.append($('<li>', {
+		text: clueObj[i].name
+		}))
+	};
 	newFileForm.append(newLabel, newInput);
 	newButtonForm.append(newSkipButton, newLeaderBoardButton);
-	newClues.append(newUl);
+	newClues.append(newH4, newOl);
 	newCluesContainer.append(newInstructions, newClues, newFileForm, newButtonForm);
 	$('.container').append(eyeSpyLogo, newCluesContainer);
 	let imageLoader = $('#uploadFile');
 	imageLoader.change(handleImage);
-
 }
 /****************************************************************************************************
-* description: dom create instructions for game and allows time to send and receive data from servers, click to close, calls getImageDataFromWatson
+ * description: dom create instructions for game and allows time to send and receive data from servers,
+ * click to close
  * @param:
  * @return:
  */
@@ -245,24 +163,10 @@ function instructionsPage(){
 	newButtonForm.append(newGoBtn, newLeaderBoardButton);
 	newLandingPageContainer.append(newInstructions, newPlayerForm, newButtonForm);
 	$('.container').append(eyeSpyLogo, newLandingPageContainer);
-
-  getImageDataFromWatson();
-
 }
+
 /****************************************************************************************************
-* description:
- * @param: none
- * @return: none
- */
-function instructionsModalButtonResponse(){
-  getImageDataFromWatson();
-
-
-
-
-}
-/****************************************************************************************************
-* description:
+* description: defines the leader board button event handler
  * @param: event
  * @return: none
  */
@@ -271,7 +175,7 @@ function leaderboardButtonHandler(event){
 	getLeaderBoardPage();
 }
 /****************************************************************************************************
-* description: for in loop, compare keys and values gives points
+* description: for in loop, compare keys and values gives points calls sameGameData
  * @param: clueImgObj and guessImgObj
  * @return:
  */
@@ -280,7 +184,6 @@ function compareClueImgToGuessImg(clueImgArray, guessImgArray){
 	for( let outer = 0; outer < clueImgArray.length; outer++ ){
 		for( let inner = 0; inner < guessImgArray.length; inner++ ){
 			if( clueImgArray[ outer ].name === guessImgArray[ inner ].name ){
-				console.log(clueImgArray[outer].name, "is a match with", guessImgArray[inner].name);
 				player.score += 10;
 				if( clueImgArray[outer].value < guessImgArray[inner].value ){
 					player.score += (clueImgArray[outer].value / guessImgArray[inner].value) * 10
@@ -294,15 +197,13 @@ function compareClueImgToGuessImg(clueImgArray, guessImgArray){
 	player.score = parseInt(player.score);
 	totalPlayersObj[player.name].score += player.score;
 	saveGameData();
-
 }
 /****************************************************************************************************
-* description:
+* description: sets up the results page
  * @param: none
  * @return: none
  */
 function getResultsPage(){
-
 	let eyeSpyLogo = $('<img>', {
 		class: 'logoImg',
 		src: 'assets/eyespylogo.png',
@@ -382,19 +283,6 @@ function getResultsPage(){
 	secondRow.append(buttonCol);
 	newResultsPage.append(firstRow, updateUser, secondRow);
 	$('.container').append(eyeSpyLogo, newResultsPage);
-
-}
-/****************************************************************************************************
-* description:
- * @param: none
- * @return: none
- */
-function resultsModalButtonHandler(){
-  getImageDataFromWatson();
-
-
-
-
 }
 /****************************************************************************************************
 * description:
@@ -403,45 +291,31 @@ function resultsModalButtonHandler(){
  */
 function getRandomImageFromFlickr(wordArray){
 	getQuote();
-  const apiKey = "2bcd2e195e7ea98f459f7bd6bdde6a29";
-  let searchKeyWordList = wordArray;
-  let randomKeyWord = searchKeyWordList[getRandomInt(0, searchKeyWordList.length-1)];
-  console.log(randomKeyWord);
-
-  const flickrConfig = {
-    url: `https://api.flickr.com/services/rest?method=flickr.photos.search&api_key=${apiKey}&format=json&nojsoncallback=1&text=${randomKeyWord}&per_page=5`,
-    success: result => {
-      const randomPhoto = result.photos.photo[getRandomInt(0, result.photos.photo.length-1)]
-
-      console.log(randomPhoto + "random photo");
-      if(randomPhoto === undefined) {
-		randomKeyWord = searchKeyWordList[getRandomInt(0, searchKeyWordList.length-1)];
-		console.log(randomKeyWord);
-		flickrConfig.url = `https://api.flickr.com/services/rest?method=flickr.photos.search&api_key=${apiKey}&format=json&nojsoncallback=1&text=${randomKeyWord}&per_page=5`;
-		$.ajax(flickrConfig);
-       // return;
-      }
-
-      let flickrImgURL = `https://farm${randomPhoto.farm}.staticflickr.com/${randomPhoto.server}/${randomPhoto.id}_${randomPhoto.secret}.jpg`
-	  savedGameImages.clueImg = flickrImgURL;
-      console.log(flickrImgURL);
-
-      clarifai.models.predict(Clarifai.GENERAL_MODEL, flickrImgURL).then(
-        response => {
-          let clarifaiResponse = response;
-          console.log(clarifaiResponse.outputs[0].data.concepts)
-          clueImg = clarifaiResponse.outputs[0].data.concepts;
-          createCluesOnDom(clueImg);
-        }
-      )
-
-      // sendToClarifai(flickrImgURL, clueImg);
-    }
-  }
-  $.ajax(flickrConfig);
+  	const apiKey = "2bcd2e195e7ea98f459f7bd6bdde6a29";
+  	let searchKeyWordList = wordArray;
+  	let randomKeyWord = searchKeyWordList[getRandomInt(0, searchKeyWordList.length-1)];
+	const flickrConfig = {
+		url: `https://api.flickr.com/services/rest?method=flickr.photos.search&api_key=${apiKey}&format=json&nojsoncallback=1&text=${randomKeyWord}&per_page=5`,
+    	success: result => {
+      		const randomPhoto = result.photos.photo[getRandomInt(0, result.photos.photo.length-1)]
+      		if(randomPhoto === undefined) {
+				randomKeyWord = searchKeyWordList[getRandomInt(0, searchKeyWordList.length-1)];
+				flickrConfig.url = `https://api.flickr.com/services/rest?method=flickr.photos.search&api_key=${apiKey}&format=json&nojsoncallback=1&text=${randomKeyWord}&per_page=5`;
+				$.ajax(flickrConfig);
+      		}
+    		let flickrImgURL = `https://farm${randomPhoto.farm}.staticflickr.com/${randomPhoto.server}/${randomPhoto.id}_${randomPhoto.secret}.jpg`
+			savedGameImages.clueImg = flickrImgURL;
+    		clarifai.models.predict(Clarifai.GENERAL_MODEL, flickrImgURL).then(response => {
+        		let clarifaiResponse = response;
+        		clueImg = clarifaiResponse.outputs[0].data.concepts;
+        		createCluesOnDom(clueImg);
+    		});
+    	}
+  	}
+  	$.ajax(flickrConfig);
 }
 /****************************************************************************************************
-* description:
+* description: sets up leader board page with dom creation
  * @param:
  * @return:
  */
@@ -489,19 +363,7 @@ function getLeaderBoardPage(){
 	$('.container').append(eyeSpyLogo, newLeaderBoardPage)
 }
 /****************************************************************************************************
-* description:
- * @param:
- * @return:
- */
-function updatePlayerScore(){
-
-
-
-
-
-}
-/****************************************************************************************************
-* description:
+* description: dom creates the waiting modal
  * @param: none
  * @return: none
  */
@@ -519,10 +381,9 @@ function waitingModal(quote){
 
 	$('.modal-body').append(eyeSpyLogo, quoteOfTheDay);
 	$('#waitingModal').modal('show');
-
 }
-/****************************************************************************************************
-* description:
+/*****************************************************************************************************
+ * description: gets a quote from geek jokes
  * @param: none
  * @return: quote
  */
@@ -533,39 +394,12 @@ function getQuote(){
 		url: `https://geek-jokes.sameerkumar.website/api`,
 		success: result => {
 			waitingModal(result);
-
-
-		},
-		error: result => console.log('not working', result)
+		}
 	}
 	$.ajax(quotesAndJokesConfig);
-	}
-/****************************************************************************************************
-* description:
- * @param:
- * @return:
- */
-function sendDataToFirebase(){
-
-
-
-
-
 }
 /****************************************************************************************************
-* description:
- * @param:
- * @return:
- */
-function receiveDataFromFirebase(){
-
-
-
-
-
-}
-/****************************************************************************************************
-* description:
+* description: this gets the image the user uploads as a base64 image
  * @param: none
  * @return: img base64
  */
@@ -588,17 +422,7 @@ function handleImage(){
 	reader.readAsDataURL(event.target.files[0]);
 }
 /****************************************************************************************************
-* description:
- * @param: compressed Image
- * @return: image
- */
-function decompressImageOnCanvas(){
-
-
-
-}
-/****************************************************************************************************
-* description:
+* description: this adds players to the leader board
  * @param:
  * @return:
  */
@@ -646,16 +470,6 @@ function skipButtonHandler() {
 	$('.container').empty();
 	getRandomWordsFromNYT();
 }
-/****************************************************************************************************
-* description: resize the images on the results page to be responsive
- * @param: none
- * @return: none
- */
-// function imageResizer(){
-// 	let clueImage = $('.clueImage');
-// 	let
-// 	if(  )
-// }
 /****************************************************************************************************
  * description: getRandomWordsFromNYT uses NYT API to get travel news titles and abstracts. These
  * form a word list for our flickr image search. Word less than four characters long are filtered.
