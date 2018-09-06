@@ -1,5 +1,8 @@
 body {
-    background-image: url("assets/city_noir1.jpg");
+    background-image: url("assets/city_of_noir.jpg");
+	background-repeat:no-repeat;
+	background-size: auto;
+	background-color: #000;
 	color: white;
 }
 #userImgCanvas{
@@ -15,6 +18,6 @@ body {
 }
 
 .logoImg {
-    height: 50%;
-    width: 50%;
+    height: auto;
+    width: 40vh;
 }
