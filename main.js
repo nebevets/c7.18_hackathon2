@@ -23,7 +23,7 @@ $(document).ready(initializeApp);
 
 /**  Define all global variables here.  **/
 const player = {name: null, score: 0};
-
+let totalPlayersObj = {};
 let clueImg;
 let guessImg;
 const clarifai = new Clarifai.App({apiKey: 'f96e9dd06030485a9595af374d3e96da'});
@@ -31,7 +31,7 @@ const clarifai = new Clarifai.App({apiKey: 'f96e9dd06030485a9595af374d3e96da'});
 let canvas;
 let ctx;
 const savedGameImages = {guessImg: null, clueImg: null};
-
+let leaderboardFirebaseDB;
 
 
 
@@ -56,7 +56,7 @@ function initializeApp(){
 	canvas = $('#imageCanvas');
 	addEventHandlers();
 	instructionsPage();
-
+	leaderboardFirebaseDB = new GenericFBModel('potato1nuget2flower', leaderBoardUpdated);
 
 
 }
@@ -228,6 +228,9 @@ function instructionsPage(){
         'text': 'Go!',
         'click': () => {
             let playerName = $('.landingPage input').val();
+			if( !playerName ){
+				return;
+			}
             addPlayerToGame(playerName);
             $('.container').empty();
         }
@@ -289,6 +292,8 @@ function compareClueImgToGuessImg(clueImgArray, guessImgArray){
 		}
 	}
 	player.score = parseInt(player.score);
+	totalPlayersObj[player.name].score += player.score;
+
 }
 /****************************************************************************************************
 * description:
@@ -615,7 +620,15 @@ function addPlayerToLeaderBoard(playerObj){
  * @return:
  */
 function addPlayerToGame(playerName){
-	player.name = playerName || 'player1';
+	debugger;
+	player.name = playerName;
+	if(totalPlayersObj[playerName]){
+		player.score = totalPlayersObj[playerName].score;
+	}
+	else{
+		totalPlayersObj[playerName] = {score: 0};
+	}
+	saveGameData();
 	getRandomImageFromFlickr();
 }
 /****************************************************************************************************
