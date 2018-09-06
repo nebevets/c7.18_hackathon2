@@ -538,7 +538,7 @@ function handleImage(){
 	reader.onload = function(event){
 		img = new Image();
 		img.src = event.target.result;
-		savedGameImages.guessImg = img.src;
+		savedGameImages.guessImg = img;
 		let clarifaiBase64Obj = {'base64': img.src.substr( ( img.src.indexOf('4')+2 ) )}
 		clarifai.models.predict(Clarifai.GENERAL_MODEL, clarifaiBase64Obj).then(
 			function(response){
