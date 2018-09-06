@@ -3,6 +3,12 @@
   text-shadow: 1px 1px black
 }
 
+@media screen and (min-width: 650px) {
+  .body {
+    background-size: 100%;
+  }
+}
+
 body {
   background-image: url("assets/city_of_noir.jpg");
 	background-repeat:no-repeat;
@@ -10,6 +16,7 @@ body {
 	background-color: #000;
 	color: white;
 }
+
 .thumbnail>img{
 	height: auto;
 	width: auto;
@@ -64,9 +71,6 @@ body {
   margin: auto;
 }
 
-input.form-control {
-  width: 45%;
-}
 
 .form-group .leaderBoard {
   background-color: rebeccapurple;
@@ -95,6 +99,13 @@ button.leaderBoard {
 }
 
 .modal-footer button {
+  border-top: 5px solid rgba(255, 255, 255, 0.1);
+  border-left: 2px solid  rgba(255, 255, 255, 0.1);
+  border-bottom: 5px solid rgba(0, 0, 0, 0.25);
+  border-right: 2px solid  rgba(0, 0, 0, 0.25);
+}
+
+button.skip {
   border-top: 5px solid rgba(255, 255, 255, 0.1);
   border-left: 2px solid  rgba(255, 255, 255, 0.1);
   border-bottom: 5px solid rgba(0, 0, 0, 0.25);
