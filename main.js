@@ -625,7 +625,7 @@ function addPlayerToGame(playerName){
 	if(totalPlayersObj[playerName]){
 		player.score = totalPlayersObj[playerName].score;
 	}
-	else{
+	else{ 
 		totalPlayersObj[playerName] = {score: 0};
 	}
 	saveGameData();
