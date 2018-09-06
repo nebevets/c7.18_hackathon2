@@ -26,7 +26,7 @@ const player = {name: null, score: 0};
 
 let clueImg;
 let guessImg;
-const clarifai = new Clarifai.App({apiKey: '0927daa610244c38b8177a5974c19c4f'});
+const clarifai = new Clarifai.App({apiKey: '5aafb283e9f24178b93ae87ec9d7856c'});
 
 let canvas;
 let ctx;
@@ -54,7 +54,6 @@ Randy Dang
 function initializeApp(){
 
 	canvas = $('#imageCanvas');
-	ctx = canvas[0].getContext('2d');
 	addEventHandlers();
 	instructionsPage();
 
@@ -117,6 +116,10 @@ function getImageDataFromWatson(img){
  * @return: none
  */
 function createCluesOnDom(clueObj){
+	let eyeSpyLogo = $('<img>', {
+		class: 'LogoImg',
+		src: 'assets/eyeSpyLogoBander.png',
+	});
 	let newCluesContainer = $('<div>', {
 		class: 'cluesPage form-group'
 	});
@@ -177,7 +180,7 @@ function createCluesOnDom(clueObj){
 	newButtonForm.append(newSkipButton, newLeaderBoardButton);
 	newClues.append(newUl);
 	newCluesContainer.append(newInstructions, newClues, newFileForm, newButtonForm);
-	$('.container').append(newCluesContainer);
+	$('.container').append(eyeSpyLogo, newCluesContainer);
 	let imageLoader = $('#uploadFile');
 	imageLoader.change(handleImage);
 
@@ -189,6 +192,10 @@ function createCluesOnDom(clueObj){
  */
 
 function instructionsPage(){
+	let eyeSpyLogo = $('<img>', {
+		class: 'LogoImg',
+		src: 'assets/eyeSpyLogoBander.png',
+	});
 	let newLandingPageContainer = $('<div>', {
 		'class': 'landingPage form-group'
 	});
@@ -234,7 +241,7 @@ function instructionsPage(){
 	newPlayerForm.append(newLabel, newInput);
 	newButtonForm.append(newGoBtn, newLeaderBoardButton);
 	newLandingPageContainer.append(newInstructions, newPlayerForm, newButtonForm);
-	$('.container').append(newLandingPageContainer);
+	$('.container').append(eyeSpyLogo, newLandingPageContainer);
 
   getImageDataFromWatson();
 
@@ -289,6 +296,11 @@ function compareClueImgToGuessImg(clueImgArray, guessImgArray){
  * @return: none
  */
 function getResultsPage(){
+	compareClueImgToGuessImg(clueImg, guessImg);
+	let eyeSpyLogo = $('<img>', {
+		class: 'LogoImg',
+		src: 'assets/eyeSpyLogoBander.png',
+	});
 	let newResultsPage = $('<div>', {
 		'class': 'resultsPage'
 	});
@@ -302,14 +314,15 @@ function getResultsPage(){
 		'class':'thumbnail'
 	});
 	let clueImg = $('<img>', {
-		'src': 'clue.jpgFIXME',
+		'class': 'clueImage',
+		'src': savedGameImages.clueImg,
 		'alt': 'your clue'
 	});
 	let clueCaption = $('<div>', {
 		'class': 'caption'
 	});
 	let cluePara = $('<p>', {
-		'text': 'This was your clue...'
+		'text': 'This was your clue image...'
 	});
 	let userCol = $('<div>', {
 		'class': 'col-sm-6'
@@ -317,9 +330,8 @@ function getResultsPage(){
 	let userThumbnail = $('<div>', {
 		'class':'thumbnail'
 	});
-	let userImg = $('<img>', {
-		'src': 'found.jpgFIXME',
-		'alt': 'you found'
+	let userImg = $('<canvas>', {
+		'id': 'userImgCanvas',
 	});
 	let userCaption = $('<div>', {
 		'class': 'caption'
@@ -330,6 +342,9 @@ function getResultsPage(){
 	let secondRow = $('<div>', {
 		'class': 'row'
 	});
+	let updateUser = $('<h1>', {
+		'text': `Your score this round was ${player.score} out of 400!`
+	})
 	let buttonCol = $('<div>', {
 		'class': 'col-sm-12'
 	});
@@ -345,7 +360,8 @@ function getResultsPage(){
 	let newLeaderBoardButton = $('<button>', {
 		'type': 'button',
 		'class': 'leaderBoard btn btn-info',
-		'text': 'Leader Board'
+		'text': 'Leader Board',
+		'click': () => leaderboardButtonHandler()
 	});
 
 	clueCaption.append(cluePara)
@@ -355,12 +371,15 @@ function getResultsPage(){
 	userThumbnail.append(userImg, userCaption);
 	userCol.append(userThumbnail);
 	firstRow.append(clueCol, userCol);
+	newResultsPage.append(updateUser);
 	buttonCol.append(getClueButton, newLeaderBoardButton);
 	secondRow.append(buttonCol);
 	newResultsPage.append(firstRow, secondRow);
-	$('.container').append(newResultsPage);
-
-
+	guessedImgCanvas = $('#userImgCanvas');
+	ctx = guessedImgCanvas[0].getContext('2d');
+	guessedImgCanvas.height = clueImg.css('height');
+	ctx.drawImage(savedGameImages.guessImg, 0, 0);
+	$('.container').append(eyeSpyLogo, newResultsPage);
 }
 /****************************************************************************************************
 * description:
@@ -420,6 +439,10 @@ function getRandomImageFromFlickr(){
  * @return:
  */
 function getLeaderBoardPage(){
+	let eyeSpyLogo = $('<img>', {
+		class: 'LogoImg',
+		src: 'assets/eyeSpyLogoBander.png',
+	});
 	let newLeaderBoardPage = $('<div>', {
 		'class': 'leaderBoard'
 	});
@@ -458,7 +481,7 @@ function getLeaderBoardPage(){
 	newLeaderBoardPage.append(addPlayerToLeaderBoard({name: 'Saul Goodman', score: '88%'}));
 	newLeaderBoardPage.append(addPlayerToLeaderBoard({name: 'Sally Dogood', score: '99%'}));
 	newLeaderBoardPage.append(buttonRow);
-	$('.container').append(newLeaderBoardPage)
+	$('.container').append(eyeSpyLogo, newLeaderBoardPage)
 }
 /****************************************************************************************************
 * description:
@@ -542,6 +565,7 @@ function receiveDataFromFirebase(){
  * @return: img base64
  */
 function handleImage(){
+	$('.container').empty();
   	getQuote();
   	let img;
 	let reader = new FileReader();
@@ -553,6 +577,8 @@ function handleImage(){
 		clarifai.models.predict(Clarifai.GENERAL_MODEL, clarifaiBase64Obj).then(
 			response => {
 				guessImg = response.outputs[0].data.concepts;
+				getQuote();
+				getResultsPage();
 			});
 	}
 	reader.readAsDataURL(event.target.files[0]);
