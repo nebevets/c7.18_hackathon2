@@ -1,7 +1,7 @@
 body {
     background-image: url("assets/city_noir1.jpg");
-    color: white
-
+	color: white;
+}
 #userImgCanvas{
 	width: 100%;
 	height: auto;
@@ -9,4 +9,7 @@ body {
 .clueImage{
 	width: 100%;
 	height: auto;
+}
+#waitingModal{
+	color: black;
 }
