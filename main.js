@@ -26,7 +26,7 @@ const player = {name: null, score: 0};
 
 let clueImg;
 let guessImg;
-const clarifai = new Clarifai.App({apiKey: '51996ceba79e4ddb90fe027b1cc20be4'});
+const clarifai = new Clarifai.App({apiKey: '0927daa610244c38b8177a5974c19c4f'});
 
 let canvas;
 let ctx;
@@ -150,10 +150,11 @@ function createCluesOnDom(clueObj){
 	let newButtonForm = $('<div>', {
 		'class': 'form-group'
 	});
-	let newUploadButton = $('<button>', {
+	let newSkipButton = $('<button>', {
 		'type': 'button',
-		'class': 'upload btn btn-default',
-		'text': 'Upload'
+		'class': 'skip btn btn-default',
+		'text': 'Skip current clues',
+		'click': () => skipButtonHandler()
 	});
 	let newLeaderBoardButton = $('<button>', {
 		'type': 'button',
@@ -172,7 +173,7 @@ function createCluesOnDom(clueObj){
   newLi1.append(newOl);
 	newUl.append(newLi1);
 	newFileForm.append(newLabel, newInput);
-	newButtonForm.append(newUploadButton, newLeaderBoardButton);
+	newButtonForm.append(newSkipButton, newLeaderBoardButton);
 	newClues.append(newUl);
 	newCluesContainer.append(newInstructions, newClues, newFileForm, newButtonForm);
 	$('.container').append(newCluesContainer);
@@ -380,9 +381,13 @@ function getRandomImageFromFlickr(){
   const flickrConfig = {
     url: `https://api.flickr.com/services/rest?method=flickr.photos.search&api_key=${apiKey}&format=json&nojsoncallback=1&text=${randomKeyWord}&per_page=5`,
     success: result => {
-      let searchResults = result.photos.photo;
-      let randomPhoto = searchResults[Math.floor(Math.random() * searchResults.length + 1)]
+      const randomPhoto = result.photos.photo[Math.floor(Math.random() * result.photos.photo.length + 1)]
+
       console.log(randomPhoto);
+      if(randomPhoto === undefined) {
+        $.ajax(flickrConfig);
+        return;
+      }
 
       let flickrImgURL = `https://farm${randomPhoto.farm}.staticflickr.com/${randomPhoto.server}/${randomPhoto.id}_${randomPhoto.secret}.jpg`
 
@@ -462,9 +467,17 @@ function updatePlayerScore(){
  * @return: none
  */
 function waitingModal(quote){
+	let eyeSpyLogo = $('<img>', {
+		class: 'quoteImg',
+		url: '../assets/eyeSpyLogoBander.png',
+	})
 
+	let quoteOfTheDay = $('<div>', {
+		class: 'quoteDiv',
+		text: quote,
+	})
 
-
+	modalBody.append(eyeSpyLogo, quoteOfTheDay);
 
 }
 /****************************************************************************************************
@@ -477,7 +490,7 @@ function getQuote(){
 		datatype: 'json',
 		method: 'get',
 		url: `https://geek-jokes.sameerkumar.website/api`,
-		success: result => { 
+		success: result => {
 			waitingModal(result);
 		}
 	}
@@ -513,7 +526,8 @@ function receiveDataFromFirebase(){
  * @return: img base64
  */
 function handleImage(){
-  	let img;
+  getQuote();
+  let img;
 	let reader = new FileReader();
 	reader.onload = function(event){
 		img = new Image();
@@ -557,7 +571,7 @@ function addPlayerToLeaderBoard(playerObj){
 	return newRow
 }
 /****************************************************************************************************
-* description: sets playerName key of global player object
+* description: sets playerName key of global player object, call getRandomImageFromFlickr
  * @param: playerName as string
  * @return: 
  */
@@ -565,4 +579,12 @@ function addPlayerToGame(playerName){
 	player.name = playerName || 'player1';
 	getRandomImageFromFlickr();
 }
-/****************************************************************************************************/
+/****************************************************************************************************
+* description: Send image data to Clarifai to anaylyze image
+ * @param: none
+ * @return: none
+ */
+function skipButtonHandler() {
+	$('.container').empty();
+	getRandomImageFromFlickr();
+}
