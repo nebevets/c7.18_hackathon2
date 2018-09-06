@@ -405,17 +405,18 @@ function getRandomImageFromFlickr(wordArray){
 	getQuote();
   const apiKey = "2bcd2e195e7ea98f459f7bd6bdde6a29";
   let searchKeyWordList = wordArray;
-  let randomKeyWord = searchKeyWordList[Math.floor(Math.random() * searchKeyWordList.length + 1)];
+  let randomKeyWord = searchKeyWordList[getRandomInt(0, searchKeyWordList.length-1)];
   console.log(randomKeyWord);
 
   const flickrConfig = {
     url: `https://api.flickr.com/services/rest?method=flickr.photos.search&api_key=${apiKey}&format=json&nojsoncallback=1&text=${randomKeyWord}&per_page=5`,
     success: result => {
-      const randomPhoto = result.photos.photo[Math.floor(Math.random() * result.photos.photo.length + 1)]
+      const randomPhoto = result.photos.photo[getRandomInt(0, result.photos.photo.length-1)]
 
       console.log(randomPhoto + "random photo");
       if(randomPhoto === undefined) {
-		randomKeyWord = searchKeyWordList[Math.floor(Math.random() * searchKeyWordList.length + 1)];
+		randomKeyWord = searchKeyWordList[getRandomInt(0, searchKeyWordList.length-1)];
+		console.log(randomKeyWord);
 		flickrConfig.url = `https://api.flickr.com/services/rest?method=flickr.photos.search&api_key=${apiKey}&format=json&nojsoncallback=1&text=${randomKeyWord}&per_page=5`;
 		$.ajax(flickrConfig);
        // return;
@@ -678,6 +679,7 @@ function getRandomWordsFromNYT(){
 
 			const wordArray = textBlock.split(' ');
 			let randomWordArray = wordArray.filter(word => word.length > minWordLength);
+			randomWordArray.push('meerkat');
 			getRandomImageFromFlickr(randomWordArray);
 		}
 	}
