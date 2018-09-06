@@ -30,6 +30,7 @@ const clarifai = new Clarifai.App({apiKey: '51996ceba79e4ddb90fe027b1cc20be4'});
 
 let canvas;
 let ctx;
+const savedGameImages = {guessImg: null, clueImg: null};
 
 
 
@@ -381,7 +382,7 @@ function getRandomImageFromFlickr(){
       console.log(randomPhoto);
 
       let flickrImgURL = `https://farm${randomPhoto.farm}.staticflickr.com/${randomPhoto.server}/${randomPhoto.id}_${randomPhoto.secret}.jpg`
-
+	  savedGameImages.clueImg = flickrImgURL;
       console.log(flickrImgURL);
 
       clarifai.models.predict(Clarifai.GENERAL_MODEL, flickrImgURL).then(
@@ -514,6 +515,7 @@ function handleImage(){
 	reader.onload = function(event){
 		img = new Image();
 		img.src = event.target.result;
+		savedGameImages.guessImg = img.src;
 		let clarifaiBase64Obj = {'base64': img.src.substr( ( img.src.indexOf('4')+2 ) )}
 		clarifai.models.predict(Clarifai.GENERAL_MODEL, clarifaiBase64Obj).then(
 			function(response){
