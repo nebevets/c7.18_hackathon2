@@ -293,6 +293,7 @@ function compareClueImgToGuessImg(clueImgArray, guessImgArray){
 	}
 	player.score = parseInt(player.score);
 	totalPlayersObj[player.name].score += player.score;
+	saveGameData();
 
 }
 /****************************************************************************************************
@@ -479,9 +480,7 @@ function getLeaderBoardPage(){
 	buttonRow.append(buttonCol);
 	firstRow.append(nameH3, statsH3);
 	newLeaderBoardPage.append(firstRow);
-	newLeaderBoardPage.append(addPlayerToLeaderBoard({name: 'John Doe', score: '78%'}));
-	newLeaderBoardPage.append(addPlayerToLeaderBoard({name: 'Saul Goodman', score: '88%'}));
-	newLeaderBoardPage.append(addPlayerToLeaderBoard({name: 'Sally Dogood', score: '99%'}));
+	addPlayersToLeaderBoard(totalPlayersObj, newLeaderBoardPage);
 	newLeaderBoardPage.append(buttonRow);
 	$('.container').append(eyeSpyLogo, newLeaderBoardPage)
 }
@@ -599,20 +598,24 @@ function decompressImageOnCanvas(){
  * @param:
  * @return:
  */
-function addPlayerToLeaderBoard(playerObj){
-	let newRow = $('<div>', {
-		'class': 'row'
-	});
-	let newPlayerName = $('<div>', {
-		'class': 'col-xs-6',
-		'text': playerObj.name
-	});
-	let newPlayerScore = $('<div>', {
-		'class': 'col-xs-6',
-		'text': playerObj.score
-	});
-	newRow.append(newPlayerName, newPlayerScore);
-	return newRow
+function addPlayersToLeaderBoard(playerObjFromFirebase, htmlElement){
+	saveGameData();
+	for( searchKey in playerObjFromFirebase ){
+		let theCurrentKey = searchKey;
+		let newRow = $('<div>', {
+			'class': 'row'
+		});
+		let newPlayerName = $('<div>', {
+			'class': 'col-xs-6',
+			'text': theCurrentKey
+		});
+		let newPlayerScore = $('<div>', {
+			'class': 'col-xs-6',
+			'text': playerObjFromFirebase[theCurrentKey].score
+		});
+		newRow.append(newPlayerName, newPlayerScore);
+		htmlElement.append(newRow);
+	}
 }
 /****************************************************************************************************
 * description: sets playerName key of global player object, call getRandomImageFromFlickr
@@ -620,7 +623,6 @@ function addPlayerToLeaderBoard(playerObj){
  * @return:
  */
 function addPlayerToGame(playerName){
-	debugger;
 	player.name = playerName;
 	if(totalPlayersObj[playerName]){
 		player.score = totalPlayersObj[playerName].score;
