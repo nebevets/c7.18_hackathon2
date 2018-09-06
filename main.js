@@ -588,7 +588,7 @@ function handleImage(){
  * @param: compressed Image
  * @return: image
  */
-function decompressImageOnCanvas(){
+function rearrangeLeaderBoard(){
 
 
 
@@ -600,6 +600,13 @@ function decompressImageOnCanvas(){
  */
 function addPlayersToLeaderBoard(playerObjFromFirebase, htmlElement){
 	saveGameData();
+	debugger;
+	let highestToLowestArray = [];
+	for( searchKey in playerObjFromFirebase){
+		highestToLowestArray.push( {[searchKey]: playerObjFromFirebase[searchKey] } );
+
+	}
+
 	for( searchKey in playerObjFromFirebase ){
 		let theCurrentKey = searchKey;
 		let newRow = $('<div>', {
