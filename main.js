@@ -23,7 +23,7 @@ $(document).ready(initializeApp);
 
 /**  Define all global variables here.  **/
 const player = {name: null, score: 0};
-
+let totalPlayersObj = {};
 let clueImg;
 let guessImg;
 const clarifai = new Clarifai.App({apiKey: 'f96e9dd06030485a9595af374d3e96da'});
@@ -31,7 +31,7 @@ const clarifai = new Clarifai.App({apiKey: 'f96e9dd06030485a9595af374d3e96da'});
 let canvas;
 let ctx;
 const savedGameImages = {guessImg: null, clueImg: null};
-
+let leaderboardFirebaseDB;
 
 
 
@@ -56,7 +56,7 @@ function initializeApp(){
 	canvas = $('#imageCanvas');
 	addEventHandlers();
 	instructionsPage();
-
+	leaderboardFirebaseDB = new GenericFBModel('potato1nuget2flower', leaderBoardUpdated);
 
 
 }
@@ -228,6 +228,9 @@ function instructionsPage(){
         'text': 'Go!',
         'click': () => {
             let playerName = $('.landingPage input').val();
+			if( !playerName ){
+				return;
+			}
             addPlayerToGame(playerName);
             $('.container').empty();
         }
@@ -289,6 +292,9 @@ function compareClueImgToGuessImg(clueImgArray, guessImgArray){
 		}
 	}
 	player.score = parseInt(player.score);
+	totalPlayersObj[player.name].score += player.score;
+	saveGameData();
+
 }
 /****************************************************************************************************
 * description:
@@ -474,9 +480,7 @@ function getLeaderBoardPage(){
 	buttonRow.append(buttonCol);
 	firstRow.append(nameH3, statsH3);
 	newLeaderBoardPage.append(firstRow);
-	newLeaderBoardPage.append(addPlayerToLeaderBoard({name: 'John Doe', score: '78%'}));
-	newLeaderBoardPage.append(addPlayerToLeaderBoard({name: 'Saul Goodman', score: '88%'}));
-	newLeaderBoardPage.append(addPlayerToLeaderBoard({name: 'Sally Dogood', score: '99%'}));
+	addPlayersToLeaderBoard(totalPlayersObj, newLeaderBoardPage);
 	newLeaderBoardPage.append(buttonRow);
 	$('.container').append(eyeSpyLogo, newLeaderBoardPage)
 }
@@ -594,20 +598,24 @@ function decompressImageOnCanvas(){
  * @param:
  * @return:
  */
-function addPlayerToLeaderBoard(playerObj){
-	let newRow = $('<div>', {
-		'class': 'row'
-	});
-	let newPlayerName = $('<div>', {
-		'class': 'col-xs-6',
-		'text': playerObj.name
-	});
-	let newPlayerScore = $('<div>', {
-		'class': 'col-xs-6',
-		'text': playerObj.score
-	});
-	newRow.append(newPlayerName, newPlayerScore);
-	return newRow
+function addPlayersToLeaderBoard(playerObjFromFirebase, htmlElement){
+	saveGameData();
+	for( searchKey in playerObjFromFirebase ){
+		let theCurrentKey = searchKey;
+		let newRow = $('<div>', {
+			'class': 'row'
+		});
+		let newPlayerName = $('<div>', {
+			'class': 'col-xs-6',
+			'text': theCurrentKey
+		});
+		let newPlayerScore = $('<div>', {
+			'class': 'col-xs-6',
+			'text': playerObjFromFirebase[theCurrentKey].score
+		});
+		newRow.append(newPlayerName, newPlayerScore);
+		htmlElement.append(newRow);
+	}
 }
 /****************************************************************************************************
 * description: sets playerName key of global player object, call getRandomWordsFromNYT
@@ -615,7 +623,14 @@ function addPlayerToLeaderBoard(playerObj){
  * @return:
  */
 function addPlayerToGame(playerName){
-	player.name = playerName || 'player1';
+	player.name = playerName;
+	if(totalPlayersObj[playerName]){
+		player.score = totalPlayersObj[playerName].score;
+	}
+	else{ 
+		totalPlayersObj[playerName] = {score: 0};
+	}
+	saveGameData();
 	getRandomWordsFromNYT();
 }
 /****************************************************************************************************
