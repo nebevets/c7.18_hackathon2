@@ -1,5 +1,5 @@
 body {
-    background-image: url("assets/city_noir1.jpg");
+  background-image: url("assets/city_noir1.jpg");
 	color: white;
 }
 #userImgCanvas{
@@ -14,7 +14,43 @@ body {
 	color: black;
 }
 
+/* Modal Image */
 .logoImg {
-    height: 50%;
-    width: 50%;
+  display: block;
+  margin: auto;
+  height: 50%;
+  width: 50%;
+}
+
+/* Page Image */
+.LogoImg {
+  display: block;
+  margin: auto;
+  max-width: 65%;
+}
+
+.landingPage .instructions {
+  font-family: 'Lato', sans-serif;
+  text-align: center;
+}
+
+.landingPage .control-label {
+  display: block;
+  text-align: center;
+}
+
+.landingPage input {
+  margin: auto;
+  width: 35%;
+  text-align: center;
+}
+
+.landingPage .form-group:nth-child(3) {
+  width: 50%;
+  margin: auto;
+}
+
+.landingPage button {
+  width: 50%;
+  display: inline-block;
 }
