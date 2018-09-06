@@ -22,7 +22,7 @@ Ease of Use / Understanding : Was it easy to use the application / game, or if i
 $(document).ready(initializeApp);
 
 /**  Define all global variables here.  **/
-const player = {};
+const player = {name: null, score: 0};
 
 let clueImg;
 let guessImg;
@@ -68,7 +68,7 @@ function initializeApp(){
 *
 */
 function addEventHandlers(){
-  submitButtonHandler();
+
 
 
 
@@ -128,8 +128,11 @@ function createCluesOnDom(clueObj){
 	});
 	let newUl = $('<ul>');
 	let newLi1 = $('<li>', {
-		'text': 'This is currently filler text FIXME'
+		'text': 'Here are your clues:'
 	});
+
+  let newOl = $('<ol>');
+
 	let newFileForm = $('<div>', {
 		'class': 'form-group'
 	});
@@ -148,17 +151,25 @@ function createCluesOnDom(clueObj){
 		'class': 'form-group'
 	});
 	let newUploadButton = $('<button>', {
+		'type': 'button',
 		'class': 'upload btn btn-default',
 		'text': 'Upload'
 	});
 	let newLeaderBoardButton = $('<button>', {
+		'type': 'button',
 		'class': 'leaderBoard btn btn-info',
-		'text': 'Leader Board'
+		'text': 'Leader Board',
+		'click': () => leaderboardButtonHandler()
 	});
 
 
 
-
+  for(var i = 0; i < 5; i++) {
+    newOl.append($('<li>', {
+      text: clueObj[i].name
+    }))
+  };
+  newLi1.append(newOl);
 	newUl.append(newLi1);
 	newFileForm.append(newLabel, newInput);
 	newButtonForm.append(newUploadButton, newLeaderBoardButton);
@@ -183,7 +194,7 @@ function instructionsPage(){
 		text: `This is a image based scavenger hunt game. IBM's AI, Watson, will pick an random image from Flickr's database, and evaluate the image.
 				You will see the evaluation from Watson, and then you must send Watson a picture that you believe best represents his initial evaluation.
 				You will receive points, depending on how similar your image evaluation is to the original image evaluation. Good luck on the hunt!`,
-		class: 'instructions'
+		class: 'instructions form-group'
 	});
 	let newPlayerForm = $('<div>', {
 		'class': 'player form-group'
@@ -202,13 +213,15 @@ function instructionsPage(){
 		'class': 'form-group'
 	});
 	let newGoBtn = $('<button>', {
-		'class': 'goBtn btn btn-default',
 		'type': 'button',
+		'class': 'goBtn btn btn-default',
 		'text': 'Go!'
 	});
 	let newLeaderBoardButton = $('<button>', {
+		'type': 'button',
 		'class': 'leaderBoard btn btn-info',
-		'text': 'Leader Board'
+		'text': 'Leader Board',
+		'click': () => leaderboardButtonHandler()
 	});
 	newPlayerForm.append(newLabel, newInput);
 	newButtonForm.append(newGoBtn, newLeaderBoardButton);
@@ -235,24 +248,31 @@ function instructionsModalButtonResponse(){
  * @param: event
  * @return: none
  */
-function submitButtonHandler(event){
-  getImageDataFromWatson();
-  getQuote()
-
-
-
-
+function leaderboardButtonHandler(event){
+	$('.container').empty();
+	getLeaderBoardPage();
 }
 /****************************************************************************************************
 * description: for in loop, compare keys and values gives points
  * @param: clueImgObj and guessImgObj
  * @return:
  */
-function compareClueImgToGuessImg(clueImgObj, guessImgObj){
+function compareClueImgToGuessImg(clueImgArray, guessImgArray){
 
-
-
-
+	for( let outer = 0; outer < clueImgArray.length; outer++ ){
+		for( let inner = 0; inner < guessImgArray.length; inner++ ){
+			if( clueImgArray[ outer ].name === guessImgArray[ inner ].name ){
+				console.log(clueImgArray[outer].name, "is a match with", guessImgArray[inner].name);
+				player.score += 10;
+				if( clueImgArray[outer].value < guessImgArray[inner].value ){
+					player.score += (clueImgArray[outer].value / guessImgArray[inner].value) * 10
+				}
+				else{
+					player.score += (guessImgArray[outer].value / clueImgArray[inner].value) * 10
+				}
+			}
+		}
+	}
 
 }
 /****************************************************************************************************
@@ -268,7 +288,7 @@ function getResultsPage(){
 		'class': 'row'
 	});
 	let clueCol = $('<div>', {
-		'class': 'col-sm-4'
+		'class': 'col-sm-6'
 	});
 	let clueThumbnail = $('<div>', {
 		'class':'thumbnail'
@@ -284,7 +304,7 @@ function getResultsPage(){
 		'text': 'This was your clue...'
 	});
 	let userCol = $('<div>', {
-		'class': 'col-sm-4'
+		'class': 'col-sm-6'
 	});
 	let userThumbnail = $('<div>', {
 		'class':'thumbnail'
@@ -303,7 +323,7 @@ function getResultsPage(){
 		'class': 'row'
 	});
 	let buttonCol = $('<div>', {
-		'class': 'col-sm-8'
+		'class': 'col-sm-12'
 	});
 	let getClueButton = $('<button>', {
 		'type': 'button',
@@ -311,6 +331,7 @@ function getResultsPage(){
 		'text': 'Get New Clue'
 	});
 	let newLeaderBoardButton = $('<button>', {
+		'type': 'button',
 		'class': 'leaderBoard btn btn-info',
 		'text': 'Leader Board'
 	});
@@ -348,7 +369,7 @@ function resultsModalButtonHandler(){
  */
 function getRandomImageFromFlickr(){
   const apiKey = "2bcd2e195e7ea98f459f7bd6bdde6a29";
-  let searchKeyWordList = ["dog", "cat", "platypus", "micky_mouse", "disneyland"];
+  let searchKeyWordList = ["dog", "cat", "platypus", "micky_mouse", "disneyland", "people", "car", "nature", "sport", "office"];
   let randomKeyWord = searchKeyWordList[Math.floor(Math.random() * searchKeyWordList.length + 1)]
 
   const flickrConfig = {
@@ -367,6 +388,7 @@ function getRandomImageFromFlickr(){
           let clarifaiResponse = response;
           console.log(clarifaiResponse.outputs[0].data.concepts)
           clueImg = clarifaiResponse.outputs[0].data.concepts;
+          createCluesOnDom(clueImg);
         }
       )
 
@@ -402,6 +424,7 @@ function getLeaderBoardPage(){
 		'class': 'col-xs-12'
 	})
 	let getClueButton = $('<button>', {
+		'type': 'button',
 		'class': 'getClue btn btn-default',
 		'text': 'Get New Clue'
 	});
@@ -493,7 +516,8 @@ function receiveDataFromFirebase(){
  * @return: img base64
  */
 function handleImage(){
-  	let img;
+  getQuote();
+  let img;
 	let reader = new FileReader();
 	reader.onload = function(event){
 		img = new Image();
@@ -536,19 +560,3 @@ function addPlayerToLeaderBoard(playerObj){
 	newRow.append(newPlayerName, newPlayerScore);
 	return newRow
 }
-/****************************************************************************************************
-* description: Send image data to Clarifai to anaylyze image
- * @param: URL as a string
- * @return: Image anaylysis array
- */
-// function sendToClarifai(link, imgArray) {
-//   clarifai.models.predict(Clarifai.GENERAL_MODEL, link).then(
-//     response => {
-//       let clarifaiResponse = response;
-//       let imageAnalysis = clarifaiResponse.outputs[0].data.concepts;
-//       console.log(imageAnaylysis)
-//       imgArray = imageAnalysis;
-//     }
-//   );
-// }
-/****************************************************************************************************/
