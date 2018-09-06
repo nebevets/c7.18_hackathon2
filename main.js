@@ -141,12 +141,12 @@ function createCluesOnDom(clueObj){
 		'class': 'form-group'
 	});
 	let newLabel = $('<label>', {
-		'class': 'control-label',
+		'class': 'control-label col-xs-12',
 		'for': 'uploadFile',
 		'text': 'Select your file here: '
 	});
 	let newInput = $('<input>', {
-		'class': 'form-control',
+		'class': 'form-control col-xs-4 col-md-1 col-lg-3',
 		'type': 'file',
 		'id': 'uploadFile',
 		'name': 'uploadFile'
@@ -156,13 +156,13 @@ function createCluesOnDom(clueObj){
 	});
 	let newSkipButton = $('<button>', {
 		'type': 'button',
-		'class': 'skip btn btn-default',
-		'text': 'Skip current clues',
+		'class': 'skip btn btn-default col-xs-12 col-sm-2 col-sm-push-1 col-md-4 col-md-push-1',
+		'text': 'Skip Clue',
 		'click': () => skipButtonHandler()
 	});
 	let newLeaderBoardButton = $('<button>', {
 		'type': 'button',
-		'class': 'leaderBoard btn btn-info',
+		'class': 'leaderBoard btn btn-info col-xs-12 col-sm-2 col-sm-push-1 col-md-4 col-md-push-2',
 		'text': 'Leader Board',
 		'click': () => leaderboardButtonHandler()
 	});
@@ -224,7 +224,7 @@ function instructionsPage(){
 	});
 	let newGoBtn = $('<button>', {
         'type': 'button',
-        'class': 'goBtn btn btn-default col-xs-4 col-xs-push-2 col-sm-3 col-sm-push-2 col-md-3 col-md-push-2',
+        'class': 'goBtn btn btn-default col-xs-4 col-xs-push-1 col-sm-3 col-sm-push-2 col-md-3 col-md-push-2',
         'text': 'Go!',
         'click': () => {
             let playerName = $('.landingPage input').val();
@@ -392,7 +392,7 @@ function resultsModalButtonHandler(){
 }
 /****************************************************************************************************
 * description:
- * @param: wordArray, a randomList 
+ * @param: wordArray, a randomList
  * @return: Clue Image
  */
 function getRandomImageFromFlickr(wordArray){
@@ -664,7 +664,7 @@ function getRandomWordsFromNYT(){
 		}
 	}
 	$.ajax( ajaxOptions );
-} 
+}
 /****************************************************************************************************
  * description: getRandomInt takes a min and max number for a range of random ints to return
  * @param: min, max
