@@ -355,7 +355,7 @@ function getResultsPage(){
 		'text': 'Get New Clue',
 		'click': () => {
 			$('.container').empty();
-			getRandomImageFromFlickr();
+			getRandomWordsFromNYT();
 		}
 	});
 	let newLeaderBoardButton = $('<button>', {
@@ -392,14 +392,14 @@ function resultsModalButtonHandler(){
 }
 /****************************************************************************************************
 * description:
- * @param: none
+ * @param: wordArray, a randomList 
  * @return: Clue Image
  */
-function getRandomImageFromFlickr(){
+function getRandomImageFromFlickr(wordArray){
 	getQuote();
   const apiKey = "2bcd2e195e7ea98f459f7bd6bdde6a29";
-  let searchKeyWordList = ["dog", "cat", "platypus", "micky_mouse", "disneyland", "people", "car", "nature", "sport", "office"];
-  let randomKeyWord = searchKeyWordList[Math.floor(Math.random() * searchKeyWordList.length + 1)]
+  let searchKeyWordList = wordArray;
+  let randomKeyWord = searchKeyWordList[Math.floor(Math.random() * searchKeyWordList.length + 1)];
 
   const flickrConfig = {
     url: `https://api.flickr.com/services/rest?method=flickr.photos.search&api_key=${apiKey}&format=json&nojsoncallback=1&text=${randomKeyWord}&per_page=5`,
@@ -466,7 +466,7 @@ function getLeaderBoardPage(){
 		'text': 'Get New Clue',
 		'click': () => {
 			$('.container').empty();
-			getRandomImageFromFlickr();
+			getRandomWordsFromNYT();
 		}
 	});
 
@@ -610,13 +610,13 @@ function addPlayerToLeaderBoard(playerObj){
 	return newRow
 }
 /****************************************************************************************************
-* description: sets playerName key of global player object, call getRandomImageFromFlickr
+* description: sets playerName key of global player object, call getRandomWordsFromNYT
  * @param: playerName as string
  * @return:
  */
 function addPlayerToGame(playerName){
 	player.name = playerName || 'player1';
-	getRandomImageFromFlickr();
+	getRandomWordsFromNYT();
 }
 /****************************************************************************************************
 * description: Send image data to Clarifai to anaylyze image
@@ -625,7 +625,7 @@ function addPlayerToGame(playerName){
  */
 function skipButtonHandler() {
 	$('.container').empty();
-	getRandomImageFromFlickr();
+	getRandomWordsFromNYT();
 }
 /****************************************************************************************************
 * description: resize the images on the results page to be responsive
@@ -637,4 +637,39 @@ function skipButtonHandler() {
 // 	let 
 // 	if(  )
 // }
+/****************************************************************************************************
+ * description: getRandomWordsFromNYT uses NYT API to get travel news titles and abstracts. These
+ * form a word list for our flickr image search. Word less than four characters long are filtered.
+ * @param: none
+ * @return: randomWordArray
+ */
+function getRandomWordsFromNYT(){
+	let ajaxOptions = {
+		url: "https://api.nytimes.com/svc/topstories/v2/travel.json",
+		method: 'GET',
+		data: {
+			'api-key': "3248c8d085284383aa5bd7aa7146601c"
+		},
+		dataType: 'json',
+		success: response => {
+			const minWordLength = 4;
+			const arrResults = response.results;
+			let titleRandomIndex = getRandomInt(0, arrResults.length-1);
+			let abstractRandomIndex = getRandomInt(0, arrResults.length-1);
+			let textBlock = arrResults[titleRandomIndex].title + " " + arrResults[abstractRandomIndex].abstract;
 
+			const wordArray = textBlock.split(' ');
+			let randomWordArray = wordArray.filter(word => word.length > minWordLength);
+			getRandomImageFromFlickr(randomWordArray);
+		}
+	}
+	$.ajax( ajaxOptions );
+} 
+/****************************************************************************************************
+ * description: getRandomInt takes a min and max number for a range of random ints to return
+ * @param: min, max
+ * @return: random int
+ */
+function getRandomInt(min, max){
+		return Math.floor(Math.random()* (max-min+1))+min;
+}
