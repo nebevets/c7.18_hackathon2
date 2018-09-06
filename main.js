@@ -51,7 +51,7 @@ Randy Dang
 
 */
 function initializeApp(){
-
+	instructionsPage();
 	canvas = $('#imageCanvas');
 	ctx = canvas[0].getContext('2d');
 	addEventHandlers();
