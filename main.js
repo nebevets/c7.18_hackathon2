@@ -128,8 +128,11 @@ function createCluesOnDom(clueObj){
 	});
 	let newUl = $('<ul>');
 	let newLi1 = $('<li>', {
-		'text': 'This is currently filler text FIXME'
+		'text': 'Here are your clues:'
 	});
+
+  let newOl = $('<ol>');
+
 	let newFileForm = $('<div>', {
 		'class': 'form-group'
 	});
@@ -162,7 +165,12 @@ function createCluesOnDom(clueObj){
 
 
 
-
+  for(var i = 0; i < 5; i++) {
+    newOl.append($('<li>', {
+      text: clueObj[i].name
+    }))
+  };
+  newLi1.append(newOl);
 	newUl.append(newLi1);
 	newFileForm.append(newLabel, newInput);
 	newButtonForm.append(newSkipButton, newLeaderBoardButton);
@@ -362,7 +370,7 @@ function resultsModalButtonHandler(){
  */
 function getRandomImageFromFlickr(){
   const apiKey = "2bcd2e195e7ea98f459f7bd6bdde6a29";
-  let searchKeyWordList = ["dog", "cat", "platypus", "micky_mouse", "disneyland"];
+  let searchKeyWordList = ["dog", "cat", "platypus", "micky_mouse", "disneyland", "people", "car", "nature", "sport", "office"];
   let randomKeyWord = searchKeyWordList[Math.floor(Math.random() * searchKeyWordList.length + 1)]
 
   const flickrConfig = {
@@ -381,6 +389,7 @@ function getRandomImageFromFlickr(){
           let clarifaiResponse = response;
           console.log(clarifaiResponse.outputs[0].data.concepts)
           clueImg = clarifaiResponse.outputs[0].data.concepts;
+          createCluesOnDom(clueImg);
         }
       )
 
@@ -543,6 +552,7 @@ function addPlayerToLeaderBoard(playerObj){
 	newRow.append(newPlayerName, newPlayerScore);
 	return newRow
 }
+
 /****************************************************************************************************
 * description: Send image data to Clarifai to anaylyze image
  * @param: none
