@@ -26,7 +26,7 @@ const player = {name: null, score: 0};
 
 let clueImg;
 let guessImg;
-const clarifai = new Clarifai.App({apiKey: '51996ceba79e4ddb90fe027b1cc20be4'});
+const clarifai = new Clarifai.App({apiKey: '0927daa610244c38b8177a5974c19c4f'});
 
 let canvas;
 let ctx;
@@ -375,9 +375,13 @@ function getRandomImageFromFlickr(){
   const flickrConfig = {
     url: `https://api.flickr.com/services/rest?method=flickr.photos.search&api_key=${apiKey}&format=json&nojsoncallback=1&text=${randomKeyWord}&per_page=5`,
     success: result => {
-      let searchResults = result.photos.photo;
-      let randomPhoto = searchResults[Math.floor(Math.random() * searchResults.length + 1)]
+      const randomPhoto = result.photos.photo[Math.floor(Math.random() * result.photos.photo.length + 1)]
+
       console.log(randomPhoto);
+      if(randomPhoto === undefined) {
+        $.ajax(flickrConfig);
+        return;
+      }
 
       let flickrImgURL = `https://farm${randomPhoto.farm}.staticflickr.com/${randomPhoto.server}/${randomPhoto.id}_${randomPhoto.secret}.jpg`
 
@@ -472,7 +476,7 @@ function getQuote(){
 		datatype: 'json',
 		method: 'get',
 		url: `https://geek-jokes.sameerkumar.website/api`,
-		success: result => { 
+		success: result => {
 			waitingModal(result);
 		}
 	}
