@@ -147,10 +147,11 @@ function createCluesOnDom(clueObj){
 	let newButtonForm = $('<div>', {
 		'class': 'form-group'
 	});
-	let newUploadButton = $('<button>', {
+	let newSkipButton = $('<button>', {
 		'type': 'button',
-		'class': 'upload btn btn-default',
-		'text': 'Upload'
+		'class': 'skip btn btn-default',
+		'text': 'Skip current clues',
+		'click': () => skipButtonHandler()
 	});
 	let newLeaderBoardButton = $('<button>', {
 		'type': 'button',
@@ -164,7 +165,7 @@ function createCluesOnDom(clueObj){
 
 	newUl.append(newLi1);
 	newFileForm.append(newLabel, newInput);
-	newButtonForm.append(newUploadButton, newLeaderBoardButton);
+	newButtonForm.append(newSkipButton, newLeaderBoardButton);
 	newClues.append(newUl);
 	newCluesContainer.append(newInstructions, newClues, newFileForm, newButtonForm);
 	$('.container').append(newCluesContainer);
@@ -544,17 +545,11 @@ function addPlayerToLeaderBoard(playerObj){
 }
 /****************************************************************************************************
 * description: Send image data to Clarifai to anaylyze image
- * @param: URL as a string
- * @return: Image anaylysis array
+ * @param: none
+ * @return: none
  */
-// function sendToClarifai(link, imgArray) {
-//   clarifai.models.predict(Clarifai.GENERAL_MODEL, link).then(
-//     response => {
-//       let clarifaiResponse = response;
-//       let imageAnalysis = clarifaiResponse.outputs[0].data.concepts;
-//       console.log(imageAnaylysis)
-//       imgArray = imageAnalysis;
-//     }
-//   );
-// }
+function skipButtonHandler() {
+	$('.container').empty();
+	getRandomImageFromFlickr();
+}
 /****************************************************************************************************/
