@@ -473,7 +473,7 @@ function waitingModal(quote){
 		class: 'quoteImg',
 		src: 'assets/eyeSpyLogoBander.png',
 	})
-
+	$('.modal-title').text("Hello " + player.name + ", some entertainment while you're waiting");
 	let quoteOfTheDay = $('<div>', {
 		class: 'quoteDiv',
 		text: quote,
