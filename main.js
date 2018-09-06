@@ -117,6 +117,10 @@ function getImageDataFromWatson(img){
  * @return: none
  */
 function createCluesOnDom(clueObj){
+	let eyeSpyLogo = $('<img>', {
+		class: 'LogoImg',
+		src: 'assets/eyeSpyLogoBander.png',
+	});
 	let newCluesContainer = $('<div>', {
 		class: 'cluesPage form-group'
 	});
@@ -177,7 +181,7 @@ function createCluesOnDom(clueObj){
 	newButtonForm.append(newSkipButton, newLeaderBoardButton);
 	newClues.append(newUl);
 	newCluesContainer.append(newInstructions, newClues, newFileForm, newButtonForm);
-	$('.container').append(newCluesContainer);
+	$('.container').append(eyeSpyLogo, newCluesContainer);
 	let imageLoader = $('#uploadFile');
 	imageLoader.change(handleImage);
 
@@ -189,6 +193,10 @@ function createCluesOnDom(clueObj){
  */
 
 function instructionsPage(){
+	let eyeSpyLogo = $('<img>', {
+		class: 'LogoImg',
+		src: 'assets/eyeSpyLogoBander.png',
+	});
 	let newLandingPageContainer = $('<div>', {
 		'class': 'landingPage form-group'
 	});
@@ -234,7 +242,7 @@ function instructionsPage(){
 	newPlayerForm.append(newLabel, newInput);
 	newButtonForm.append(newGoBtn, newLeaderBoardButton);
 	newLandingPageContainer.append(newInstructions, newPlayerForm, newButtonForm);
-	$('.container').append(newLandingPageContainer);
+	$('.container').append(eyeSpyLogo, newLandingPageContainer);
 
   getImageDataFromWatson();
 
@@ -289,6 +297,10 @@ function compareClueImgToGuessImg(clueImgArray, guessImgArray){
  * @return: none
  */
 function getResultsPage(){
+	let eyeSpyLogo = $('<img>', {
+		class: 'LogoImg',
+		src: 'assets/eyeSpyLogoBander.png',
+	});
 	let newResultsPage = $('<div>', {
 		'class': 'resultsPage'
 	});
@@ -358,7 +370,7 @@ function getResultsPage(){
 	buttonCol.append(getClueButton, newLeaderBoardButton);
 	secondRow.append(buttonCol);
 	newResultsPage.append(firstRow, secondRow);
-	$('.container').append(newResultsPage);
+	$('.container').append(eyeSpyLogo, newResultsPage);
 
 
 }
@@ -420,6 +432,10 @@ function getRandomImageFromFlickr(){
  * @return:
  */
 function getLeaderBoardPage(){
+	let eyeSpyLogo = $('<img>', {
+		class: 'LogoImg',
+		src: 'assets/eyeSpyLogoBander.png',
+	});
 	let newLeaderBoardPage = $('<div>', {
 		'class': 'leaderBoard'
 	});
@@ -458,7 +474,7 @@ function getLeaderBoardPage(){
 	newLeaderBoardPage.append(addPlayerToLeaderBoard({name: 'Saul Goodman', score: '88%'}));
 	newLeaderBoardPage.append(addPlayerToLeaderBoard({name: 'Sally Dogood', score: '99%'}));
 	newLeaderBoardPage.append(buttonRow);
-	$('.container').append(newLeaderBoardPage)
+	$('.container').append(eyeSpyLogo, newLeaderBoardPage)
 }
 /****************************************************************************************************
 * description:
