@@ -68,7 +68,7 @@ function initializeApp(){
 *
 */
 function addEventHandlers(){
-  submitButtonHandler();
+
 
 
 
@@ -158,7 +158,8 @@ function createCluesOnDom(clueObj){
 	let newLeaderBoardButton = $('<button>', {
 		'type': 'button',
 		'class': 'leaderBoard btn btn-info',
-		'text': 'Leader Board'
+		'text': 'Leader Board',
+		'click': () => leaderboardButtonHandler()
 	});
 
 
@@ -219,7 +220,8 @@ function instructionsPage(){
 	let newLeaderBoardButton = $('<button>', {
 		'type': 'button',
 		'class': 'leaderBoard btn btn-info',
-		'text': 'Leader Board'
+		'text': 'Leader Board',
+		'click': () => leaderboardButtonHandler()
 	});
 	newPlayerForm.append(newLabel, newInput);
 	newButtonForm.append(newGoBtn, newLeaderBoardButton);
@@ -246,12 +248,9 @@ function instructionsModalButtonResponse(){
  * @param: event
  * @return: none
  */
-function submitButtonHandler(event){
-  getImageDataFromWatson();
-
-
-
-
+function leaderboardButtonHandler(event){
+	$('.container').empty();
+	getLeaderBoardPage();
 }
 /****************************************************************************************************
 * description: for in loop, compare keys and values gives points
