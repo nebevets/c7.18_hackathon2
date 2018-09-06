@@ -56,7 +56,7 @@ function initializeApp(){
 	canvas = $('#imageCanvas');
 	ctx = canvas[0].getContext('2d');
 	addEventHandlers();
-
+	instructionsPage()
 
 
 
@@ -215,10 +215,15 @@ function instructionsPage(){
 		'class': 'form-group'
 	});
 	let newGoBtn = $('<button>', {
-		'type': 'button',
-		'class': 'goBtn btn btn-default',
-		'text': 'Go!'
-	});
+        'type': 'button',
+        'class': 'goBtn btn btn-default',
+        'text': 'Go!',
+        'click': function(){
+            let playerName = $('.landingPage input').val();
+            addPlayerToGame(playerName);
+            $('.container').empty();
+        }
+    });
 	let newLeaderBoardButton = $('<button>', {
 		'type': 'button',
 		'class': 'leaderBoard btn btn-info',
@@ -567,7 +572,15 @@ function addPlayerToLeaderBoard(playerObj){
 	newRow.append(newPlayerName, newPlayerScore);
 	return newRow
 }
-
+/****************************************************************************************************
+* description: sets playerName key of global player object, call getRandomImageFromFlickr
+ * @param: playerName as string
+ * @return: 
+ */
+function addPlayerToGame(playerName){
+	player.name = playerName || 'player1';
+	getRandomImageFromFlickr();
+}
 /****************************************************************************************************
 * description: Send image data to Clarifai to anaylyze image
  * @param: none
@@ -577,4 +590,3 @@ function skipButtonHandler() {
 	$('.container').empty();
 	getRandomImageFromFlickr();
 }
-/****************************************************************************************************/
