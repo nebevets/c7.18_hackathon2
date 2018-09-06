@@ -54,7 +54,6 @@ Randy Dang
 function initializeApp(){
 
 	canvas = $('#imageCanvas');
-	ctx = canvas[0].getContext('2d');
 	addEventHandlers();
 	instructionsPage();
 
@@ -288,6 +287,7 @@ function compareClueImgToGuessImg(clueImgArray, guessImgArray){
  * @return: none
  */
 function getResultsPage(){
+	compareClueImgToGuessImg(clueImg, guessImg);
 	let newResultsPage = $('<div>', {
 		'class': 'resultsPage'
 	});
@@ -301,14 +301,15 @@ function getResultsPage(){
 		'class':'thumbnail'
 	});
 	let clueImg = $('<img>', {
-		'src': 'clue.jpgFIXME',
+		'class': 'clueImage',
+		'src': savedGameImages.clueImg,
 		'alt': 'your clue'
 	});
 	let clueCaption = $('<div>', {
 		'class': 'caption'
 	});
 	let cluePara = $('<p>', {
-		'text': 'This was your clue...'
+		'text': 'This was your clue image...'
 	});
 	let userCol = $('<div>', {
 		'class': 'col-sm-6'
@@ -316,9 +317,8 @@ function getResultsPage(){
 	let userThumbnail = $('<div>', {
 		'class':'thumbnail'
 	});
-	let userImg = $('<img>', {
-		'src': 'found.jpgFIXME',
-		'alt': 'you found'
+	let userImg = $('<canvas>', {
+		'id': 'userImgCanvas',
 	});
 	let userCaption = $('<div>', {
 		'class': 'caption'
@@ -329,6 +329,9 @@ function getResultsPage(){
 	let secondRow = $('<div>', {
 		'class': 'row'
 	});
+	let updateUser = $('<h1>', {
+		'text': `Your score this round was ${player.score} out of 400!`
+	})
 	let buttonCol = $('<div>', {
 		'class': 'col-sm-12'
 	});
@@ -344,7 +347,8 @@ function getResultsPage(){
 	let newLeaderBoardButton = $('<button>', {
 		'type': 'button',
 		'class': 'leaderBoard btn btn-info',
-		'text': 'Leader Board'
+		'text': 'Leader Board',
+		'click': () => leaderboardButtonHandler()
 	});
 
 	clueCaption.append(cluePara)
@@ -354,10 +358,16 @@ function getResultsPage(){
 	userThumbnail.append(userImg, userCaption);
 	userCol.append(userThumbnail);
 	firstRow.append(clueCol, userCol);
+	newResultsPage.append(updateUser);
 	buttonCol.append(getClueButton, newLeaderBoardButton);
 	secondRow.append(buttonCol);
 	newResultsPage.append(firstRow, secondRow);
 	$('.container').append(newResultsPage);
+	
+	guessedImgCanvas = $('#userImgCanvas');
+	ctx = guessedImgCanvas[0].getContext('2d');
+	guessedImgCanvas.height = clueImg.css('height');
+	ctx.drawImage(savedGameImages.guessImg, 0, 0);
 
 
 }
@@ -541,6 +551,7 @@ function receiveDataFromFirebase(){
  * @return: img base64
  */
 function handleImage(){
+	$('.container').empty();
   	getQuote();
   	let img;
 	let reader = new FileReader();
@@ -552,6 +563,8 @@ function handleImage(){
 		clarifai.models.predict(Clarifai.GENERAL_MODEL, clarifaiBase64Obj).then(
 			response => {
 				guessImg = response.outputs[0].data.concepts;
+				getQuote();
+				getResultsPage();
 			});
 	}
 	reader.readAsDataURL(event.target.files[0]);
