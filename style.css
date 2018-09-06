@@ -1,5 +1,10 @@
+* {
+  font-family: monospace;
+  text-shadow: 1px 1px black
+}
+
 body {
-    background-image: url("assets/city_of_noir.jpg");
+  background-image: url("assets/city_of_noir.jpg");
 	background-repeat:no-repeat;
 	background-size: auto;
 	background-color: #000;
@@ -19,7 +24,79 @@ body {
 	color: black;
 }
 
+/* Modal Image */
 .logoImg {
-    height: auto;
-    width: 40vh;
+  display: block;
+  margin: auto;
+  height: 50%;
+  width: 50%;
+}
+
+/* Page Image */
+.LogoImg {
+  display: block;
+  margin: auto;
+  max-width: 65%;
+}
+
+.landingPage .instructions {
+  /* font-family: 'Lato', sans-serif; */
+  text-align: center;
+}
+
+.landingPage .control-label {
+  display: block;
+  text-align: center;
+}
+
+.landingPage input {
+  margin: auto;
+  /* width: 35%; */
+  text-align: center;
+}
+
+.landingPage button.leaderBoard {
+  font-size: 1.3rem;
+}
+
+.landingPage .form-group:nth-child(3) {
+  /* width: 50%; */
+  margin: auto;
+}
+
+input.form-control {
+  width: 45%;
+}
+
+.form-group .leaderBoard {
+  background-color: rebeccapurple;
+  color: white;
+}
+
+.modal-content {
+  background-color: #ccc;
+  border-radius: 15px 15px;
+  text-align: center;
+}
+
+.goBtn {
+  background-color: #ccc;
+  border-top: 5px solid rgba(255, 255, 255, 0.1);
+  border-left: 2px solid  rgba(255, 255, 255, 0.1);
+  border-bottom: 5px solid rgba(0, 0, 0, 0.25);
+  border-right: 2px solid  rgba(0, 0, 0, 0.25);
+}
+
+button.leaderBoard {
+  border-top: 5px solid rgba(255, 255, 255, 0.1);
+ border-left: 2px solid  rgba(255, 255, 255, 0.1);
+ border-bottom: 5px solid rgba(0, 0, 0, 0.25);
+ border-right: 2px solid  rgba(0, 0, 0, 0.25);
+}
+
+.modal-footer button {
+  border-top: 5px solid rgba(255, 255, 255, 0.1);
+  border-left: 2px solid  rgba(255, 255, 255, 0.1);
+  border-bottom: 5px solid rgba(0, 0, 0, 0.25);
+  border-right: 2px solid  rgba(0, 0, 0, 0.25);
 }
