@@ -26,7 +26,7 @@ const player = {name: null, score: 0};
 
 let clueImg;
 let guessImg;
-const clarifai = new Clarifai.App({apiKey: '5aafb283e9f24178b93ae87ec9d7856c'});
+const clarifai = new Clarifai.App({apiKey: 'f96e9dd06030485a9595af374d3e96da'});
 
 let canvas;
 let ctx;
@@ -288,7 +288,7 @@ function compareClueImgToGuessImg(clueImgArray, guessImgArray){
 			}
 		}
 	}
-
+	player.score = parseInt(player.score);
 }
 /****************************************************************************************************
 * description:
@@ -296,7 +296,7 @@ function compareClueImgToGuessImg(clueImgArray, guessImgArray){
  * @return: none
  */
 function getResultsPage(){
-	compareClueImgToGuessImg(clueImg, guessImg);
+
 	let eyeSpyLogo = $('<img>', {
 		class: 'LogoImg',
 		src: 'assets/eyeSpyLogoBander.png',
@@ -313,7 +313,7 @@ function getResultsPage(){
 	let clueThumbnail = $('<div>', {
 		'class':'thumbnail'
 	});
-	let clueImg = $('<img>', {
+	let clueImgElement = $('<img>', {
 		'class': 'clueImage',
 		'src': savedGameImages.clueImg,
 		'alt': 'your clue'
@@ -342,6 +342,7 @@ function getResultsPage(){
 	let secondRow = $('<div>', {
 		'class': 'row'
 	});
+	compareClueImgToGuessImg(clueImg, guessImg);
 	let updateUser = $('<h1>', {
 		'text': `Your score this round was ${player.score} out of 400!`
 	})
@@ -365,21 +366,21 @@ function getResultsPage(){
 	});
 
 	clueCaption.append(cluePara)
-	clueThumbnail.append(clueImg, clueCaption);
+	clueThumbnail.append(clueImgElement, clueCaption);
 	clueCol.append(clueThumbnail);
 	userCaption.append(userPara)
 	userThumbnail.append(userImg, userCaption);
 	userCol.append(userThumbnail);
 	firstRow.append(clueCol, userCol);
-	newResultsPage.append(updateUser);
 	buttonCol.append(getClueButton, newLeaderBoardButton);
 	secondRow.append(buttonCol);
-	newResultsPage.append(firstRow, secondRow);
-	guessedImgCanvas = $('#userImgCanvas');
-	ctx = guessedImgCanvas[0].getContext('2d');
-	guessedImgCanvas.height = clueImg.css('height');
-	ctx.drawImage(savedGameImages.guessImg, 0, 0);
+	newResultsPage.append(firstRow, updateUser, secondRow);
 	$('.container').append(eyeSpyLogo, newResultsPage);
+	let guessedImgCanvas = $('#userImgCanvas');
+	ctx = guessedImgCanvas[0].getContext('2d');
+	guessedImgCanvas.height = clueImgElement.css('height');
+	ctx.drawImage(savedGameImages.guessImg, 0, 0);
+
 }
 /****************************************************************************************************
 * description:
@@ -577,7 +578,6 @@ function handleImage(){
 		clarifai.models.predict(Clarifai.GENERAL_MODEL, clarifaiBase64Obj).then(
 			response => {
 				guessImg = response.outputs[0].data.concepts;
-				getQuote();
 				getResultsPage();
 			});
 	}
