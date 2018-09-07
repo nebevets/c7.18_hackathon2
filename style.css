@@ -11,16 +11,25 @@ body {
 	color: white;
 }
 
+.goBtn, button.leaderBoard, .modal-footer button, .button.skip, .resultsPage button, .leaderBoard button {
+  border-top: 5px solid rgba(255, 255, 255, 0.1);
+  border-left: 2px solid  rgba(255, 255, 255, 0.1);
+  border-bottom: 5px solid rgba(0, 0, 0, 0.25);
+  border-right: 2px solid  rgba(0, 0, 0, 0.25);
+}
+
 .thumbnail>img{
 	height: auto;
 	width: auto;
 	max-height: 100%;
 	max-width: 100%;
 }
+
 .clueImage{
 	width: 100%;
 	height: 15%;
 }
+
 #waitingModal{
 	color: black;
 }
@@ -41,7 +50,6 @@ body {
 }
 
 .landingPage .instructions {
-  /* font-family: 'Lato', sans-serif; */
   text-align: center;
 }
 
@@ -52,7 +60,6 @@ body {
 
 .landingPage input {
   margin: auto;
-  /* width: 35%; */
   text-align: center;
 }
 
@@ -61,10 +68,8 @@ body {
 }
 
 .landingPage .form-group:nth-child(3) {
-  /* width: 50%; */
   margin: auto;
 }
-
 
 .form-group .leaderBoard {
   background-color: rebeccapurple;
@@ -75,13 +80,6 @@ body {
   background-color: #ccc;
   border-radius: 15px 15px;
   text-align: center;
-}
-
-.goBtn, button.leaderBoard, .modal-footer button, .button.skip, .resultsPage button {
-  border-top: 5px solid rgba(255, 255, 255, 0.1);
-  border-left: 2px solid  rgba(255, 255, 255, 0.1);
-  border-bottom: 5px solid rgba(0, 0, 0, 0.25);
-  border-right: 2px solid  rgba(0, 0, 0, 0.25);
 }
 
 .goBtn {
@@ -120,10 +118,6 @@ body {
   text-align: center;
 }
 
-.resultsPage h1 {
-  text-align: center;
-}
-
 .resultsPage .getClue {
   background-color: #ccc;
 }
@@ -131,4 +125,12 @@ body {
 .resultsPage .leaderBoard {
   background-color: rebeccapurple;
   color: white;
+}
+
+.leaderBoard {
+  text-align: center;
+}
+
+.leaderBoard button {
+  background-color: #ccc;
 }

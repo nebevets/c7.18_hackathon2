@@ -346,7 +346,7 @@ function getLeaderBoardPage(){
 	})
 	let getClueButton = $('<button>', {
 		'type': 'button',
-		'class': 'getClue btn btn-default',
+		'class': 'getClue btn btn-default col-xs-4 col-xs-push-4 col-sm-4 col-sm-push-4 col-md-4 col-md-push-4',
 		'text': 'Get New Clue',
 		'click': () => {
 			$('.container').empty();
