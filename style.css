@@ -83,33 +83,15 @@ body {
   text-align: center;
 }
 
+.goBtn, button.leaderBoard, .modal-footer button, .button.skip, .resultsPage button {
+  border-top: 5px solid rgba(255, 255, 255, 0.1);
+  border-left: 2px solid  rgba(255, 255, 255, 0.1);
+  border-bottom: 5px solid rgba(0, 0, 0, 0.25);
+  border-right: 2px solid  rgba(0, 0, 0, 0.25);
+}
+
 .goBtn {
   background-color: #ccc;
-  border-top: 5px solid rgba(255, 255, 255, 0.1);
-  border-left: 2px solid  rgba(255, 255, 255, 0.1);
-  border-bottom: 5px solid rgba(0, 0, 0, 0.25);
-  border-right: 2px solid  rgba(0, 0, 0, 0.25);
-}
-
-button.leaderBoard {
-  border-top: 5px solid rgba(255, 255, 255, 0.1);
- border-left: 2px solid  rgba(255, 255, 255, 0.1);
- border-bottom: 5px solid rgba(0, 0, 0, 0.25);
- border-right: 2px solid  rgba(0, 0, 0, 0.25);
-}
-
-.modal-footer button {
-  border-top: 5px solid rgba(255, 255, 255, 0.1);
-  border-left: 2px solid  rgba(255, 255, 255, 0.1);
-  border-bottom: 5px solid rgba(0, 0, 0, 0.25);
-  border-right: 2px solid  rgba(0, 0, 0, 0.25);
-}
-
-button.skip {
-  border-top: 5px solid rgba(255, 255, 255, 0.1);
-  border-left: 2px solid  rgba(255, 255, 255, 0.1);
-  border-bottom: 5px solid rgba(0, 0, 0, 0.25);
-  border-right: 2px solid  rgba(0, 0, 0, 0.25);
 }
 
 .landingPage .form-control {
@@ -142,13 +124,6 @@ button.skip {
 
 .resultsPage * {
   text-align: center;
-}
-
-.resultsPage button {
-  border-top: 5px solid rgba(255, 255, 255, 0.1);
-  border-left: 2px solid  rgba(255, 255, 255, 0.1);
-  border-bottom: 5px solid rgba(0, 0, 0, 0.25);
-  border-right: 2px solid  rgba(0, 0, 0, 0.25);
 }
 
 .resultsPage h1 {
