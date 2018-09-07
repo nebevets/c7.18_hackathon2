@@ -422,27 +422,44 @@ function handleImage(){
 	reader.readAsDataURL(event.target.files[0]);
 }
 /****************************************************************************************************
-* description: this adds players to the leader board
- * @param:
- * @return:
+ * description: this adds players to the leader board, calls saveGameData()
+ * @param: playerObjFromFirebase, htmlElement
+ * @returns: none
  */
 function addPlayersToLeaderBoard(playerObjFromFirebase, htmlElement){
 	saveGameData();
-	for( searchKey in playerObjFromFirebase ){
-		let theCurrentKey = searchKey;
-		let newRow = $('<div>', {
-			'class': 'row'
-		});
-		let newPlayerName = $('<div>', {
-			'class': 'col-xs-6',
-			'text': theCurrentKey
-		});
-		let newPlayerScore = $('<div>', {
-			'class': 'col-xs-6',
-			'text': playerObjFromFirebase[theCurrentKey].score
-		});
-		newRow.append(newPlayerName, newPlayerScore);
-		htmlElement.append(newRow);
+	let highestToLowestArray = [];
+	for( let searchKey in playerObjFromFirebase){
+		highestToLowestArray.push( playerObjFromFirebase[searchKey].score );
+	}
+		highestToLowestArray.sort( (a, b) => b - a );
+		for( let splicingIndex = 0; splicingIndex < highestToLowestArray.length; splicingIndex++ ){
+			let lastIndexValue = highestToLowestArray.lastIndexOf(highestToLowestArray[splicingIndex])
+			if( splicingIndex !== lastIndexValue ){
+				highestToLowestArray.splice(lastIndexValue, 1);
+				splicingIndex--;
+			}
+		}
+
+	for( let searchIndex = 0; searchIndex < highestToLowestArray.length; searchIndex++ ){
+			for( let searchKey in playerObjFromFirebase ){
+			let theCurrentKey = searchKey;
+			if( playerObjFromFirebase[theCurrentKey].score === highestToLowestArray[searchIndex] ){
+				let newRow = $('<div>', {
+					'class': 'row'
+				});
+				let newPlayerName = $('<div>', {
+					'class': 'col-xs-6',
+					'text': theCurrentKey
+				});
+				let newPlayerScore = $('<div>', {
+					'class': 'col-xs-6',
+					'text': playerObjFromFirebase[theCurrentKey].score
+				});
+				newRow.append(newPlayerName, newPlayerScore);
+				htmlElement.append(newRow);
+			}
+		}	
 	}
 }
 /****************************************************************************************************
