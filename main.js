@@ -350,6 +350,10 @@ function getLeaderBoardPage(){
 		'text': 'Get New Clue',
 		'click': () => {
 			$('.container').empty();
+			if(player.name === null){
+				instructionsPage();
+				return;
+			}
 			getRandomWordsFromNYT();
 		}
 	});
