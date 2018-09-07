@@ -139,3 +139,27 @@ button.skip {
   text-align: center;
   list-style-type: none;
 }
+
+.resultsPage * {
+  text-align: center;
+}
+
+.resultsPage button {
+  border-top: 5px solid rgba(255, 255, 255, 0.1);
+  border-left: 2px solid  rgba(255, 255, 255, 0.1);
+  border-bottom: 5px solid rgba(0, 0, 0, 0.25);
+  border-right: 2px solid  rgba(0, 0, 0, 0.25);
+}
+
+.resultsPage h1 {
+  text-align: center;
+}
+
+.resultsPage .getClue {
+  background-color: #ccc;
+}
+
+.resultsPage .leaderBoard {
+  background-color: rebeccapurple;
+  color: white;
+}

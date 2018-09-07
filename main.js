@@ -258,7 +258,7 @@ function getResultsPage(){
 	});
 	let getClueButton = $('<button>', {
 		'type': 'button',
-		'class': 'getClue btn btn-default',
+		'class': 'getClue btn btn-default col-xs-4 col-xs-push-1 col-sm-3 col-sm-push-2 col-md-3 col-md-push-2',
 		'text': 'Get New Clue',
 		'click': () => {
 			$('.container').empty();
@@ -267,7 +267,7 @@ function getResultsPage(){
 	});
 	let newLeaderBoardButton = $('<button>', {
 		'type': 'button',
-		'class': 'leaderBoard btn btn-info',
+		'class': 'leaderBoard btn btn-info col-xs-4 col-xs-push-3 col-sm-3 col-sm-push-4 col-md-3 col-md-push-4',
 		'text': 'Leader Board',
 		'click': () => leaderboardButtonHandler()
 	});
