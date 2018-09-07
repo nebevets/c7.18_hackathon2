@@ -132,3 +132,10 @@ body {
   background-color: rebeccapurple;
   color: white;
 }
+.leaderBoard {
+	text-align: center;
+  }
+  
+  .leaderBoard button {
+	background-color: #ccc;
+  }

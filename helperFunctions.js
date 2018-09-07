@@ -5,11 +5,11 @@
  */
 function addPlayerToGame(playerName){
 	player.name = playerName.toLowerCase();
-	if(totalPlayersObj[playerName]){
-		player.score = totalPlayersObj[playerName].score;
+	if(totalPlayersObj[player.name]){
+		player.score = totalPlayersObj[player.name].score;
 	}
 	else{
-		totalPlayersObj[playerName] = {score: 0};
+		totalPlayersObj[player.name] = {score: 0};
 	}
 	saveGameData();
 	getRandomWordsFromNYT();
