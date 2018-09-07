@@ -177,26 +177,27 @@ function leaderboardButtonHandler(event){
 /****************************************************************************************************
 * description: for in loop, compare keys and values gives points calls sameGameData
  * @param: clueImgObj and guessImgObj
- * @return:
+ * @return: currentScore
  */
 function compareClueImgToGuessImg(clueImgArray, guessImgArray){
-
+	let currentScore = 0;
 	for( let outer = 0; outer < clueImgArray.length; outer++ ){
 		for( let inner = 0; inner < guessImgArray.length; inner++ ){
 			if( clueImgArray[ outer ].name === guessImgArray[ inner ].name ){
-				player.score += 10;
+				currentScore += 10;
 				if( clueImgArray[outer].value < guessImgArray[inner].value ){
-					player.score += (clueImgArray[outer].value / guessImgArray[inner].value) * 10
+					currentScore += (clueImgArray[outer].value / guessImgArray[inner].value) * 10
 				}
 				else{
-					player.score += (guessImgArray[outer].value / clueImgArray[inner].value) * 10
+					currentScore += (guessImgArray[outer].value / clueImgArray[inner].value) * 10
 				}
 			}
 		}
 	}
-	player.score = parseInt(player.score);
-	totalPlayersObj[player.name].score += player.score;
+	currentScore = parseInt(currentScore);
+	totalPlayersObj[player.name].score += currentScore;
 	saveGameData();
+	return currentScore;
 }
 /****************************************************************************************************
 * description: sets up the results page
@@ -249,9 +250,8 @@ function getResultsPage(){
 	let secondRow = $('<div>', {
 		'class': 'row'
 	});
-	compareClueImgToGuessImg(clueImg, guessImg);
 	let updateUser = $('<h1>', {
-		'text': `Your score this round was ${player.score} out of 400!`
+		'text': `Your score this round was ${compareClueImgToGuessImg(clueImg, guessImg)} out of 400!`
 	})
 	let buttonCol = $('<div>', {
 		'class': 'col-sm-12'
