@@ -463,7 +463,7 @@ function addPlayersToLeaderBoard(playerObjFromFirebase, htmlElement){
 				newRow.append(newPlayerName, newPlayerScore);
 				htmlElement.append(newRow);
 			}
-		}	
+		}
 	}
 }
 /****************************************************************************************************
