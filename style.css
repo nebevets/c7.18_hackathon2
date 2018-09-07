@@ -3,12 +3,6 @@
   text-shadow: 1px 1px black
 }
 
-@media screen and (min-width: 650px) {
-  .body {
-    background-size: 100%;
-  }
-}
-
 body {
   background-image: url("assets/city_of_noir.jpg");
 	background-repeat:no-repeat;
