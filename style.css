@@ -116,6 +116,10 @@ button.skip {
   width: 50%;
 }
 
+.cluesPage * {
+  text-align: center;
+}
+
 .cluesPage > .form-group:nth-child(3) {
   margin: auto;
   margin-bottom: 1%;
@@ -125,6 +129,13 @@ button.skip {
   margin: 1%;
 }
 
-.cluesPage * {
+.cluesPage h4 {
+  margin-left: 5%;
   text-align: center;
+}
+
+.cluesPage ol {
+  list-style-position: inside;
+  text-align: center;
+  list-style-type: none;
 }
