@@ -53,7 +53,7 @@ function compareClueImgToGuessImg(clueImgArray, guessImgArray){
  * @return: none
  */
 function leaderboardButtonHandler(event){
-	$('.container').empty();
+	emptyContainer();
 	getLeaderBoardPage();
 }
 /****************************************************************************************************
@@ -62,6 +62,14 @@ function leaderboardButtonHandler(event){
  * @return: none
  */
 function skipButtonHandler() {
-	$('.container').empty();
+	emptyContainer();
 	getRandomWordsFromNYT();
+}
+/****************************************************************************************************
+* description: empties the contents of the page container
+ * @param: none
+ * @return: none
+ */
+function emptyContainer() {
+	$('.container').empty();
 }

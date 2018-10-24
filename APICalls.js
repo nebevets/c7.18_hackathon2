@@ -57,7 +57,7 @@ function getQuote(){
  * @return: img base64
  */
 function handleImage(){
-	$('.container').empty();
+	emptyContainer();
   	getQuote();
   	let img;
 	let reader = new FileReader();
