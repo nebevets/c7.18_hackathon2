@@ -29,15 +29,15 @@ function getRandomInt(min, max){
  */
 function compareClueImgToGuessImg(clueImgArray, guessImgArray){
 	let currentScore = 0;
-	for( let outer = 0; outer < clueImgArray.length; outer++ ){
-		for( let inner = 0; inner < guessImgArray.length; inner++ ){
-			if( clueImgArray[ outer ].name === guessImgArray[ inner ].name ){
+	for( let clueImgIndex = 0; clueImgIndex < clueImgArray.length; clueImgIndex++ ){
+		for( let guessedImgIndex = 0; guessedImgIndex < guessImgArray.length; guessedImgIndex++ ){
+			if( clueImgArray[ clueImgIndex ].name === guessImgArray[ guessedImgIndex ].name ){
 				currentScore += 10;
-				if( clueImgArray[outer].value < guessImgArray[inner].value ){
-					currentScore += (clueImgArray[outer].value / guessImgArray[inner].value) * 10
+				if( clueImgArray[outer].value < guessImgArray[guessedImgIndex].value ){
+					currentScore += (clueImgArray[clueImgIndex].value / guessImgArray[guessedImgIndex].value) * 10
 				}
 				else{
-					currentScore += (guessImgArray[outer].value / clueImgArray[inner].value) * 10
+					currentScore += (guessImgArray[clueImgIndex].value / clueImgArray[guessedImgIndex].value) * 10
 				}
 			}
 		}
