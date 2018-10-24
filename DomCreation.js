@@ -265,29 +265,35 @@ function getLeaderBoardPage(){
 	$('.container').append(eyeSpyLogo, newLeaderBoardPage)
 }
 /****************************************************************************************************
- * description: this adds players to the leader board, calls saveGameData()
+ * description: this adds players to the leader board, calls saveGameData().
+ *  	due to firebase not having base functionality for arrays, the data must be manipulated around in order to display in 
+ * 		decending order, as well as keep names attached.
  * @param: playerObjFromFirebase, htmlElement
  * @returns: none
  */
 function addPlayersToLeaderBoard(playerObjFromFirebase, htmlElement){
 	saveGameData();
-	let highestToLowestArray = [];
+		//deconstructs the object received from firebase into an array of just score values
+	let descendingScoreArray = [];
 	for( let searchKey in playerObjFromFirebase){
-		highestToLowestArray.push( playerObjFromFirebase[searchKey].score );
+		descendingScoreArray.push( playerObjFromFirebase[searchKey].score );
 	}
-		highestToLowestArray.sort( (a, b) => b - a );
-		for( let splicingIndex = 0; splicingIndex < highestToLowestArray.length; splicingIndex++ ){
-			let lastIndexValue = highestToLowestArray.lastIndexOf(highestToLowestArray[splicingIndex])
-			if( splicingIndex !== lastIndexValue ){
-				highestToLowestArray.splice(lastIndexValue, 1);
-				splicingIndex--;
-			}
+		//sorts the array into descending order
+	descendingScoreArray.sort( (a, b) => b - a );
+		//loops through the array of scores and removed duplicate scores and scores of 0 from the array
+	for( let scoreArrayIndex = 0; scoreArrayIndex < descendingScoreArray.length; scoreArrayIndex++ ){
+		let lastIndexOfCurrentScore = descendingScoreArray.lastIndexOf(descendingScoreArray[scoreArrayIndex])
+		if( scoreArrayIndex !== lastIndexOfCurrentScore || descendingScoreArray[scoreArrayIndex] === 0){
+			descendingScoreArray.splice(lastIndexOfCurrentScore, 1);
+			scoreArrayIndex--;
 		}
-
-	for( let searchIndex = 0; searchIndex < highestToLowestArray.length; searchIndex++ ){
-			for( let searchKey in playerObjFromFirebase ){
+	}
+		//with the descending array of unique scores, loops through it and matches the player with that score in the firebase object, and then
+		//DOM creates them in order. Also limits the number of highscores to a max of 25.
+	for( let searchIndex = 0; searchIndex < descendingScoreArray.length || searchIndex > 25; searchIndex++ ){
+		for( let searchKey in playerObjFromFirebase ){
 			let theCurrentKey = searchKey;
-			if( playerObjFromFirebase[theCurrentKey].score === highestToLowestArray[searchIndex] ){
+			if( playerObjFromFirebase[theCurrentKey].score === descendingScoreArray[searchIndex] ){
 				let newRow = $('<div>', {
 					'class': 'row'
 				});
