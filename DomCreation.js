@@ -188,7 +188,7 @@ function getResultsPage(){
 	});
 	let updateUser = $('<h1>', {
 		'text': `Your score this round was ${compareClueImgToGuessImg(clueImg, guessImg)} out of 400!`
-	})
+	});
 	let buttonCol = $('<div>', {
 		'class': 'col-sm-12'
 	});

@@ -33,7 +33,7 @@ function compareClueImgToGuessImg(clueImgArray, guessImgArray){
 		for( let guessedImgIndex = 0; guessedImgIndex < guessImgArray.length; guessedImgIndex++ ){
 			if( clueImgArray[ clueImgIndex ].name === guessImgArray[ guessedImgIndex ].name ){
 				currentScore += 10;
-				if( clueImgArray[outer].value < guessImgArray[guessedImgIndex].value ){
+				if( clueImgArray[clueImgIndex].value < guessImgArray[guessedImgIndex].value ){
 					currentScore += (clueImgArray[clueImgIndex].value / guessImgArray[guessedImgIndex].value) * 10
 				}
 				else{
