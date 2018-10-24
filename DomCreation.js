@@ -47,7 +47,6 @@ function instructionsPage(){
 						return;
 					}
             		addPlayerToGame(playerName);
-            		//$('.container').empty();
 					emptyContainer();
         		}
 			}
@@ -250,7 +249,7 @@ function getLeaderBoardPage(){
 		'class': 'getClue btn btn-default',
 		'text': 'Get New Clue',
 		'click': () => {
-			$('.container').empty();
+			emptyContainer();
 			if(player.name === null){
 				instructionsPage();
 				return;
