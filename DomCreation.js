@@ -40,14 +40,17 @@ function instructionsPage(){
         'type': 'button',
         'class': 'goBtn btn btn-default col-xs-4 col-xs-push-1 col-sm-3 col-sm-push-2 col-md-3 col-md-push-2',
         'text': 'Go!',
-        'click': () => {
-            let playerName = $('.landingPage input').val();
-			if( !playerName ){
-				return;
+        'on': {
+				'click': () => {
+            		let playerName = $('.landingPage input').val();
+					if( !playerName ){
+						return;
+					}
+            		addPlayerToGame(playerName);
+            		//$('.container').empty();
+					emptyContainer();
+        		}
 			}
-            addPlayerToGame(playerName);
-            $('.container').empty();
-        }
     });
 	let newLeaderBoardButton = $('<button>', {
 		'type': 'button',
@@ -189,7 +192,7 @@ function getResultsPage(){
 		'class': 'getClue btn btn-default col-xs-4 col-xs-push-1 col-sm-3 col-sm-push-2 col-md-3 col-md-push-2',
 		'text': 'Get New Clue',
 		'click': () => {
-			$('.container').empty();
+			emptyContainer();
 			getRandomWordsFromNYT();
 		}
 	});
