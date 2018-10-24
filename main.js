@@ -14,7 +14,7 @@ const player = {name: null, score: 0};
 let totalPlayersObj = {};
 let clueImg;
 let guessImg;
-const clarifai = new Clarifai.App({apiKey: 'f96e9dd06030485a9595af374d3e96da'});
+const clarifai = new Clarifai.App({apiKey: clarifiAPIKey});
 let canvas;
 let ctx;
 const savedGameImages = {guessImg: null, clueImg: null};

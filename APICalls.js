@@ -5,16 +5,15 @@
  */
 function getRandomImageFromFlickr(wordArray){
 	getQuote();
-  	const apiKey = "2bcd2e195e7ea98f459f7bd6bdde6a29";
-  	let searchKeyWordList = wordArray;
+	let searchKeyWordList = wordArray;
   	let randomKeyWord = searchKeyWordList[getRandomInt(0, searchKeyWordList.length-1)];
 	const flickrConfig = {
-		url: `https://api.flickr.com/services/rest?method=flickr.photos.search&api_key=${apiKey}&format=json&nojsoncallback=1&text=${randomKeyWord}&per_page=5`,
+		url: `https://api.flickr.com/services/rest?method=flickr.photos.search&api_key=${flickrAPIKey}&format=json&nojsoncallback=1&text=${randomKeyWord}&per_page=5`,
     	success: result => {
       		const randomPhoto = result.photos.photo[getRandomInt(0, result.photos.photo.length-1)]
       		if(randomPhoto === undefined) {
 				randomKeyWord = searchKeyWordList[getRandomInt(0, searchKeyWordList.length-1)];
-				flickrConfig.url = `https://api.flickr.com/services/rest?method=flickr.photos.search&api_key=${apiKey}&format=json&nojsoncallback=1&text=${randomKeyWord}&per_page=5`;
+				flickrConfig.url = `https://api.flickr.com/services/rest?method=flickr.photos.search&api_key=${flickrAPIKey}&format=json&nojsoncallback=1&text=${randomKeyWord}&per_page=5`;
 				$.ajax(flickrConfig);
       		}
     		let flickrImgURL = `https://farm${randomPhoto.farm}.staticflickr.com/${randomPhoto.server}/${randomPhoto.id}_${randomPhoto.secret}.jpg`
@@ -78,7 +77,7 @@ function getRandomWordsFromNYT(){
 		url: "https://api.nytimes.com/svc/topstories/v2/travel.json",
 		method: 'GET',
 		data: {
-			'api-key': "3248c8d085284383aa5bd7aa7146601c"
+			'api-key': NYTimesAPIKey
 		},
 		dataType: 'json',
 		success: response => {
