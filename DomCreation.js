@@ -41,21 +41,23 @@ function instructionsPage(){
         'class': 'goBtn btn btn-default col-xs-4 col-xs-push-1 col-sm-3 col-sm-push-2 col-md-3 col-md-push-2',
         'text': 'Go!',
         'on': {
-				'click': () => {
-            		let playerName = $('.landingPage input').val();
-					if( !playerName ){
-						return;
-					}
-            		addPlayerToGame(playerName);
-					emptyContainer();
-        		}
-			}
+			'click': () => {
+				let playerName = $('.landingPage input').val();
+				if( !playerName ){
+					return;
+				}
+            	addPlayerToGame(playerName);
+				emptyContainer();
+        	}
+		}
     });
 	let newLeaderBoardButton = $('<button>', {
 		'type': 'button',
 		'class': 'leaderBoard btn btn-info col-xs-4 col-xs-push-3 col-sm-3 col-sm-push-4 col-md-3 col-md-push-4',
 		'text': 'Leader Board',
-		'click': () => leaderboardButtonHandler()
+		'on': {
+			'click': leaderboardButtonHandler
+		}
 	});
 	newPlayerForm.append(newLabel, newInput);
 	newButtonForm.append(newGoBtn, newLeaderBoardButton);
@@ -108,13 +110,17 @@ function createCluesOnDom(clueObj){
 		'type': 'button',
 		'class': 'skip btn btn-default col-xs-12 col-sm-5 col-md-4 col-md-push-2',
 		'text': 'Skip Clue',
-		'click': () => skipButtonHandler()
+		'on': {
+			'click': skipButtonHandler
+		}
 	});
 	let newLeaderBoardButton = $('<button>', {
 		'type': 'button',
 		'class': 'leaderBoard btn btn-info col-xs-12 col-sm-5 col-sm-push-1 col-md-4 col-md-push-2',
 		'text': 'Leader Board',
-		'click': () => leaderboardButtonHandler()
+		'on': {
+			'click': leaderboardButtonHandler
+		}
 	});
 	for(var i = 0; i < 5; i++) {
 		newOl.append($('<li>', {
@@ -199,7 +205,9 @@ function getResultsPage(){
 		'type': 'button',
 		'class': 'leaderBoard btn btn-info col-xs-4 col-xs-push-3 col-sm-3 col-sm-push-4 col-md-3 col-md-push-4',
 		'text': 'Leader Board',
-		'click': () => leaderboardButtonHandler()
+		'on': {
+			'click': leaderboardButtonHandler
+		}
 	});
 
 	clueCaption.append(cluePara)
@@ -248,13 +256,15 @@ function getLeaderBoardPage(){
 		'type': 'button',
 		'class': 'getClue btn btn-default',
 		'text': 'Get New Clue',
-		'click': () => {
-			emptyContainer();
-			if(player.name === null){
-				instructionsPage();
-				return;
+		'on': {
+			'click': () => {
+				emptyContainer();
+				if(player.name === null){
+					instructionsPage();
+					return;
+				}
+				getRandomWordsFromNYT();
 			}
-			getRandomWordsFromNYT();
 		}
 	});
 
