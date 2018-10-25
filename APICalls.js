@@ -10,7 +10,9 @@ function getRandomImageFromFlickr(wordArray){
 	let flickrAttempts = 0;
 
 	if(flickrAttempts > 3) {
-		errorModal("Error: Server is not responding. Please refresh the game and try again.")
+		let errorTitle = 'Error: Server Not Responding';
+		let errorMsgs = ['The image server is not responding. Please refresh the game and try again'];
+		showErrorModal(errorTitle, errorMsgs);
 	}
 
 	const flickrConfig = {
