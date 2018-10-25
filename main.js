@@ -15,7 +15,7 @@ let totalPlayersObj = {};
 let clueImg;
 let guessImg;
 const clarifai = new Clarifai.App({apiKey: clarifiAPIKey});
-let canvas;
+let imgConverter;
 const savedGameImages = {guessImg: null, clueImg: null};
 let leaderboardFirebaseDB;
 /***************************************************************************************************
@@ -25,7 +25,7 @@ let leaderboardFirebaseDB;
 * @returns: none
 */
 function initializeApp(){
-	canvas = $('#imageCanvas');
+	imgConverter = $('#imgConverter');
 	instructionsPage();
 	leaderboardFirebaseDB = new GenericFBModel('potato1nuget2flower', leaderBoardUpdated);
 }
