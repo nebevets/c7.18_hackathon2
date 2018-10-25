@@ -187,7 +187,7 @@ function getResultsPage(){
 		'class': 'row'
 	});
 	let updateUser = $('<h1>', {
-		'text': `Your score this round was ${compareClueImgToGuessImg(clueImg, guessImg)} out of 400!`
+		'text': `Clarifai rates the two images ${compareClueImgToGuessImg(clueImg, guessImg)}% similar!`
 	});
 	let buttonCol = $('<div>', {
 		'class': 'col-sm-12'
