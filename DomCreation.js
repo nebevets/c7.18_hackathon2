@@ -5,11 +5,8 @@
  * @param:none
  * @return:none
  */
+
 function createLandingPage(){
-	let eyeSpyLogo = $('<img>', {
-		class: 'logoImg',
-		src: 'assets/eyespylogo.png',
-	});
 	let newLandingPageContainer = $('<div>', {
 		'class': 'landingPage form-group'
 	});
@@ -37,20 +34,26 @@ function createLandingPage(){
 		'class': 'form-group'
 	});
 	let newGoBtn = $('<button>', {
-        'type': 'button',
-        'class': 'goBtn btn btn-default col-xs-4 col-xs-push-1 col-sm-3 col-sm-push-2 col-md-3 col-md-push-2',
-        'text': 'Go!',
-        'on': {
-			'click': () => {
-				let playerName = $('.landingPage input').val();
-				if( !playerName ){
-					return;
+		        'type': 'button',
+		        'class': 'goBtn btn btn-default col-xs-4 col-xs-push-1 col-sm-3 col-sm-push-2 col-md-3 col-md-push-2',
+		        'text': 'Go!',
+		        'on': {
+					'click': () => {
+						let $nameInput = $('.landingPage input');
+						let playerName = $nameInput.val();
+						let playerNameRegEx = /^[a-zA-Z\-'0-9]{2,15}$/;
+						if(!playerNameRegEx.test(playerName)){
+							let errorTitle = 'Error: Name Input';
+							let errorMsgs = [`"${playerName}" is not a valid user name. Use up to 15 letters and/or numbers only.`];
+							$nameInput.val('');
+							showErrorModal(errorTitle, errorMsgs);
+							return;
+						}
+		            	addPlayerToGame(playerName);
+						emptyContainer();
+		        	}
 				}
-            	addPlayerToGame(playerName);
-				emptyContainer();
-        	}
-		}
-    });
+	});
 	let newLeaderBoardButton = $('<button>', {
 		'type': 'button',
 		'class': 'leaderBoard btn btn-info col-xs-4 col-xs-push-3 col-sm-3 col-sm-push-4 col-md-3 col-md-push-4',
@@ -62,7 +65,7 @@ function createLandingPage(){
 	newPlayerForm.append(newLabel, newInput);
 	newButtonForm.append(newGoBtn, newLeaderBoardButton);
 	newLandingPageContainer.append(newInstructions, newPlayerForm, newButtonForm);
-	$('.container').append(eyeSpyLogo, newLandingPageContainer);
+	$('.container').append(newLandingPageContainer);
 }
 /****************************************************************************************************
 * description: creates the clue page
@@ -70,10 +73,6 @@ function createLandingPage(){
  * @return: none
  */
 function createCluesOnDom(clueObj){
-	let eyeSpyLogo = $('<img>', {
-		class: 'logoImg',
-		src: 'assets/eyespylogo.png',
-	});
 	let newCluesContainer = $('<div>', {
 		class: 'cluesPage form-group'
 	});
@@ -132,7 +131,7 @@ function createCluesOnDom(clueObj){
 	newButtonForm.append(newSkipButton, newLeaderBoardButton);
 	newClues.append(newH4, newOl);
 	newCluesContainer.append(newInstructions, newClues, newFileForm, newButtonForm);
-	$('.container').append(eyeSpyLogo, newCluesContainer);
+	$('.container').append(newCluesContainer);
 	let imageLoader = $('#uploadFile');
 	imageLoader.change(handleImage);
 }
@@ -142,10 +141,6 @@ function createCluesOnDom(clueObj){
  * @return: none
  */
 function getResultsPage(){
-	let eyeSpyLogo = $('<img>', {
-		class: 'logoImg',
-		src: 'assets/eyespylogo.png',
-	});
 	let newResultsPage = $('<div>', {
 		'class': 'resultsPage'
 	});
@@ -224,7 +219,7 @@ function getResultsPage(){
 	buttonCol.append(getClueButton, newLeaderBoardButton);
 	secondRow.append(buttonCol);
 	newResultsPage.append(firstRow, updateUser, secondRow);
-	$('.container').append(eyeSpyLogo, newResultsPage);
+	$('.container').append(newResultsPage);
 }
 /****************************************************************************************************
 * description: sets up leader board page with dom creation
@@ -232,10 +227,6 @@ function getResultsPage(){
  * @return:
  */
 function getLeaderBoardPage(){
-	let eyeSpyLogo = $('<img>', {
-		class: 'logoImg',
-		src: 'assets/eyespylogo.png',
-	});
 	let newLeaderBoardPage = $('<div>', {
 		'class': 'leaderBoard'
 	});
@@ -278,7 +269,7 @@ function getLeaderBoardPage(){
 	newLeaderBoardPage.append(firstRow);
 	addPlayersToLeaderBoard(totalPlayersObj, newLeaderBoardPage);
 	newLeaderBoardPage.append(buttonRow);
-	$('.container').append(eyeSpyLogo, newLeaderBoardPage)
+	$('.container').append(newLeaderBoardPage)
 }
 /****************************************************************************************************
  * description: this adds players to the leader board, calls saveGameData().
@@ -334,19 +325,16 @@ function addPlayersToLeaderBoard(playerObjFromFirebase, htmlElement){
  */
 function waitingModal(quote){
 	$('.modal-body').empty();
-	let eyeSpyLogo = $('<img>', {
-		class: 'logoImg',
-		src: 'assets/eyespylogo.png',
-	})
 	$('.modal-title').text(`Hello ${player.name}, some entertainment while you're waiting`);
 	let quoteOfTheDay = $('<div>', {
 		class: 'quoteDiv',
 		text: quote,
 	})
 
-	$('.modal-body').append(eyeSpyLogo, quoteOfTheDay);
+	$('.modal-body').append(quoteOfTheDay);
 	$('#waitingModal').modal('show');
 }
+
 /*****************************************************************************************************/
 
 /****************************************************************************************************
@@ -356,17 +344,13 @@ function waitingModal(quote){
  */
 function errorModal(message){
 	$('.modal-body').empty();
-	let eyeSpyLogo = $('<img>', {
-		class: 'logoImg',
-		src: 'assets/eyespylogo.png',
-	})
 	$('.modal-title').text(`Error`);
 	let errorMessage = $('<div>', {
 		class: 'quoteDiv',
 		text: message,
 	})
 
-	$('.modal-body').append(eyeSpyLogo, errorMessage);
+	$('.modal-body').append(errorMessage);
 	$('#waitingModal').modal('show');
 }
 /*****************************************************************************************************/
