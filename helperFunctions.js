@@ -84,3 +84,25 @@ function skipButtonHandler() {
 function emptyContainer() {
 	$('.container').empty();
 }
+/****************************************************************************************************
+* description: dom creates the error modal and shows it.
+ * @param: titleText is displayed in the title of the modal. errors is an array of error messages
+ *         that are shown in the modal body.
+ * @return: none
+ */
+function showErrorModal(titleText, errors){
+	$modalTitle = $('.modal-title');
+	$modalMessage = $('.modal-body');
+	$modalMessage.empty();
+	$modalTitle.text(titleText);
+	for (var error in errors){
+		  var errorDivProps = {
+				'class': 'alert alert-danger',
+				text: errors[error]
+		  };
+		  var $errorDiv = $('<div>', errorDivProps);
+		  $modalMessage.append($errorDiv);
+	}
+	$('#waitingModal').modal('show');
+}
+/*****************************************************************************************************/
