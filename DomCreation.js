@@ -5,7 +5,8 @@
  * @param:none
  * @return:none
  */
-function instructionsPage(){
+
+function createLandingPage(){
 	let newLandingPageContainer = $('<div>', {
 		'class': 'landingPage form-group'
 	});
@@ -254,7 +255,7 @@ function getLeaderBoardPage(){
 			'click': () => {
 				emptyContainer();
 				if(player.name === null){
-					instructionsPage();
+					createLandingPage();
 					return;
 				}
 				getRandomWordsFromNYT();
