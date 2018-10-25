@@ -191,7 +191,7 @@ function getResultsPage(){
 		'class': 'row'
 	});
 	let updateUser = $('<h1>', {
-		'text': `Your score this round was ${compareClueImgToGuessImg(clueImg, guessImg)} out of 400!`
+		'text': `Clarifai rates the two images ${compareClueImgToGuessImg(clueImg, guessImg)}% similar!`
 	});
 	let buttonCol = $('<div>', {
 		'class': 'col-sm-12'
@@ -292,8 +292,7 @@ function addPlayersToLeaderBoard(playerObjFromFirebase, htmlElement){
 		//deconstructs the object received from firebase into an array of just score values
 	let descendingScoreArray = [];
 	for( let searchKey in playerObjFromFirebase){
-		descendingScoreArray.push( playerObjFromFirebase[searchKey].score );
-	}
+		descendingScoreArray.push( playerObjFromFirebase[searchKey].score / playerObjFromFirebase[searchKey].attempts );	}
 		//sorts the array into descending order
 	descendingScoreArray.sort( (a, b) => b - a );
 		//loops through the array of scores and removed duplicate scores and scores of 0 from the array
@@ -309,8 +308,8 @@ function addPlayersToLeaderBoard(playerObjFromFirebase, htmlElement){
 	for( let searchIndex = 0; searchIndex < descendingScoreArray.length || searchIndex > 25; searchIndex++ ){
 		for( let searchKey in playerObjFromFirebase ){
 			let theCurrentKey = searchKey;
-			if( playerObjFromFirebase[theCurrentKey].score === descendingScoreArray[searchIndex] ){
-				let newRow = $('<div>', {
+			if( playerObjFromFirebase[theCurrentKey].score / playerObjFromFirebase[searchKey].attempts === descendingScoreArray[searchIndex] ){
+					let newRow = $('<div>', {
 					'class': 'row'
 				});
 				let newPlayerName = $('<div>', {
@@ -319,7 +318,7 @@ function addPlayersToLeaderBoard(playerObjFromFirebase, htmlElement){
 				});
 				let newPlayerScore = $('<div>', {
 					'class': 'col-xs-6',
-					'text': playerObjFromFirebase[theCurrentKey].score
+					'text': `${parseInt(playerObjFromFirebase[theCurrentKey].score / playerObjFromFirebase[searchKey].attempts)}%`
 				});
 				newRow.append(newPlayerName, newPlayerScore);
 				htmlElement.append(newRow);
