@@ -5,7 +5,7 @@
  * @param:none
  * @return:none
  */
-function instructionsPage(){
+function createLandingPage(){
 	let eyeSpyLogo = $('<img>', {
 		class: 'logoImg',
 		src: 'assets/eyespylogo.png',
@@ -264,7 +264,7 @@ function getLeaderBoardPage(){
 			'click': () => {
 				emptyContainer();
 				if(player.name === null){
-					instructionsPage();
+					createLandingPage();
 					return;
 				}
 				getRandomWordsFromNYT();
