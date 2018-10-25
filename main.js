@@ -10,7 +10,7 @@
 */
 $(document).ready(initializeApp);
 /**  Define all global variables here.  **/
-const player = {name: null, score: 0};
+const player = {name: null, score: 0, attempts: 0};
 let totalPlayersObj = {};
 let clueImg;
 let guessImg;
