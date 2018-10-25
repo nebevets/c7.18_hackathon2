@@ -6,10 +6,6 @@
  * @return:none
  */
 function instructionsPage(){
-	let eyeSpyLogo = $('<img>', {
-		class: 'logoImg',
-		src: 'assets/eyespylogo.png',
-	});
 	let newLandingPageContainer = $('<div>', {
 		'class': 'landingPage form-group'
 	});
@@ -68,7 +64,7 @@ function instructionsPage(){
 	newPlayerForm.append(newLabel, newInput);
 	newButtonForm.append(newGoBtn, newLeaderBoardButton);
 	newLandingPageContainer.append(newInstructions, newPlayerForm, newButtonForm);
-	$('.container').append(eyeSpyLogo, newLandingPageContainer);
+	$('.container').append(newLandingPageContainer);
 }
 /****************************************************************************************************
 * description: creates the clue page
@@ -76,10 +72,6 @@ function instructionsPage(){
  * @return: none
  */
 function createCluesOnDom(clueObj){
-	let eyeSpyLogo = $('<img>', {
-		class: 'logoImg',
-		src: 'assets/eyespylogo.png',
-	});
 	let newCluesContainer = $('<div>', {
 		class: 'cluesPage form-group'
 	});
@@ -138,7 +130,7 @@ function createCluesOnDom(clueObj){
 	newButtonForm.append(newSkipButton, newLeaderBoardButton);
 	newClues.append(newH4, newOl);
 	newCluesContainer.append(newInstructions, newClues, newFileForm, newButtonForm);
-	$('.container').append(eyeSpyLogo, newCluesContainer);
+	$('.container').append(newCluesContainer);
 	let imageLoader = $('#uploadFile');
 	imageLoader.change(handleImage);
 }
@@ -148,10 +140,6 @@ function createCluesOnDom(clueObj){
  * @return: none
  */
 function getResultsPage(){
-	let eyeSpyLogo = $('<img>', {
-		class: 'logoImg',
-		src: 'assets/eyespylogo.png',
-	});
 	let newResultsPage = $('<div>', {
 		'class': 'resultsPage'
 	});
@@ -230,7 +218,7 @@ function getResultsPage(){
 	buttonCol.append(getClueButton, newLeaderBoardButton);
 	secondRow.append(buttonCol);
 	newResultsPage.append(firstRow, updateUser, secondRow);
-	$('.container').append(eyeSpyLogo, newResultsPage);
+	$('.container').append(newResultsPage);
 }
 /****************************************************************************************************
 * description: sets up leader board page with dom creation
@@ -238,10 +226,6 @@ function getResultsPage(){
  * @return:
  */
 function getLeaderBoardPage(){
-	let eyeSpyLogo = $('<img>', {
-		class: 'logoImg',
-		src: 'assets/eyespylogo.png',
-	});
 	let newLeaderBoardPage = $('<div>', {
 		'class': 'leaderBoard'
 	});
@@ -284,7 +268,7 @@ function getLeaderBoardPage(){
 	newLeaderBoardPage.append(firstRow);
 	addPlayersToLeaderBoard(totalPlayersObj, newLeaderBoardPage);
 	newLeaderBoardPage.append(buttonRow);
-	$('.container').append(eyeSpyLogo, newLeaderBoardPage)
+	$('.container').append(newLeaderBoardPage)
 }
 /****************************************************************************************************
  * description: this adds players to the leader board, calls saveGameData().
@@ -340,17 +324,32 @@ function addPlayersToLeaderBoard(playerObjFromFirebase, htmlElement){
  */
 function waitingModal(quote){
 	$('.modal-body').empty();
-	let eyeSpyLogo = $('<img>', {
-		class: 'logoImg',
-		src: 'assets/eyespylogo.png',
-	})
 	$('.modal-title').text(`Hello ${player.name}, some entertainment while you're waiting`);
 	let quoteOfTheDay = $('<div>', {
 		class: 'quoteDiv',
 		text: quote,
 	})
 
-	$('.modal-body').append(eyeSpyLogo, quoteOfTheDay);
+	$('.modal-body').append(quoteOfTheDay);
+	$('#waitingModal').modal('show');
+}
+
+/*****************************************************************************************************/
+
+/****************************************************************************************************
+* description: dom creates the error modal
+ * @param: none
+ * @return: none
+ */
+function errorModal(message){
+	$('.modal-body').empty();
+	$('.modal-title').text(`Error`);
+	let errorMessage = $('<div>', {
+		class: 'quoteDiv',
+		text: message,
+	})
+
+	$('.modal-body').append(errorMessage);
 	$('#waitingModal').modal('show');
 }
 /*****************************************************************************************************/
