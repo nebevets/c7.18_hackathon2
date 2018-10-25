@@ -10,20 +10,24 @@ function getRandomImageFromFlickr(wordArray){
 	let flickrAttempts = 0;
 
 	if(flickrAttempts > 3) {
-		waitingModal("Error: Server is not responding. Please refresh the game and try again.")
-		// errorModal("Error: Server is not responding. Please refresh the game and try again.")
+		errorModal("Error: Server is not responding. Please refresh the game and try again.")
 	}
 
 	const flickrConfig = {
 		url: `https://api.flickr.com/services/rest?method=flickr.photos.search&api_key=${flickrAPIKey}&format=json&nojsoncallback=1&text=${randomKeyWord}&per_page=5`,
     	success: result => {
-	  		const randomPhoto = result.photos.photo[getRandomInt(0, result.photos.photo.length-1)]
-				if(randomPhoto === undefined && flickrAttempts < 3) {
+	  		const randomPhoto = result.photos.photo[getRandomInt(0, result.photos.photo.length-1)];
+
+				if(!randomPhoto && flickrAttempts < 3) {
 					randomKeyWord = searchKeyWordList[getRandomInt(0, searchKeyWordList.length-1)];
 					flickrAttempts++;
 					flickrConfig.url = `https://api.flickr.com/services/rest?method=flickr.photos.search&api_key=${flickrAPIKey}&format=json&nojsoncallback=1&text=${randomKeyWord}&per_page=5`;
 					$.ajax(flickrConfig);
-	  		}
+	  		} else {
+						const userID = randomPhoto.owner;
+						retrieveFlickrUploaderInfo(userID);
+				}
+
 	  		let flickrImgURL = 	`https://farm${randomPhoto.farm}.staticflickr.com/${randomPhoto.server}/${randomPhoto.id}_${randomPhoto.secret}.jpg`;
 				savedGameImages.clueImg = flickrImgURL;
 	  		clarifai.models.predict(Clarifai.GENERAL_MODEL, flickrImgURL).then(response => {
@@ -35,6 +39,22 @@ function getRandomImageFromFlickr(wordArray){
   	}
 	$.ajax(flickrConfig);
 }
+
+/****************************************************************************************************
+* description: retrieves image uploader information to give credit for picture in results page
+ * @param: userid
+ * @return: none
+ */
+function retrieveFlickrUploaderInfo(userid){
+	const flickrConfig = {
+		url: `https://api.flickr.com/services/rest?method=flickr.people.getInfo&api_key=${flickrAPIKey}&user_id=${userid}&format=json&nojsoncallback=1`,
+		success: result => {
+			savedGameImages.uploader = result.person.username._content;
+		}
+	}
+	$.ajax(flickrConfig);
+}
+
 /****************************************************************************************************
  * description: gets a quote from geek jokes
  * @param: none

@@ -168,6 +168,9 @@ function getResultsPage(){
 	let cluePara = $('<p>', {
 		'text': 'This was your clue image...'
 	});
+	let uploaderCredit = $('<p>', {
+		'text': `Flickr image provided by: ${savedGameImages.uploader}`
+	});
 	let userCol = $('<div>', {
 		'class': 'col-sm-6'
 	});
@@ -210,7 +213,7 @@ function getResultsPage(){
 		}
 	});
 
-	clueCaption.append(cluePara)
+	clueCaption.append(cluePara, uploaderCredit);
 	clueThumbnail.append(clueImgElement, clueCaption);
 	clueCol.append(clueThumbnail);
 	userCaption.append(userPara)
@@ -278,7 +281,7 @@ function getLeaderBoardPage(){
 }
 /****************************************************************************************************
  * description: this adds players to the leader board, calls saveGameData().
- *  	due to firebase not having base functionality for arrays, the data must be manipulated around in order to display in 
+ *  	due to firebase not having base functionality for arrays, the data must be manipulated around in order to display in
  * 		decending order, as well as keep names attached.
  * @param: playerObjFromFirebase, htmlElement
  * @returns: none
@@ -341,6 +344,28 @@ function waitingModal(quote){
 	})
 
 	$('.modal-body').append(eyeSpyLogo, quoteOfTheDay);
+	$('#waitingModal').modal('show');
+}
+/*****************************************************************************************************/
+
+/****************************************************************************************************
+* description: dom creates the error modal
+ * @param: none
+ * @return: none
+ */
+function errorModal(message){
+	$('.modal-body').empty();
+	let eyeSpyLogo = $('<img>', {
+		class: 'logoImg',
+		src: 'assets/eyespylogo.png',
+	})
+	$('.modal-title').text(`Error`);
+	let errorMessage = $('<div>', {
+		class: 'quoteDiv',
+		text: message,
+	})
+
+	$('.modal-body').append(eyeSpyLogo, errorMessage);
 	$('#waitingModal').modal('show');
 }
 /*****************************************************************************************************/
