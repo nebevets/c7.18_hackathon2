@@ -17,7 +17,7 @@ let guessImg;
 const clarifai = new Clarifai.App({apiKey: clarifiAPIKey});
 let imgConverter;
 const savedGameImages = {guessImg: null, clueImg: null};
-let leaderboardFirebaseDB;
+const leaderboardFirebaseDB;
 /***************************************************************************************************
 * description: initializes the application, including adding click handlers and pulling in any data
 * from the server
