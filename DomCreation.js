@@ -101,7 +101,8 @@ function createCluesOnDom(clueObj){
 		'class': 'form-control col-xs-4 col-md-1 col-lg-3',
 		'type': 'file',
 		'id': 'uploadFile',
-		'name': 'uploadFile'
+		'name': 'uploadFile',
+		'accept': 'image/x-png,image/gif,image/jpeg'
 	});
 	let newButtonForm = $('<div>', {
 		'class': 'form-group col-md-12'
@@ -168,6 +169,9 @@ function getResultsPage(){
 	let cluePara = $('<p>', {
 		'text': 'This was your clue image...'
 	});
+	let uploaderCredit = $('<p>', {
+		'text': `Flickr image provided by: ${savedGameImages.uploader}`
+	});
 	let userCol = $('<div>', {
 		'class': 'col-sm-6'
 	});
@@ -187,7 +191,7 @@ function getResultsPage(){
 		'class': 'row'
 	});
 	let updateUser = $('<h1>', {
-		'text': `Clarifai rates the two images ${compareClueImgToGuessImg(clueImg, guessImg)}% similar!`
+		'text': `Your score this round was ${compareClueImgToGuessImg(clueImg, guessImg)} out of 400!`
 	});
 	let buttonCol = $('<div>', {
 		'class': 'col-sm-12'
@@ -210,7 +214,7 @@ function getResultsPage(){
 		}
 	});
 
-	clueCaption.append(cluePara)
+	clueCaption.append(cluePara, uploaderCredit);
 	clueThumbnail.append(clueImgElement, clueCaption);
 	clueCol.append(clueThumbnail);
 	userCaption.append(userPara)
@@ -278,7 +282,7 @@ function getLeaderBoardPage(){
 }
 /****************************************************************************************************
  * description: this adds players to the leader board, calls saveGameData().
- *  	due to firebase not having base functionality for arrays, the data must be manipulated around in order to display in 
+ *  	due to firebase not having base functionality for arrays, the data must be manipulated around in order to display in
  * 		decending order, as well as keep names attached.
  * @param: playerObjFromFirebase, htmlElement
  * @returns: none
@@ -288,7 +292,7 @@ function addPlayersToLeaderBoard(playerObjFromFirebase, htmlElement){
 		//deconstructs the object received from firebase into an array of just score values
 	let descendingScoreArray = [];
 	for( let searchKey in playerObjFromFirebase){
-		descendingScoreArray.push( playerObjFromFirebase[searchKey].score / playerObjFromFirebase[searchKey].attempts );
+		descendingScoreArray.push( playerObjFromFirebase[searchKey].score );
 	}
 		//sorts the array into descending order
 	descendingScoreArray.sort( (a, b) => b - a );
@@ -305,7 +309,7 @@ function addPlayersToLeaderBoard(playerObjFromFirebase, htmlElement){
 	for( let searchIndex = 0; searchIndex < descendingScoreArray.length || searchIndex > 25; searchIndex++ ){
 		for( let searchKey in playerObjFromFirebase ){
 			let theCurrentKey = searchKey;
-			if( playerObjFromFirebase[theCurrentKey].score / playerObjFromFirebase[searchKey].attempts === descendingScoreArray[searchIndex] ){
+			if( playerObjFromFirebase[theCurrentKey].score === descendingScoreArray[searchIndex] ){
 				let newRow = $('<div>', {
 					'class': 'row'
 				});
@@ -315,7 +319,7 @@ function addPlayersToLeaderBoard(playerObjFromFirebase, htmlElement){
 				});
 				let newPlayerScore = $('<div>', {
 					'class': 'col-xs-6',
-					'text': `${parseInt(playerObjFromFirebase[theCurrentKey].score / playerObjFromFirebase[searchKey].attempts)}%`
+					'text': playerObjFromFirebase[theCurrentKey].score
 				});
 				newRow.append(newPlayerName, newPlayerScore);
 				htmlElement.append(newRow);
@@ -341,6 +345,28 @@ function waitingModal(quote){
 	})
 
 	$('.modal-body').append(eyeSpyLogo, quoteOfTheDay);
+	$('#waitingModal').modal('show');
+}
+/*****************************************************************************************************/
+
+/****************************************************************************************************
+* description: dom creates the error modal
+ * @param: none
+ * @return: none
+ */
+function errorModal(message){
+	$('.modal-body').empty();
+	let eyeSpyLogo = $('<img>', {
+		class: 'logoImg',
+		src: 'assets/eyespylogo.png',
+	})
+	$('.modal-title').text(`Error`);
+	let errorMessage = $('<div>', {
+		class: 'quoteDiv',
+		text: message,
+	})
+
+	$('.modal-body').append(eyeSpyLogo, errorMessage);
 	$('#waitingModal').modal('show');
 }
 /*****************************************************************************************************/
