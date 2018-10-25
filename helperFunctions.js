@@ -48,6 +48,8 @@ function compareClueImgToGuessImg(clueImgArray, guessImgArray){
 	}
 	currentScore /= 400;	//turns the score into a percent
 	currentScore = parseInt(currentScore);
+	player.score += currentScore;
+	player.attempts++
 	totalPlayersObj[player.name].score += currentScore;
 	totalPlayersObj[player.name].attempts++;
 	saveGameData();
@@ -69,6 +71,8 @@ function leaderboardButtonHandler(event){
  */
 function skipButtonHandler() {
 	player.attempts += 0.25;
+	totalPlayersObj[player.name].attempts += 0.25;
+	saveGameData();
 	emptyContainer();
 	getRandomWordsFromNYT();
 }

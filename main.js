@@ -16,7 +16,6 @@ let clueImg;
 let guessImg;
 const clarifai = new Clarifai.App({apiKey: clarifiAPIKey});
 let canvas;
-let ctx;
 const savedGameImages = {guessImg: null, clueImg: null};
 let leaderboardFirebaseDB;
 /***************************************************************************************************
