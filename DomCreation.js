@@ -279,7 +279,6 @@ function getLeaderBoardPage(){
  * @returns: none
  */
 function addPlayersToLeaderBoard(playerObjFromFirebase, htmlElement){
-	debugger;
 	saveGameData();
 		//deconstructs the object received from firebase into an array of just score values
 	let descendingScoreArray = [];
