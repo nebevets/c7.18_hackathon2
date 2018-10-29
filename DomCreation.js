@@ -279,11 +279,15 @@ function getLeaderBoardPage(){
  * @returns: none
  */
 function addPlayersToLeaderBoard(playerObjFromFirebase, htmlElement){
+	debugger;
 	saveGameData();
 		//deconstructs the object received from firebase into an array of just score values
 	let descendingScoreArray = [];
-	for( let searchKey in playerObjFromFirebase){
-		descendingScoreArray.push( playerObjFromFirebase[searchKey].score / playerObjFromFirebase[searchKey].attempts );	}
+	for( let searchKey in playerObjFromFirebase ){
+		if( playerObjFromFirebase[ searchKey ].attempts ){		//here in order to make sure that the score isnt divided by 0
+			descendingScoreArray.push( playerObjFromFirebase[searchKey].score / playerObjFromFirebase[searchKey].attempts );
+		}
+	}
 		//sorts the array into descending order
 	descendingScoreArray.sort( (a, b) => b - a );
 		//loops through the array of scores and removed duplicate scores and scores of 0 from the array
