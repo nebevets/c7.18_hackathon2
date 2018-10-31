@@ -46,7 +46,7 @@ function compareClueImgToGuessImg(clueImgArray, guessImgArray){
 			}
 		}
 	}
-	currentScore /= 400;	//turns the score into a percent
+	currentScore /= 4;	//turns the score into a percent
 	currentScore = parseInt(currentScore);
 	player.score += currentScore;
 	player.attempts++
