@@ -5,7 +5,6 @@
  * @return: none
  */
 function getRandomImageFromFlickr(wordArray) {
-	getQuote();
 	let searchKeyWordList = wordArray;
 	let randomKeyWord = searchKeyWordList[getRandomInt(0, searchKeyWordList.length - 1)];
 	let flickrAttempts = 0;
@@ -59,29 +58,12 @@ function retrieveFlickrUploaderInfo(userid) {
 }
 
 /****************************************************************************************************
- * description: gets a quote from geek jokes
- * @param: none
- * @return: none
- */
-function getQuote() {
-	const quotesAndJokesConfig = {
-		datatype: 'json',
-		method: 'get',
-		url: `https://geek-jokes.sameerkumar.website/api`,
-		success: result => {
-			waitingModal(result);
-		}
-	}
-	$.ajax(quotesAndJokesConfig);
-}
-/****************************************************************************************************
 * description: this gets the image the user uploads as a base64 image
  * @param: none
  * @return: none
  */
 function handleImage() {
 	emptyContainer();
-	getQuote();
 	let img;
 	let reader = new FileReader();
 	reader.onload = event => {

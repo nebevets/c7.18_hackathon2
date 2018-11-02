@@ -83,6 +83,7 @@ function skipButtonHandler() {
  */
 function emptyContainer() {
 	$('.container').empty();
+	makeEllipsis();
 }
 /****************************************************************************************************
 * description: dom creates the error modal and shows it.
@@ -103,6 +104,27 @@ function showErrorModal(titleText, errors) {
 		var $errorDiv = $('<div>', errorDivProps);
 		$modalMessage.append($errorDiv);
 	}
-	$('#waitingModal').modal('show');
+	$('#errorModal').modal('show');
 }
-/*****************************************************************************************************/
+/*****************************************************************************************************
+ * description: this creates dots in the middle of the screen to simulate progress
+ * @param: dots is the number of dots to create
+ * @return: none
+ */
+function makeEllipsis(dots){
+	dots = dots || 1;
+	ellipsis.text('.'.repeat(dots));
+	(dots >= 5) ? dots = 0 : ++dots;
+	ellipsisTimeout = setTimeout(()=>{
+	  makeEllipsis(dots);
+	}, 1000);
+}
+/*****************************************************************************************************
+ * description: this destoys what makeEllipsis creates
+ * @param: none
+ * @return: none
+ */
+function destroyEllipsis(){
+	clearTimeout(ellipsisTimeout);
+	ellipsis.empty();
+}
