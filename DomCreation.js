@@ -34,20 +34,11 @@ function createLandingPage() {
 		'class': 'form-group'
 	});
 	let newGoBtn = $('<button>', {
-		'type': 'button',
-		'class': 'goBtn btn btn-default col-xs-4 col-xs-push-1 col-sm-3 col-sm-push-2 col-md-3 col-md-push-2',
-		'text': 'Go!',
-		'on': {
-			'click': () => {
-				let $nameInput = $('.landingPage input');
-				let playerName = $nameInput.val();
-				let playerNameRegEx = /^[a-zA-Z\-'0-9]{2,15}$/;
-				if (!playerNameRegEx.test(playerName)) {
-					let errorTitle = 'Error: Name Input';
-					let errorMsgs = [`"${playerName}" is not a valid user name. Use up to 15 letters and/or numbers only.`];
-					$nameInput.val('');
-					showErrorModal(errorTitle, errorMsgs);
-					return;
+		        'type': 'button',
+		        'class': 'leaderBoard btn btn-info col-xs-4 col-xs-push-1 col-sm-3 col-sm-push-2 col-md-3 col-md-push-2',
+		        'text': 'Leader Board',
+		        'on': {
+					    'click': leaderboardButtonHandler
 				}
 				addPlayerToGame(playerName);
 				emptyContainer();
@@ -56,10 +47,23 @@ function createLandingPage() {
 	});
 	let newLeaderBoardButton = $('<button>', {
 		'type': 'button',
-		'class': 'leaderBoard btn btn-info col-xs-4 col-xs-push-3 col-sm-3 col-sm-push-4 col-md-3 col-md-push-4',
-		'text': 'Leader Board',
+		'class': 'goBtn btn btn-default col-xs-4 col-xs-push-3 col-sm-3 col-sm-push-4 col-md-3 col-md-push-4',
+		'text': 'Go!',
 		'on': {
-			'click': leaderboardButtonHandler
+			'click': () => {
+				let $nameInput = $('.landingPage input');
+				let playerName = $nameInput.val();
+				let playerNameRegEx = /^[a-zA-Z\-'0-9]{2,15}$/;
+				if(!playerNameRegEx.test(playerName)){
+					let errorTitle = 'Error: Name Input';
+					let errorMsgs = [`"${playerName}" is not a valid user name. Use up to 15 letters and/or numbers only.`];
+					$nameInput.val('');
+					showErrorModal(errorTitle, errorMsgs);
+					return;
+				}
+        addPlayerToGame(playerName);
+				emptyContainer();
+        	}
 		}
 	});
 	newPlayerForm.append(newLabel, newInput);
