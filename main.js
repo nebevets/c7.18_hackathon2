@@ -28,4 +28,5 @@ const leaderboardFirebaseDB = new GenericFBModel('potato1nuget2flower', leaderBo
 function initializeApp() {
   imgConverter = $('#imgConverter');
   createLandingPage();
+  $("#instruction-modal").modal("show");
 }
