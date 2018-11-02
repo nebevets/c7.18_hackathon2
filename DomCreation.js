@@ -40,11 +40,7 @@ function createLandingPage() {
 		        'on': {
 					    'click': leaderboardButtonHandler
 				}
-				addPlayerToGame(playerName);
-				emptyContainer();
-			}
-		}
-	});
+			});
 	let newLeaderBoardButton = $('<button>', {
 		'type': 'button',
 		'class': 'goBtn btn btn-default col-xs-4 col-xs-push-3 col-sm-3 col-sm-push-4 col-md-3 col-md-push-4',
