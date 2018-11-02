@@ -1,3 +1,69 @@
+@media (min-width: 1281px) {
+  /* Desktops */
+
+  body {
+    background-size: cover;
+  }
+
+  .logoImg {
+    width: 35%;
+  }
+
+}
+
+@media (min-width: 1025px) and (max-width: 1280px) {
+  /* Laptops/Desktops */
+
+  body {
+    background-size: cover;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  /* Tablets, Ipads, Portrait */
+
+  body {
+    
+  }
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
+  /* Low Res Tablets, Mobile Phones (Landscape) */
+}
+
+@media (min-width: 481px) and (max-width: 767px) and (orientation: landscape) {
+  /* Most Smartphones (Landscape) */
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+  /* Mobile Phones */
+
+  .logoImg {
+    width: 70%;
+  }
+
+  .landingPage h4.instructions {
+    line-height: 20px;
+    font-size: 16px;
+  }
+
+}
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-device-pixel-ratio: 2) and (device-aspect-ratio: 2/3) and (orientation:portrait) {
+  /* Iphone 4 Portrait */
+}
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape) {
+  /* Iphone 4 Portrait */
+}
+
+@media only screen and (min-device-width: 375px) and (max-device-height: 812px) and (orientation : landscape) and (-webkit-device-pixel-ratio: 3){
+  /* Iphone X Landscape */
+}
+  
+  
+
+
 * {
   font-family: monospace;
 }
@@ -5,7 +71,6 @@
 body {
   background-image: url("assets/city_of_noir.jpg");
 	background-repeat:no-repeat;
-	background-size: auto;
 	background-color: #000;
   color: white;
 }
@@ -38,15 +103,13 @@ body {
   text-shadow: 1px 1px white;
 }
 
-/* Modal Image */
+/* Page Image */
 .logoImg {
   display: block;
   margin: auto;
-  height: 50%;
-  width: 50%;
 }
 
-/* Page Image */
+/* Logo Image */
 .LogoImg {
   display: block;
   margin: auto;
@@ -144,4 +207,8 @@ body {
   
   .leaderBoard button {
 	background-color: #ccc;
+  }
+
+  canvas {
+    width: 0;
   }
