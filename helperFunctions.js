@@ -1,16 +1,16 @@
 /****************************************************************************************************
 * description: sets playerName key of global player object, call getRandomWordsFromNYT
  * @param: playerName as string
- * @return:
+ * @return: none
  */
-function addPlayerToGame(playerName){
+function addPlayerToGame(playerName) {
 	player.name = playerName.toLowerCase();
-	if(totalPlayersObj[player.name]){
+	if (totalPlayersObj[player.name]) {
 		player.score = totalPlayersObj[player.name].score;
 		player.attempts = totalPlayersObj[player.name].attempts
 	}
-	else{
-		totalPlayersObj[player.name] = {score: 0, attempts: 0};
+	else {
+		totalPlayersObj[player.name] = { score: 0, attempts: 0 };
 	}
 	saveGameData();
 	getRandomWordsFromNYT();
@@ -20,8 +20,8 @@ function addPlayerToGame(playerName){
  * @param: min, max
  * @return: random int
  */
-function getRandomInt(min, max){
-	return Math.floor(Math.random()* (max-min+1))+min;
+function getRandomInt(min, max) {
+	return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 /****************************************************************************************************
 * description: used to score image sent to Clarifai, and the image from Flickr that was sent. 
@@ -29,18 +29,18 @@ function getRandomInt(min, max){
  * @param: clueImgObj and guessImgObj
  * @return: currentScore
  */
-function compareClueImgToGuessImg(clueImgArray, guessImgArray){
+function compareClueImgToGuessImg(clueImgArray, guessImgArray) {
 	let currentScore = 0;
-		//loops through each object returned from Clarifai 
-	for( let clueImgIndex = 0; clueImgIndex < clueImgArray.length; clueImgIndex++ ){
-		for( let guessedImgIndex = 0; guessedImgIndex < guessImgArray.length; guessedImgIndex++ ){
-			if( clueImgArray[ clueImgIndex ].name === guessImgArray[ guessedImgIndex ].name ){		//makes a comparison of the catagory that Clarifai returned
+	//loops through each object returned from Clarifai 
+	for (let clueImgIndex = 0; clueImgIndex < clueImgArray.length; clueImgIndex++) {
+		for (let guessedImgIndex = 0; guessedImgIndex < guessImgArray.length; guessedImgIndex++) {
+			if (clueImgArray[clueImgIndex].name === guessImgArray[guessedImgIndex].name) {		//makes a comparison of the catagory that Clarifai returned
 				currentScore += 10;		//if catagory was a match, give user points.
-					//then does a comparison on the value of the catagory, and finds the difference of the two values, and assigns a score based on the difference
-				if( clueImgArray[clueImgIndex].value < guessImgArray[guessedImgIndex].value ){
+				//then does a comparison on the value of the catagory, and finds the difference of the two values, and assigns a score based on the difference
+				if (clueImgArray[clueImgIndex].value < guessImgArray[guessedImgIndex].value) {
 					currentScore += (clueImgArray[clueImgIndex].value / guessImgArray[guessedImgIndex].value) * 10
 				}
-				else{
+				else {
 					currentScore += (guessImgArray[clueImgIndex].value / clueImgArray[guessedImgIndex].value) * 10
 				}
 			}
@@ -60,7 +60,7 @@ function compareClueImgToGuessImg(clueImgArray, guessImgArray){
  * @param: event
  * @return: none
  */
-function leaderboardButtonHandler(event){
+function leaderboardButtonHandler(event) {
 	emptyContainer();
 	getLeaderBoardPage();
 }
@@ -90,18 +90,18 @@ function emptyContainer() {
  *         that are shown in the modal body.
  * @return: none
  */
-function showErrorModal(titleText, errors){
+function showErrorModal(titleText, errors) {
 	$modalTitle = $('.modal-title');
 	$modalMessage = $('.modal-body');
 	$modalMessage.empty();
 	$modalTitle.text(titleText);
-	for (var error in errors){
-		  var errorDivProps = {
-				'class': 'alert alert-danger',
-				text: errors[error]
-		  };
-		  var $errorDiv = $('<div>', errorDivProps);
-		  $modalMessage.append($errorDiv);
+	for (var error in errors) {
+		var errorDivProps = {
+			'class': 'alert alert-danger',
+			text: errors[error]
+		};
+		var $errorDiv = $('<div>', errorDivProps);
+		$modalMessage.append($errorDiv);
 	}
 	$('#waitingModal').modal('show');
 }

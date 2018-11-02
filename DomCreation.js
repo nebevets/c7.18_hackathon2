@@ -6,7 +6,7 @@
  * @return:none
  */
 
-function createLandingPage(){
+function createLandingPage() {
 	let newLandingPageContainer = $('<div>', {
 		'class': 'landingPage form-group'
 	});
@@ -34,25 +34,25 @@ function createLandingPage(){
 		'class': 'form-group'
 	});
 	let newGoBtn = $('<button>', {
-		        'type': 'button',
-		        'class': 'goBtn btn btn-default col-xs-4 col-xs-push-1 col-sm-3 col-sm-push-2 col-md-3 col-md-push-2',
-		        'text': 'Go!',
-		        'on': {
-					'click': () => {
-						let $nameInput = $('.landingPage input');
-						let playerName = $nameInput.val();
-						let playerNameRegEx = /^[a-zA-Z\-'0-9]{2,15}$/;
-						if(!playerNameRegEx.test(playerName)){
-							let errorTitle = 'Error: Name Input';
-							let errorMsgs = [`"${playerName}" is not a valid user name. Use up to 15 letters and/or numbers only.`];
-							$nameInput.val('');
-							showErrorModal(errorTitle, errorMsgs);
-							return;
-						}
-		            	addPlayerToGame(playerName);
-						emptyContainer();
-		        	}
+		'type': 'button',
+		'class': 'goBtn btn btn-default col-xs-4 col-xs-push-1 col-sm-3 col-sm-push-2 col-md-3 col-md-push-2',
+		'text': 'Go!',
+		'on': {
+			'click': () => {
+				let $nameInput = $('.landingPage input');
+				let playerName = $nameInput.val();
+				let playerNameRegEx = /^[a-zA-Z\-'0-9]{2,15}$/;
+				if (!playerNameRegEx.test(playerName)) {
+					let errorTitle = 'Error: Name Input';
+					let errorMsgs = [`"${playerName}" is not a valid user name. Use up to 15 letters and/or numbers only.`];
+					$nameInput.val('');
+					showErrorModal(errorTitle, errorMsgs);
+					return;
 				}
+				addPlayerToGame(playerName);
+				emptyContainer();
+			}
+		}
 	});
 	let newLeaderBoardButton = $('<button>', {
 		'type': 'button',
@@ -72,7 +72,7 @@ function createLandingPage(){
  * @param: clueObj
  * @return: none
  */
-function createCluesOnDom(clueObj){
+function createCluesOnDom(clueObj) {
 	let newCluesContainer = $('<div>', {
 		class: 'cluesPage form-group'
 	});
@@ -87,7 +87,7 @@ function createCluesOnDom(clueObj){
 	let newH4 = $('<h4>', {
 		'text': 'Here are your clues:'
 	});
-    let newOl = $('<ol>');
+	let newOl = $('<ol>');
 	let newFileForm = $('<div>', {
 		'class': 'form-group col-xs-12 col-md-6 col-md-push-3'
 	});
@@ -122,9 +122,9 @@ function createCluesOnDom(clueObj){
 			'click': leaderboardButtonHandler
 		}
 	});
-	for(var i = 0; i < 5; i++) {
+	for (var i = 0; i < 5; i++) {
 		newOl.append($('<li>', {
-		text: clueObj[i].name
+			text: clueObj[i].name
 		}))
 	};
 	newFileForm.append(newLabel, newInput);
@@ -140,7 +140,7 @@ function createCluesOnDom(clueObj){
  * @param: none
  * @return: none
  */
-function getResultsPage(){
+function getResultsPage() {
 	let newResultsPage = $('<div>', {
 		'class': 'resultsPage'
 	});
@@ -151,7 +151,7 @@ function getResultsPage(){
 		'class': 'col-sm-6'
 	});
 	let clueThumbnail = $('<div>', {
-		'class':'thumbnail'
+		'class': 'thumbnail'
 	});
 	let clueImgElement = $('<img>', {
 		'class': 'clueImage',
@@ -171,7 +171,7 @@ function getResultsPage(){
 		'class': 'col-sm-6'
 	});
 	let userThumbnail = $('<div>', {
-		'class':'thumbnail'
+		'class': 'thumbnail'
 	});
 	let userImg = $('<img>', {
 		src: savedGameImages.guessImg.src,
@@ -223,10 +223,10 @@ function getResultsPage(){
 }
 /****************************************************************************************************
 * description: sets up leader board page with dom creation
- * @param:
- * @return:
+ * @param:none
+ * @return:none
  */
-function getLeaderBoardPage(){
+function getLeaderBoardPage() {
 	let newLeaderBoardPage = $('<div>', {
 		'class': 'leaderBoard'
 	});
@@ -254,7 +254,7 @@ function getLeaderBoardPage(){
 		'on': {
 			'click': () => {
 				emptyContainer();
-				if(player.name === null){
+				if (player.name === null) {
 					createLandingPage();
 					return;
 				}
@@ -278,32 +278,32 @@ function getLeaderBoardPage(){
  * @param: playerObjFromFirebase, htmlElement
  * @returns: none
  */
-function addPlayersToLeaderBoard(playerObjFromFirebase, htmlElement){
+function addPlayersToLeaderBoard(playerObjFromFirebase, htmlElement) {
 	saveGameData();
-		//deconstructs the object received from firebase into an array of just score values
+	//deconstructs the object received from firebase into an array of just score values
 	let descendingScoreArray = [];
-	for( let searchKey in playerObjFromFirebase ){
-		if( playerObjFromFirebase[ searchKey ].attempts ){		//here in order to make sure that the score isnt divided by 0
-			descendingScoreArray.push( playerObjFromFirebase[searchKey].score / playerObjFromFirebase[searchKey].attempts );
+	for (let searchKey in playerObjFromFirebase) {
+		if (playerObjFromFirebase[searchKey].attempts) {		//here in order to make sure that the score isnt divided by 0
+			descendingScoreArray.push(playerObjFromFirebase[searchKey].score / playerObjFromFirebase[searchKey].attempts);
 		}
 	}
-		//sorts the array into descending order
-	descendingScoreArray.sort( (a, b) => b - a );
-		//loops through the array of scores and removed duplicate scores and scores of 0 from the array
-	for( let scoreArrayIndex = 0; scoreArrayIndex < descendingScoreArray.length; scoreArrayIndex++ ){
+	//sorts the array into descending order
+	descendingScoreArray.sort((a, b) => b - a);
+	//loops through the array of scores and removed duplicate scores and scores of 0 from the array
+	for (let scoreArrayIndex = 0; scoreArrayIndex < descendingScoreArray.length; scoreArrayIndex++) {
 		let lastIndexOfCurrentScore = descendingScoreArray.lastIndexOf(descendingScoreArray[scoreArrayIndex])
-		if( scoreArrayIndex !== lastIndexOfCurrentScore || descendingScoreArray[scoreArrayIndex] === 0){
+		if (scoreArrayIndex !== lastIndexOfCurrentScore || descendingScoreArray[scoreArrayIndex] === 0) {
 			descendingScoreArray.splice(lastIndexOfCurrentScore, 1);
 			scoreArrayIndex--;
 		}
 	}
-		//with the descending array of unique scores, loops through it and matches the player with that score in the firebase object, and then
-		//DOM creates them in order. Also limits the number of highscores to a max of 25.
-	for( let searchIndex = 0; searchIndex < descendingScoreArray.length || searchIndex > 25; searchIndex++ ){
-		for( let searchKey in playerObjFromFirebase ){
+	//with the descending array of unique scores, loops through it and matches the player with that score in the firebase object, and then
+	//DOM creates them in order. Also limits the number of highscores to a max of 25.
+	for (let searchIndex = 0; searchIndex < descendingScoreArray.length || searchIndex > 25; searchIndex++) {
+		for (let searchKey in playerObjFromFirebase) {
 			let theCurrentKey = searchKey;
-			if( playerObjFromFirebase[theCurrentKey].score / playerObjFromFirebase[searchKey].attempts === descendingScoreArray[searchIndex] ){
-					let newRow = $('<div>', {
+			if (playerObjFromFirebase[theCurrentKey].score / playerObjFromFirebase[searchKey].attempts === descendingScoreArray[searchIndex]) {
+				let newRow = $('<div>', {
 					'class': 'row'
 				});
 				let newPlayerName = $('<div>', {
@@ -325,7 +325,7 @@ function addPlayersToLeaderBoard(playerObjFromFirebase, htmlElement){
  * @param: none
  * @return: none
  */
-function waitingModal(quote){
+function waitingModal(quote) {
 	$('.modal-body').empty();
 	$('.modal-title').text(`Hello ${player.name}, some entertainment while you're waiting`);
 	let quoteOfTheDay = $('<div>', {
@@ -344,7 +344,7 @@ function waitingModal(quote){
  * @param: none
  * @return: none
  */
-function errorModal(message){
+function errorModal(message) {
 	$('.modal-body').empty();
 	$('.modal-title').text(`Error`);
 	let errorMessage = $('<div>', {

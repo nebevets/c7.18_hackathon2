@@ -10,14 +10,14 @@
 */
 $(document).ready(initializeApp);
 /**  Define all global variables here.  **/
-const player = {name: null, score: 0, attempts: 0};
+const player = { name: null, score: 0, attempts: 0 };
 let totalPlayersObj = {};
 let clueImg;
 let guessImg;
-const clarifai = new Clarifai.App({apiKey: clarifiAPIKey});
+const clarifai = new Clarifai.App({ apiKey: clarifiAPIKey });
 let imgConverter;
-const savedGameImages = {guessImg: null, clueImg: null};
-const	leaderboardFirebaseDB = new GenericFBModel('potato1nuget2flower', leaderBoardUpdated);
+const savedGameImages = { guessImg: null, clueImg: null };
+const leaderboardFirebaseDB = new GenericFBModel('potato1nuget2flower', leaderBoardUpdated);
 
 /***************************************************************************************************
 * description: initializes the application, including adding click handlers and pulling in any data
@@ -25,7 +25,7 @@ const	leaderboardFirebaseDB = new GenericFBModel('potato1nuget2flower', leaderBo
 * @params: none
 * @returns: none
 */
-function initializeApp(){
-	imgConverter = $('#imgConverter');
-	createLandingPage();
+function initializeApp() {
+  imgConverter = $('#imgConverter');
+  createLandingPage();
 }
