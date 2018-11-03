@@ -258,6 +258,7 @@ function getLeaderBoardPage() {
 				emptyContainer();
 				if (player.name === null) {
 					createLandingPage();
+					destroyEllipsis();
 					return;
 				}
 				getRandomWordsFromNYT();
