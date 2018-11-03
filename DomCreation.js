@@ -11,10 +11,7 @@ function createLandingPage() {
 		'class': 'landingPage form-group'
 	});
 	let newInstructions = $('<h4>', {
-		text: `Eye Spy is an image-based scavenger hunt game. A random image is chosen and evaluated.
-				Clues are given to you based on this information. You must find something that matches those clues,
-				take a picture and upload it for evaluation. You receive points, depending on how similar your image
-				is to the original. Good luck on your hunt!`,
+		text: `Good luck on your hunt!`,
 		class: 'instructions form-group'
 	});
 	let newPlayerForm = $('<div>', {
@@ -35,15 +32,15 @@ function createLandingPage() {
 	});
 	let newGoBtn = $('<button>', {
 		        'type': 'button',
-		        'class': 'leaderBoard btn btn-info col-xs-4 col-xs-push-1 col-sm-3 col-sm-push-2 col-md-3 col-md-push-2',
+		        'class': 'leaderBoard btn btn-info col-xs-12 col-sm-3 col-sm-push-2',
 		        'text': 'Leader Board',
 		        'on': {
 					    'click': leaderboardButtonHandler
 				}
-			});
+	});
 	let newLeaderBoardButton = $('<button>', {
 		'type': 'button',
-		'class': 'goBtn btn btn-default col-xs-4 col-xs-push-3 col-sm-3 col-sm-push-4 col-md-3 col-md-push-4',
+		'class': 'goBtn btn btn-default col-xs-12 col-sm-3 col-sm-push-4',
 		'text': 'Go!',
 		'on': {
 			'click': () => {
@@ -125,8 +122,8 @@ function createCluesOnDom(clueObj) {
 	for (var i = 0; i < 5; i++) {
 		newOl.append($('<li>', {
 			text: clueObj[i].name
-		}))
-	};
+		}));
+	}
 	newFileForm.append(newLabel, newInput);
 	newButtonForm.append(newSkipButton, newLeaderBoardButton);
 	newClues.append(newH4, newOl);
@@ -212,7 +209,7 @@ function getResultsPage() {
 	clueCaption.append(cluePara, uploaderCredit);
 	clueThumbnail.append(clueImgElement, clueCaption);
 	clueCol.append(clueThumbnail);
-	userCaption.append(userPara)
+	userCaption.append(userPara);
 	userThumbnail.append(userImg, userCaption);
 	userCol.append(userThumbnail);
 	firstRow.append(clueCol, userCol);
@@ -246,7 +243,7 @@ function getLeaderBoardPage() {
 	});
 	let buttonCol = $('<div>', {
 		'class': 'col-xs-12'
-	})
+	});
 	let getClueButton = $('<button>', {
 		'type': 'button',
 		'class': 'getClue btn btn-default',
@@ -269,7 +266,7 @@ function getLeaderBoardPage() {
 	newLeaderBoardPage.append(firstRow);
 	addPlayersToLeaderBoard(totalPlayersObj, newLeaderBoardPage);
 	newLeaderBoardPage.append(buttonRow);
-	$('.container').append(newLeaderBoardPage)
+	$('.container').append(newLeaderBoardPage);
 }
 /****************************************************************************************************
  * description: this adds players to the leader board, calls saveGameData().
@@ -291,7 +288,7 @@ function addPlayersToLeaderBoard(playerObjFromFirebase, htmlElement) {
 	descendingScoreArray.sort((a, b) => b - a);
 	//loops through the array of scores and removed duplicate scores and scores of 0 from the array
 	for (let scoreArrayIndex = 0; scoreArrayIndex < descendingScoreArray.length; scoreArrayIndex++) {
-		let lastIndexOfCurrentScore = descendingScoreArray.lastIndexOf(descendingScoreArray[scoreArrayIndex])
+		let lastIndexOfCurrentScore = descendingScoreArray.lastIndexOf(descendingScoreArray[scoreArrayIndex]);
 		if (scoreArrayIndex !== lastIndexOfCurrentScore || descendingScoreArray[scoreArrayIndex] === 0) {
 			descendingScoreArray.splice(lastIndexOfCurrentScore, 1);
 			scoreArrayIndex--;
@@ -331,7 +328,7 @@ function waitingModal(quote) {
 	let quoteOfTheDay = $('<div>', {
 		class: 'quoteDiv',
 		text: quote,
-	})
+	});
 
 	$('.modal-body').append(quoteOfTheDay);
 	$('#waitingModal').modal('show');
@@ -350,7 +347,7 @@ function errorModal(message) {
 	let errorMessage = $('<div>', {
 		class: 'quoteDiv',
 		text: message,
-	})
+	});
 
 	$('.modal-body').append(errorMessage);
 	$('#waitingModal').modal('show');

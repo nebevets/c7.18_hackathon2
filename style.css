@@ -9,6 +9,10 @@
     width: 35%;
   }
 
+  .carousel .item h3 {
+    font-size: 1.35em;
+  }
+
 }
 
 @media (min-width: 1025px) and (max-width: 1280px) {
@@ -23,16 +27,41 @@
   /* Tablets, Ipads, Portrait */
 
   body {
-    
+    background-size: 300%;
   }
+
+  .logoImg {
+    width: 50%;
+  }
+
+  .carousel .item h3 {
+    font-size: 1.35em;
+  }
+
 }
 
 @media (min-width: 481px) and (max-width: 767px) {
-  /* Low Res Tablets, Mobile Phones (Landscape) */
+  /* Low Res Tablets, Mobile Phones (Portrait) */
+
+  .logoImg {
+    width: 75%;
+  }
+
+  .carousel .item h3 {
+    font-size: 1.35em;
+  }
+  
 }
 
 @media (min-width: 481px) and (max-width: 767px) and (orientation: landscape) {
   /* Most Smartphones (Landscape) */
+  .logoImg {
+    width: 40%;
+  }
+
+  .landingPage .instructions {
+    font-size: 1em;
+  }
 }
 
 @media (min-width: 320px) and (max-width: 480px) {
@@ -47,18 +76,42 @@
     font-size: 16px;
   }
 
+  .container .landingPage .form-control {
+    width: 100%;
+  }
+
+  .container .landingPage .btn:first-of-type {
+    margin-bottom: 2%;
+  }
+
+  .carousel .item h3 {
+    font-size: 1.15em;
+  }
+
 }
 
 @media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-device-pixel-ratio: 2) and (device-aspect-ratio: 2/3) and (orientation:portrait) {
   /* Iphone 4 Portrait */
+
+  body {
+    background-size: 500%;
+  }
 }
 
 @media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape) {
   /* Iphone 4 Portrait */
+
+  .logoImg {
+    width: 35%;
+  }
 }
 
 @media only screen and (min-device-width: 375px) and (max-device-height: 812px) and (orientation : landscape) and (-webkit-device-pixel-ratio: 3){
   /* Iphone X Landscape */
+
+  .logoImg {
+    width: 45%;
+  }
 }
   
   
@@ -175,7 +228,6 @@ body {
 }
 
 .cluesPage h4 {
-  margin-left: 5%;
   text-align: center;
 }
 
@@ -183,6 +235,7 @@ body {
   list-style-position: inside;
   text-align: center;
   list-style-type: none;
+  padding: 0;
 }
 
 .resultsPage * {
@@ -206,9 +259,35 @@ body {
   }
   
   .leaderBoard button {
-	background-color: #ccc;
+	  background-color: #ccc;
   }
 
   canvas {
     width: 0;
   }
+#instruction-modal {
+  color: black;
+}
+
+.carousel{
+  margin-top: 20px;
+}
+.carousel .item{
+  min-height: 280px; /* Prevent carousel from being distorted if for some reason image doesn't load */
+}
+
+.carousel .item h3 {
+  width: 75%;
+  margin: auto;
+}
+
+.carousel .item h3:last-of-type {
+  margin-top: 3%;
+}
+
+.carousel .item img{
+  margin: 0 auto; /* Align slide image horizontally center */
+}
+.bs-example{
+	margin: 20px;
+}
