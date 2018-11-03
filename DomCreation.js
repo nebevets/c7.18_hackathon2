@@ -38,7 +38,7 @@ function createLandingPage() {
 		        'class': 'leaderBoard btn btn-info col-xs-4 col-xs-push-1 col-sm-3 col-sm-push-2 col-md-3 col-md-push-2',
 		        'text': 'Leader Board',
 		        'on': {
-					    'click': leaderboardButtonHandler
+					'click': leaderboardButtonHandler
 				}
 	});
 	let newLeaderBoardButton = $('<button>', {
@@ -57,7 +57,7 @@ function createLandingPage() {
 					showErrorModal(errorTitle, errorMsgs);
 					return;
 				}
-        addPlayerToGame(playerName);
+        		addPlayerToGame(playerName);
 				emptyContainer();
         	}
 		}
@@ -131,6 +131,7 @@ function createCluesOnDom(clueObj) {
 	newButtonForm.append(newSkipButton, newLeaderBoardButton);
 	newClues.append(newH4, newOl);
 	newCluesContainer.append(newInstructions, newClues, newFileForm, newButtonForm);
+	destroyEllipsis();
 	$('.container').append(newCluesContainer);
 	let imageLoader = $('#uploadFile');
 	imageLoader.change(handleImage);
@@ -219,6 +220,7 @@ function getResultsPage() {
 	buttonCol.append(getClueButton, newLeaderBoardButton);
 	secondRow.append(buttonCol);
 	newResultsPage.append(firstRow, updateUser, secondRow);
+	destroyEllipsis();
 	$('.container').append(newResultsPage);
 }
 /****************************************************************************************************
@@ -269,6 +271,7 @@ function getLeaderBoardPage() {
 	newLeaderBoardPage.append(firstRow);
 	addPlayersToLeaderBoard(totalPlayersObj, newLeaderBoardPage);
 	newLeaderBoardPage.append(buttonRow);
+	destroyEllipsis();
 	$('.container').append(newLeaderBoardPage);
 }
 /****************************************************************************************************
@@ -320,24 +323,6 @@ function addPlayersToLeaderBoard(playerObjFromFirebase, htmlElement) {
 		}
 	}
 }
-/****************************************************************************************************
-* description: dom creates the waiting modal
- * @param: none
- * @return: none
- */
-function waitingModal(quote) {
-	$('.modal-body').empty();
-	$('.modal-title').text(`Hello ${player.name}, some entertainment while you're waiting`);
-	let quoteOfTheDay = $('<div>', {
-		class: 'quoteDiv',
-		text: quote,
-	});
-
-	$('.modal-body').append(quoteOfTheDay);
-	$('#waitingModal').modal('show');
-}
-
-/*****************************************************************************************************/
 
 /****************************************************************************************************
 * description: dom creates the error modal
@@ -353,6 +338,6 @@ function errorModal(message) {
 	});
 
 	$('.modal-body').append(errorMessage);
-	$('#waitingModal').modal('show');
+	$('#errorModal').modal('show');
 }
 /*****************************************************************************************************/

@@ -10,6 +10,8 @@
 */
 $(document).ready(initializeApp);
 /**  Define all global variables here.  **/
+let ellipsisTimeout = null;
+let ellipsis = null;
 const player = { name: null, score: 0, attempts: 0 };
 let totalPlayersObj = {};
 let clueImg;
@@ -27,6 +29,7 @@ const leaderboardFirebaseDB = new GenericFBModel('potato1nuget2flower', leaderBo
 */
 function initializeApp() {
   imgConverter = $('#imgConverter');
+  ellipsis = $('#ellipsis');
   createLandingPage();
   $("#instruction-modal").modal("show");
 }
