@@ -1,3 +1,186 @@
+@media (min-width: 1281px) {
+  /* Desktops */
+
+  body {
+    background-size: cover;
+  }
+
+  .logoImg {
+    width: 35%;
+  }
+
+  .carousel .item h3 {
+    font-size: 1.35em;
+  }
+
+  .resultsPage .thumbnail img {
+    height: 29vh;
+  }
+}
+
+@media (min-width: 1025px) and (max-width: 1280px) {
+  /* Laptops/Desktops */
+
+  body {
+    background-size: 225%;
+  }
+
+  .logoImg {
+    width: 40%;
+  }
+
+  .carousel .item h3, .carousel .item h4 {
+    font-size: 1.35em;
+  }
+
+}
+
+@media (min-width: 1024px) and (max-width: 1366px) and (orientation: landscape) and (-webkit-min-device-pixel-ratio: 1.5) {
+  /* Ipad Pro Landscape */
+
+  body {
+    background-size: auto;
+  }
+
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  /* Tablets, Ipads, Portrait */
+
+  body {
+    background-size: 350%;
+  }
+
+  .logoImg {
+    width: 40%;
+  }
+
+  .carousel .item h3 {
+    font-size: 1.35em;
+  }
+
+}
+
+
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+  /* Tablets, Ipads, Landscape */
+
+  body {
+    background-size: 225%;
+  }
+
+}
+
+@media (min-width: 481px) and (max-width: 767px) {
+  /* Low Res Tablets, Mobile Phones (Portrait) */
+
+  .logoImg {
+    width: 75%;
+  }
+
+  .carousel .item h3 {
+    font-size: 1.35em;
+  }
+  
+  .cluesPage .instructions {
+    font-size: 1.25em;
+  }
+
+}
+
+@media (min-width: 481px) and (max-width: 767px) and (orientation: landscape) {
+  /* Most Smartphones (Landscape) */
+  .logoImg {
+    width: 40%;
+  }
+
+  .landingPage .instructions {
+    font-size: 1em;
+  }
+
+  .resultsPage .thumbnail img {
+    height: 60vh;
+  }
+}
+
+@media (min-width: 320px) and (max-width: 480px) {
+  /* Mobile Phones */
+
+  .logoImg {
+    width: 70%;
+  }
+
+  .landingPage h4.instructions {
+    line-height: 20px;
+    font-size: 16px;
+  }
+
+  .container .landingPage .form-control {
+    width: 100%;
+  }
+
+  .container .landingPage .btn:first-of-type {
+    margin-bottom: 2%;
+  }
+
+  .carousel .item h3, .carousel .item h4 {
+    font-size: 1.15em;
+  }
+
+  .cluesPage .instructions {
+    font-size: 1em;
+  } 
+
+}
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-device-pixel-ratio: 2) and (device-aspect-ratio: 2/3) and (orientation:portrait) {
+  /* Iphone 4 Portrait */
+
+  body {
+    background-size: 500%;
+  }
+
+  #instruction-modal .item h4, #instruction-modal .carousel h3 {
+    font-size: .85em;
+  }
+
+
+}
+
+@media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape) {
+  /* Iphone 4 Landscape */
+
+  .logoImg {
+    width: 35%;
+  }
+
+  #instruction-modal .carousel .item h3, #instruction-modal .carousel h4 {
+    font-size: .8em;
+  }
+
+  .resultsPage .thumbnail img {
+    height: 80vh;
+  }
+
+}
+
+@media only screen and (min-device-width: 375px) and (max-device-height: 812px) and (orientation : landscape) and (-webkit-device-pixel-ratio: 3){
+  /* Iphone X Landscape */
+
+  .logoImg {
+    width: 45%;
+  }
+
+  #instruction-modal .item h3, #instruction-modal .item h4 {
+    font-size: 1em;
+  }
+  
+  .resultsPage .thumbnail img {
+    height: 60vh;
+  }
+
+}
+
 * {
   font-family: monospace;
 }
@@ -5,7 +188,6 @@
 body {
   background-image: url("assets/city_of_noir.jpg");
 	background-repeat:no-repeat;
-	background-size: auto;
 	background-color: #000;
   color: white;
 }
@@ -13,6 +195,7 @@ body {
 .instructions {
   text-shadow: 1px 1px  black;
   color: white;
+  margin: auto;
 }
 
 .cluesPage {
@@ -26,27 +209,22 @@ body {
 }
 
 .thumbnail>img{
-	height: 100%;
-	width: 100%;
-}
-.clueImage{
-	width: 100%;
-	height: 15%;
+  object-fit: cover;
+  width: 100%;
+  height: 29vh;
 }
 #errorModal{
   color: black;
   text-shadow: 1px 1px white;
 }
 
-/* Modal Image */
+/* Page Image */
 .logoImg {
   display: block;
   margin: auto;
-  height: 50%;
-  width: 50%;
 }
 
-/* Page Image */
+/* Logo Image */
 .LogoImg {
   display: block;
   margin: auto;
@@ -112,7 +290,6 @@ body {
 }
 
 .cluesPage h4 {
-  margin-left: 5%;
   text-align: center;
 }
 
@@ -120,6 +297,7 @@ body {
   list-style-position: inside;
   text-align: center;
   list-style-type: none;
+  padding: 0;
 }
 
 .resultsPage * {
@@ -128,6 +306,7 @@ body {
 
 .resultsPage h1 {
   text-align: center;
+  font-size: 1.5em;
 }
 
 .resultsPage .getClue {
@@ -142,19 +321,22 @@ body {
 	text-align: center;
   }
   
-  .leaderBoard button {
-	  background-color: #ccc;
-  }
+.leaderBoard button {
+  background-color: #ccc;
+  margin-top: 4%;
+}
+
+
+canvas {
+  width: 0;
+}
 
 #instruction-modal {
   color: black;
 }
 
-.carousel{
-  margin-top: 20px;
-}
 .carousel .item{
-  min-height: 280px; /* Prevent carousel from being distorted if for some reason image doesn't load */
+  min-height: 0px;
 }
 
 .carousel .item h3 {

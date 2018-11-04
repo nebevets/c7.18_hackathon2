@@ -11,10 +11,7 @@ function createLandingPage() {
 		'class': 'landingPage form-group'
 	});
 	let newInstructions = $('<h4>', {
-		text: `Eye Spy is an image-based scavenger hunt game. A random image is chosen and evaluated.
-				Clues are given to you based on this information. You must find something that matches those clues,
-				take a picture and upload it for evaluation. You receive points, depending on how similar your image
-				is to the original. Good luck on your hunt!`,
+		text: `Good luck on your hunt!`,
 		class: 'instructions form-group'
 	});
 	let newPlayerForm = $('<div>', {
@@ -35,7 +32,7 @@ function createLandingPage() {
 	});
 	let newGoBtn = $('<button>', {
 		        'type': 'button',
-		        'class': 'leaderBoard btn btn-info col-xs-4 col-xs-push-1 col-sm-3 col-sm-push-2 col-md-3 col-md-push-2',
+		        'class': 'leaderBoard btn btn-info col-xs-12 col-sm-3 col-sm-push-2',
 		        'text': 'Leader Board',
 		        'on': {
 					'click': leaderboardButtonHandler
@@ -43,7 +40,7 @@ function createLandingPage() {
 	});
 	let newLeaderBoardButton = $('<button>', {
 		'type': 'button',
-		'class': 'goBtn btn btn-default col-xs-4 col-xs-push-3 col-sm-3 col-sm-push-4 col-md-3 col-md-push-4',
+		'class': 'goBtn btn btn-default col-xs-12 col-sm-3 col-sm-push-4',
 		'text': 'Go!',
 		'on': {
 			'click': () => {
@@ -183,6 +180,9 @@ function getResultsPage() {
 	let userPara = $('<p>', {
 		'text': 'This is what you found...'
 	});
+	let playerCredit = $("<p>", {
+		'text': 'Your image'
+	});
 	let secondRow = $('<div>', {
 		'class': 'row'
 	});
@@ -213,7 +213,7 @@ function getResultsPage() {
 	clueCaption.append(cluePara, uploaderCredit);
 	clueThumbnail.append(clueImgElement, clueCaption);
 	clueCol.append(clueThumbnail);
-	userCaption.append(userPara);
+	userCaption.append(userPara, playerCredit);
 	userThumbnail.append(userImg, userCaption);
 	userCol.append(userThumbnail);
 	firstRow.append(clueCol, userCol);
