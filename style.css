@@ -13,29 +13,60 @@
     font-size: 1.35em;
   }
 
+  .resultsPage .thumbnail img {
+    height: 29vh;
+  }
 }
 
 @media (min-width: 1025px) and (max-width: 1280px) {
   /* Laptops/Desktops */
 
   body {
-    background-size: cover;
+    background-size: 225%;
   }
+
+  .logoImg {
+    width: 40%;
+  }
+
+  .carousel .item h3, .carousel .item h4 {
+    font-size: 1.35em;
+  }
+
+}
+
+@media (min-width: 1024px) and (max-width: 1366px) and (orientation: landscape) and (-webkit-min-device-pixel-ratio: 1.5) {
+  /* Ipad Pro Landscape */
+
+  body {
+    background-size: auto;
+  }
+
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
   /* Tablets, Ipads, Portrait */
 
   body {
-    background-size: 300%;
+    background-size: 350%;
   }
 
   .logoImg {
-    width: 50%;
+    width: 40%;
   }
 
   .carousel .item h3 {
     font-size: 1.35em;
+  }
+
+}
+
+
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+  /* Tablets, Ipads, Landscape */
+
+  body {
+    background-size: 225%;
   }
 
 }
@@ -51,6 +82,10 @@
     font-size: 1.35em;
   }
   
+  .cluesPage .instructions {
+    font-size: 1.25em;
+  }
+
 }
 
 @media (min-width: 481px) and (max-width: 767px) and (orientation: landscape) {
@@ -61,6 +96,10 @@
 
   .landingPage .instructions {
     font-size: 1em;
+  }
+
+  .resultsPage .thumbnail img {
+    height: 60vh;
   }
 }
 
@@ -84,9 +123,13 @@
     margin-bottom: 2%;
   }
 
-  .carousel .item h3 {
+  .carousel .item h3, .carousel .item h4 {
     font-size: 1.15em;
   }
+
+  .cluesPage .instructions {
+    font-size: 1em;
+  } 
 
 }
 
@@ -96,14 +139,29 @@
   body {
     background-size: 500%;
   }
+
+  #instruction-modal .item h4, #instruction-modal .carousel h3 {
+    font-size: .85em;
+  }
+
+
 }
 
 @media only screen and (min-device-width: 320px) and (max-device-width: 480px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape) {
-  /* Iphone 4 Portrait */
+  /* Iphone 4 Landscape */
 
   .logoImg {
     width: 35%;
   }
+
+  #instruction-modal .carousel .item h3, #instruction-modal .carousel h4 {
+    font-size: .8em;
+  }
+
+  .resultsPage .thumbnail img {
+    height: 80vh;
+  }
+
 }
 
 @media only screen and (min-device-width: 375px) and (max-device-height: 812px) and (orientation : landscape) and (-webkit-device-pixel-ratio: 3){
@@ -112,10 +170,16 @@
   .logoImg {
     width: 45%;
   }
-}
-  
-  
 
+  #instruction-modal .item h3, #instruction-modal .item h4 {
+    font-size: 1em;
+  }
+  
+  .resultsPage .thumbnail img {
+    height: 60vh;
+  }
+
+}
 
 * {
   font-family: monospace;
@@ -131,6 +195,7 @@ body {
 .instructions {
   text-shadow: 1px 1px  black;
   color: white;
+  margin: auto;
 }
 
 .cluesPage {
@@ -144,13 +209,11 @@ body {
 }
 
 .thumbnail>img{
-	height: 100%;
-	width: 100%;
+  object-fit: cover;
+  width: 100%;
+  height: 29vh;
 }
-.clueImage{
-	width: 100%;
-	height: 15%;
-}
+
 #waitingModal{
   color: black;
   text-shadow: 1px 1px white;
@@ -244,6 +307,7 @@ body {
 
 .resultsPage h1 {
   text-align: center;
+  font-size: 1.5em;
 }
 
 .resultsPage .getClue {
@@ -258,22 +322,22 @@ body {
 	text-align: center;
   }
   
-  .leaderBoard button {
-	  background-color: #ccc;
-  }
+.leaderBoard button {
+  background-color: #ccc;
+  margin-top: 4%;
+}
 
-  canvas {
-    width: 0;
-  }
+
+canvas {
+  width: 0;
+}
+
 #instruction-modal {
   color: black;
 }
 
-.carousel{
-  margin-top: 20px;
-}
 .carousel .item{
-  min-height: 280px; /* Prevent carousel from being distorted if for some reason image doesn't load */
+  min-height: 0px;
 }
 
 .carousel .item h3 {
@@ -287,7 +351,4 @@ body {
 
 .carousel .item img{
   margin: 0 auto; /* Align slide image horizontally center */
-}
-.bs-example{
-	margin: 20px;
 }

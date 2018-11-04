@@ -179,6 +179,9 @@ function getResultsPage() {
 	let userPara = $('<p>', {
 		'text': 'This is what you found...'
 	});
+	let playerCredit = $("<p>", {
+		'text': 'Your image'
+	});
 	let secondRow = $('<div>', {
 		'class': 'row'
 	});
@@ -209,7 +212,7 @@ function getResultsPage() {
 	clueCaption.append(cluePara, uploaderCredit);
 	clueThumbnail.append(clueImgElement, clueCaption);
 	clueCol.append(clueThumbnail);
-	userCaption.append(userPara);
+	userCaption.append(userPara, playerCredit);
 	userThumbnail.append(userImg, userCaption);
 	userCol.append(userThumbnail);
 	firstRow.append(clueCol, userCol);
