@@ -38,7 +38,7 @@ function getRandomImageFromFlickr(wordArray) {
 				createCluesOnDom(clueImg);
 			});
 		}
-	}
+	};
 	$.ajax(flickrConfig);
 }
 
@@ -53,7 +53,7 @@ function retrieveFlickrUploaderInfo(userid) {
 		success: result => {
 			savedGameImages.uploader = result.person.username._content;
 		}
-	}
+	};
 	$.ajax(flickrConfig);
 }
 
@@ -75,7 +75,7 @@ function handleImage() {
 			guessImg = response.outputs[0].data.concepts;
 			getResultsPage();
 		});
-	}
+	};
 	reader.readAsDataURL(event.target.files[0]);
 }
 /****************************************************************************************************
@@ -104,6 +104,6 @@ function getRandomWordsFromNYT() {
 			randomWordArray.push('meerkat');
 			getRandomImageFromFlickr(randomWordArray);
 		}
-	}
+	};
 	$.ajax(ajaxOptions);
 }

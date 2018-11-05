@@ -194,7 +194,7 @@ function getResultsPage() {
 	});
 	let getClueButton = $('<button>', {
 		'type': 'button',
-		'class': 'getClue btn btn-default col-xs-4 col-xs-push-1 col-sm-3 col-sm-push-2 col-md-3 col-md-push-2',
+		'class': 'getClue btn btn-default col-xs-12 col-sm-3 col-sm-push-4',
 		'text': 'Get New Clue',
 		'click': () => {
 			emptyContainer();
@@ -203,7 +203,7 @@ function getResultsPage() {
 	});
 	let newLeaderBoardButton = $('<button>', {
 		'type': 'button',
-		'class': 'leaderBoard btn btn-info col-xs-4 col-xs-push-3 col-sm-3 col-sm-push-4 col-md-3 col-md-push-4',
+		'class': 'leaderBoard btn btn-info col-xs-12 col-sm-3 col-sm-push-2',
 		'text': 'Leader Board',
 		'on': {
 			'click': leaderboardButtonHandler
@@ -217,7 +217,7 @@ function getResultsPage() {
 	userThumbnail.append(userImg, userCaption);
 	userCol.append(userThumbnail);
 	firstRow.append(clueCol, userCol);
-	buttonCol.append(getClueButton, newLeaderBoardButton);
+	buttonCol.append(newLeaderBoardButton, getClueButton);
 	secondRow.append(buttonCol);
 	newResultsPage.append(firstRow, updateUser, secondRow);
 	destroyEllipsis();
