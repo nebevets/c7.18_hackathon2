@@ -26,11 +26,15 @@
   }
 
   .logoImg {
-    width: 40%;
+    width: 37%;
   }
 
   .carousel .item h3, .carousel .item h4 {
     font-size: 1.35em;
+  }
+
+  .resultsPage .thumbnail > img {
+    height: 57vh;
   }
 
 }
@@ -325,6 +329,10 @@ body {
   background-color: #ccc;
   margin-top: 4%;
 }
+
+.leaderBoard button:first-of-type {
+  margin-bottom: 1%;
+} 
 
 
 canvas {
