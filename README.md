@@ -11,8 +11,8 @@ An image scavenger hunt game that utilizes an artificial intelligence API to ana
 
 ## Technologies
 
-- JavaScript/jQuery
-- Bootstrap
+- JavaScript, jQuery, AJAX
+- HTML5, Bootstrap, CSS3
 
 ## Authors
 
