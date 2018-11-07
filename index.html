@@ -1,45 +1,106 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="initial-scale=1, user-scalable=no">
-        <meta name="author" content="steve benedict, gerry blackmon, randy dang, jonathan gallo">
-        <meta name="description" content="hackathon 2, team 2">
 
-        <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-        <link rel="stylesheet" href="./style.css">
-        <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
-        <script type="text/javascript" src="https://sdk.clarifai.com/js/clarifai-latest.js"></script>
-        <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
-        <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/5.4.2/firebase.js"></script>
-        <script src="firebase/firebaseFunctions.js"></script>
-        <script src="firebase/genericFirebaseBackend.js"></script>
-        <script src="firebase/firebaseConfig.js"></script>
-        <script src="./APICalls.js"></script>
-        <script src="./helperFunctions.js"></script>
-        <script src="./DomCreation.js"></script>
-        <script src="./main.js"></script>
-        <title>7.18 Team 2 Hackathon</title>
-    </head>
-    <body class="body">
-        <div class="container">
-        </div>
-        <!-- this is the modal we show for waiting -->
-        <div id="waitingModal" class="modal fade" role="dialog">
-            <div class="modal-dialog model-sm">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title"></h4>
-                    </div>
-                    <div class="modal-body"></div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    </div>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, user-scalable=no">
+    <meta name="author" content="steve benedict, gerry blackmon, randy dang, jonathan gallo">
+    <meta name="description" content="hackathon 2, team 2">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+    <script type="text/javascript" src="https://sdk.clarifai.com/js/clarifai-latest.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.0.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.4.2/firebase.js"></script>
+    <script src="api_keys.js"></script>
+    <script src="firebase/firebaseFunctions.js"></script>
+    <script src="firebase/genericFirebaseBackend.js"></script>
+    <script src="APICalls.js"></script>
+    <script src="helperFunctions.js"></script>
+    <script src="DomCreation.js"></script>
+    <script src="main.js"></script>
+    <title>Eye Spy</title>
+</head>
+
+<body class="body">
+    <img class="logoImg" src="assets/eyespylogo.png">
+    <div id="ellipsis"></div>
+    <div class="container">
+    </div>
+    <!-- this is the modal we show for errors -->
+    <div id="errorModal" class="modal fade" role="dialog">
+        <div class="modal-dialog model-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title"></h4>
+                </div>
+                <div class="modal-body"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
-        <canvas id="imageCanvas"></canvas>
-    </body>
+    </div>
+
+    <!-- this is the modal we show for instructions -->
+    <div id="instruction-modal" class="modal fade" role="dialog">
+        <div class="modal-dialog model-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Welcome to EyeSpy!</h4>
+                </div>
+                <div class="modal-body">
+                    
+                    <div id="instruction-carousel" class="carousel slide" data-interval="false">
+
+                        <!-- Carousel Item Wrapper / Content -->
+                        <div class="carousel-inner">
+                            <div class="item active">
+                                <h3>Eye Spy is an image-based scavenger hunt game. A random image from Flickr is chosen and evaluated by an AI called Clarafai. </h3>
+                                <h3>Clues are given to you based on the information given from the AI. Upload an image based off the clues and see how similar your image is to the Flickr image! </h3>
+                            </div>
+                            <div class="item">
+                                <img src="assets/carousel-image-1.png" alt="enter player name">
+                                <h4>Enter player name here to begin the game.</h4>
+                            </div>
+                            <div class="item">
+                                <img src="assets/carousel-image-3.png" alt="clues">
+                                <h4>Clues are given about the random photo pulled from Flickr. The user then has to upload a photo to Clarifai matching those clues.</h4>
+                            </div>
+                            <div class="item">
+                                <img src="assets/carousel-image-4.png" alt="scoring">
+                                <h4>Clarifai compares the two images and the user is scored on how similar they are to each other . The scoring is percentage based and is out of 100%.</h4>
+                            </div>
+                            <div class="item">
+                                <img src="assets/carousel-image-5.png" alt="multiplayer">
+                                <h4>Compete against your friends and family to see who can score the highest amount of points!</h4>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Carousel Controls -->
+                    <a href="#instruction-carousel" data-slide="prev" class="carousel-control left">
+                        <span class="glyphicon glyphicon-chevron-left"></span>
+                    </a>
+                    <a href="#instruction-carousel" data-slide="next" class="carousel-control right">
+                        <span class="glyphicon glyphicon-chevron-right"></span>
+                    </a>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Instruction Modal End -->
+
+    <canvas id="imgConverter"></canvas>
+</body>
+
 </html>

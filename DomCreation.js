@@ -5,19 +5,13 @@
  * @param:none
  * @return:none
  */
-function instructionsPage(){
-	let eyeSpyLogo = $('<img>', {
-		class: 'logoImg',
-		src: 'assets/eyespylogo.png',
-	});
+
+function createLandingPage() {
 	let newLandingPageContainer = $('<div>', {
 		'class': 'landingPage form-group'
 	});
 	let newInstructions = $('<h4>', {
-		text: `Eye Spy is an image-based scavenger hunt game. A random image is chosen and evaluated.
-				Clues are given to you based on this information. You must find something that matches those clues,
-				take a picture and upload it for evaluation. You receive points, depending on how similar your image
-				is to the original. Good luck on your hunt!`,
+		text: `Good luck on your hunt!`,
 		class: 'instructions form-group'
 	});
 	let newPlayerForm = $('<div>', {
@@ -37,39 +31,45 @@ function instructionsPage(){
 		'class': 'form-group'
 	});
 	let newGoBtn = $('<button>', {
-        'type': 'button',
-        'class': 'goBtn btn btn-default col-xs-4 col-xs-push-1 col-sm-3 col-sm-push-2 col-md-3 col-md-push-2',
-        'text': 'Go!',
-        'click': () => {
-            let playerName = $('.landingPage input').val();
-			if( !playerName ){
-				return;
-			}
-            addPlayerToGame(playerName);
-            $('.container').empty();
-        }
-    });
+		        'type': 'button',
+		        'class': 'leaderBoard btn btn-info col-xs-12 col-sm-3 col-sm-push-2',
+		        'text': 'Leader Board',
+		        'on': {
+					'click': leaderboardButtonHandler
+				}
+	});
 	let newLeaderBoardButton = $('<button>', {
 		'type': 'button',
-		'class': 'leaderBoard btn btn-info col-xs-4 col-xs-push-3 col-sm-3 col-sm-push-4 col-md-3 col-md-push-4',
-		'text': 'Leader Board',
-		'click': () => leaderboardButtonHandler()
+		'class': 'goBtn btn btn-default col-xs-12 col-sm-3 col-sm-push-4',
+		'text': 'Go!',
+		'on': {
+			'click': () => {
+				let $nameInput = $('.landingPage input');
+				let playerName = $nameInput.val();
+				let playerNameRegEx = /^[a-zA-Z\-'0-9]{2,15}$/;
+				if(!playerNameRegEx.test(playerName)){
+					let errorTitle = 'Error: Name Input';
+					let errorMsgs = [`"${playerName}" is not a valid user name. Use up to 15 letters and/or numbers only.`];
+					$nameInput.val('');
+					showErrorModal(errorTitle, errorMsgs);
+					return;
+				}
+        		addPlayerToGame(playerName);
+				emptyContainer();
+        	}
+		}
 	});
 	newPlayerForm.append(newLabel, newInput);
 	newButtonForm.append(newGoBtn, newLeaderBoardButton);
 	newLandingPageContainer.append(newInstructions, newPlayerForm, newButtonForm);
-	$('.container').append(eyeSpyLogo, newLandingPageContainer);
+	$('.container').append(newLandingPageContainer);
 }
 /****************************************************************************************************
 * description: creates the clue page
  * @param: clueObj
  * @return: none
  */
-function createCluesOnDom(clueObj){
-	let eyeSpyLogo = $('<img>', {
-		class: 'logoImg',
-		src: 'assets/eyespylogo.png',
-	});
+function createCluesOnDom(clueObj) {
 	let newCluesContainer = $('<div>', {
 		class: 'cluesPage form-group'
 	});
@@ -84,7 +84,7 @@ function createCluesOnDom(clueObj){
 	let newH4 = $('<h4>', {
 		'text': 'Here are your clues:'
 	});
-    let newOl = $('<ol>');
+	let newOl = $('<ol>');
 	let newFileForm = $('<div>', {
 		'class': 'form-group col-xs-12 col-md-6 col-md-push-3'
 	});
@@ -97,7 +97,8 @@ function createCluesOnDom(clueObj){
 		'class': 'form-control col-xs-4 col-md-1 col-lg-3',
 		'type': 'file',
 		'id': 'uploadFile',
-		'name': 'uploadFile'
+		'name': 'uploadFile',
+		'accept': 'image/x-png,image/gif,image/jpeg'
 	});
 	let newButtonForm = $('<div>', {
 		'class': 'form-group col-md-12'
@@ -106,24 +107,29 @@ function createCluesOnDom(clueObj){
 		'type': 'button',
 		'class': 'skip btn btn-default col-xs-12 col-sm-5 col-md-4 col-md-push-2',
 		'text': 'Skip Clue',
-		'click': () => skipButtonHandler()
+		'on': {
+			'click': skipButtonHandler
+		}
 	});
 	let newLeaderBoardButton = $('<button>', {
 		'type': 'button',
 		'class': 'leaderBoard btn btn-info col-xs-12 col-sm-5 col-sm-push-1 col-md-4 col-md-push-2',
 		'text': 'Leader Board',
-		'click': () => leaderboardButtonHandler()
+		'on': {
+			'click': leaderboardButtonHandler
+		}
 	});
-	for(var i = 0; i < 5; i++) {
+	for (var i = 0; i < 5; i++) {
 		newOl.append($('<li>', {
-		text: clueObj[i].name
-		}))
-	};
+			text: clueObj[i].name
+		}));
+	}
 	newFileForm.append(newLabel, newInput);
 	newButtonForm.append(newSkipButton, newLeaderBoardButton);
 	newClues.append(newH4, newOl);
 	newCluesContainer.append(newInstructions, newClues, newFileForm, newButtonForm);
-	$('.container').append(eyeSpyLogo, newCluesContainer);
+	destroyEllipsis();
+	$('.container').append(newCluesContainer);
 	let imageLoader = $('#uploadFile');
 	imageLoader.change(handleImage);
 }
@@ -132,11 +138,7 @@ function createCluesOnDom(clueObj){
  * @param: none
  * @return: none
  */
-function getResultsPage(){
-	let eyeSpyLogo = $('<img>', {
-		class: 'logoImg',
-		src: 'assets/eyespylogo.png',
-	});
+function getResultsPage() {
 	let newResultsPage = $('<div>', {
 		'class': 'resultsPage'
 	});
@@ -147,7 +149,7 @@ function getResultsPage(){
 		'class': 'col-sm-6'
 	});
 	let clueThumbnail = $('<div>', {
-		'class':'thumbnail'
+		'class': 'thumbnail'
 	});
 	let clueImgElement = $('<img>', {
 		'class': 'clueImage',
@@ -160,11 +162,14 @@ function getResultsPage(){
 	let cluePara = $('<p>', {
 		'text': 'This was your clue image...'
 	});
+	let uploaderCredit = $('<p>', {
+		'text': `Flickr image provided by: ${savedGameImages.uploader}`
+	});
 	let userCol = $('<div>', {
 		'class': 'col-sm-6'
 	});
 	let userThumbnail = $('<div>', {
-		'class':'thumbnail'
+		'class': 'thumbnail'
 	});
 	let userImg = $('<img>', {
 		src: savedGameImages.guessImg.src,
@@ -175,53 +180,55 @@ function getResultsPage(){
 	let userPara = $('<p>', {
 		'text': 'This is what you found...'
 	});
+	let playerCredit = $("<p>", {
+		'text': 'Your image'
+	});
 	let secondRow = $('<div>', {
 		'class': 'row'
 	});
 	let updateUser = $('<h1>', {
-		'text': `Your score this round was ${compareClueImgToGuessImg(clueImg, guessImg)} out of 400!`
-	})
+		'text': `Clarifai rates the two images ${compareClueImgToGuessImg(clueImg, guessImg)}% similar!`
+	});
 	let buttonCol = $('<div>', {
 		'class': 'col-sm-12'
 	});
 	let getClueButton = $('<button>', {
 		'type': 'button',
-		'class': 'getClue btn btn-default col-xs-4 col-xs-push-1 col-sm-3 col-sm-push-2 col-md-3 col-md-push-2',
+		'class': 'getClue btn btn-default col-xs-12 col-sm-3 col-sm-push-4',
 		'text': 'Get New Clue',
 		'click': () => {
-			$('.container').empty();
+			emptyContainer();
 			getRandomWordsFromNYT();
 		}
 	});
 	let newLeaderBoardButton = $('<button>', {
 		'type': 'button',
-		'class': 'leaderBoard btn btn-info col-xs-4 col-xs-push-3 col-sm-3 col-sm-push-4 col-md-3 col-md-push-4',
+		'class': 'leaderBoard btn btn-info col-xs-12 col-sm-3 col-sm-push-2',
 		'text': 'Leader Board',
-		'click': () => leaderboardButtonHandler()
+		'on': {
+			'click': leaderboardButtonHandler
+		}
 	});
 
-	clueCaption.append(cluePara)
+	clueCaption.append(cluePara, uploaderCredit);
 	clueThumbnail.append(clueImgElement, clueCaption);
 	clueCol.append(clueThumbnail);
-	userCaption.append(userPara)
+	userCaption.append(userPara, playerCredit);
 	userThumbnail.append(userImg, userCaption);
 	userCol.append(userThumbnail);
 	firstRow.append(clueCol, userCol);
-	buttonCol.append(getClueButton, newLeaderBoardButton);
+	buttonCol.append(newLeaderBoardButton, getClueButton);
 	secondRow.append(buttonCol);
 	newResultsPage.append(firstRow, updateUser, secondRow);
-	$('.container').append(eyeSpyLogo, newResultsPage);
+	destroyEllipsis();
+	$('.container').append(newResultsPage);
 }
 /****************************************************************************************************
 * description: sets up leader board page with dom creation
- * @param:
- * @return:
+ * @param:none
+ * @return:none
  */
-function getLeaderBoardPage(){
-	let eyeSpyLogo = $('<img>', {
-		class: 'logoImg',
-		src: 'assets/eyespylogo.png',
-	});
+function getLeaderBoardPage() {
 	let newLeaderBoardPage = $('<div>', {
 		'class': 'leaderBoard'
 	});
@@ -241,18 +248,21 @@ function getLeaderBoardPage(){
 	});
 	let buttonCol = $('<div>', {
 		'class': 'col-xs-12'
-	})
+	});
 	let getClueButton = $('<button>', {
 		'type': 'button',
 		'class': 'getClue btn btn-default',
 		'text': 'Get New Clue',
-		'click': () => {
-			$('.container').empty();
-			if(player.name === null){
-				instructionsPage();
-				return;
+		'on': {
+			'click': () => {
+				emptyContainer();
+				if (player.name === null) {
+					createLandingPage();
+					destroyEllipsis();
+					return;
+				}
+				getRandomWordsFromNYT();
 			}
-			getRandomWordsFromNYT();
 		}
 	});
 
@@ -262,32 +272,41 @@ function getLeaderBoardPage(){
 	newLeaderBoardPage.append(firstRow);
 	addPlayersToLeaderBoard(totalPlayersObj, newLeaderBoardPage);
 	newLeaderBoardPage.append(buttonRow);
-	$('.container').append(eyeSpyLogo, newLeaderBoardPage)
+	destroyEllipsis();
+	$('.container').append(newLeaderBoardPage);
 }
 /****************************************************************************************************
- * description: this adds players to the leader board, calls saveGameData()
+ * description: this adds players to the leader board, calls saveGameData().
+ *  	due to firebase not having base functionality for arrays, the data must be manipulated around in order to display in
+ * 		decending order, as well as keep names attached.
  * @param: playerObjFromFirebase, htmlElement
  * @returns: none
  */
-function addPlayersToLeaderBoard(playerObjFromFirebase, htmlElement){
+function addPlayersToLeaderBoard(playerObjFromFirebase, htmlElement) {
 	saveGameData();
-	let highestToLowestArray = [];
-	for( let searchKey in playerObjFromFirebase){
-		highestToLowestArray.push( playerObjFromFirebase[searchKey].score );
-	}
-		highestToLowestArray.sort( (a, b) => b - a );
-		for( let splicingIndex = 0; splicingIndex < highestToLowestArray.length; splicingIndex++ ){
-			let lastIndexValue = highestToLowestArray.lastIndexOf(highestToLowestArray[splicingIndex])
-			if( splicingIndex !== lastIndexValue ){
-				highestToLowestArray.splice(lastIndexValue, 1);
-				splicingIndex--;
-			}
+	//deconstructs the object received from firebase into an array of just score values
+	let descendingScoreArray = [];
+	for (let searchKey in playerObjFromFirebase) {
+		if (playerObjFromFirebase[searchKey].attempts) {		//here in order to make sure that the score isnt divided by 0
+			descendingScoreArray.push(playerObjFromFirebase[searchKey].score / playerObjFromFirebase[searchKey].attempts);
 		}
-
-	for( let searchIndex = 0; searchIndex < highestToLowestArray.length; searchIndex++ ){
-			for( let searchKey in playerObjFromFirebase ){
+	}
+	//sorts the array into descending order
+	descendingScoreArray.sort((a, b) => b - a);
+	//loops through the array of scores and removed duplicate scores and scores of 0 from the array
+	for (let scoreArrayIndex = 0; scoreArrayIndex < descendingScoreArray.length; scoreArrayIndex++) {
+		let lastIndexOfCurrentScore = descendingScoreArray.lastIndexOf(descendingScoreArray[scoreArrayIndex]);
+		if (scoreArrayIndex !== lastIndexOfCurrentScore || descendingScoreArray[scoreArrayIndex] === 0) {
+			descendingScoreArray.splice(lastIndexOfCurrentScore, 1);
+			scoreArrayIndex--;
+		}
+	}
+	//with the descending array of unique scores, loops through it and matches the player with that score in the firebase object, and then
+	//DOM creates them in order. Also limits the number of highscores to a max of 25.
+	for (let searchIndex = 0; searchIndex < descendingScoreArray.length || searchIndex > 25; searchIndex++) {
+		for (let searchKey in playerObjFromFirebase) {
 			let theCurrentKey = searchKey;
-			if( playerObjFromFirebase[theCurrentKey].score === highestToLowestArray[searchIndex] ){
+			if (playerObjFromFirebase[theCurrentKey].score / playerObjFromFirebase[searchKey].attempts === descendingScoreArray[searchIndex]) {
 				let newRow = $('<div>', {
 					'class': 'row'
 				});
@@ -297,7 +316,7 @@ function addPlayersToLeaderBoard(playerObjFromFirebase, htmlElement){
 				});
 				let newPlayerScore = $('<div>', {
 					'class': 'col-xs-6',
-					'text': playerObjFromFirebase[theCurrentKey].score
+					'text': `${parseInt(playerObjFromFirebase[theCurrentKey].score / playerObjFromFirebase[searchKey].attempts)}%`
 				});
 				newRow.append(newPlayerName, newPlayerScore);
 				htmlElement.append(newRow);
@@ -305,24 +324,21 @@ function addPlayersToLeaderBoard(playerObjFromFirebase, htmlElement){
 		}
 	}
 }
+
 /****************************************************************************************************
-* description: dom creates the waiting modal
+* description: dom creates the error modal
  * @param: none
  * @return: none
  */
-function waitingModal(quote){
+function errorModal(message) {
 	$('.modal-body').empty();
-	let eyeSpyLogo = $('<img>', {
-		class: 'logoImg',
-		src: 'assets/eyespylogo.png',
-	})
-	$('.modal-title').text(`Hello ${player.name}, some entertainment while you're waiting`);
-	let quoteOfTheDay = $('<div>', {
+	$('.modal-title').text(`Error`);
+	let errorMessage = $('<div>', {
 		class: 'quoteDiv',
-		text: quote,
-	})
+		text: message,
+	});
 
-	$('.modal-body').append(eyeSpyLogo, quoteOfTheDay);
-	$('#waitingModal').modal('show');
+	$('.modal-body').append(errorMessage);
+	$('#errorModal').modal('show');
 }
 /*****************************************************************************************************/
