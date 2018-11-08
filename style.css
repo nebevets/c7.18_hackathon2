@@ -1,3 +1,186 @@
+* {
+  font-family: monospace;
+}
+
+body {
+  background-image: url("assets/city_of_noir.jpg");
+	background-repeat:no-repeat;
+	background-color: #000;
+  color: white;
+}
+
+.instructions {
+  text-shadow: 1px 1px  black;
+  color: white;
+  margin: auto;
+}
+
+.cluesPage {
+  text-shadow: 1px 1px black;
+  color: white;
+}
+
+.row {
+  text-shadow: 1px 1px black;
+  color: white;
+}
+
+.thumbnail>img{
+  object-fit: scale-down;
+  width: 100%;
+  height: 29vh;
+}
+
+#errorModal{
+  color: black;
+  text-shadow: 1px 1px white;
+}
+
+.logoImg {
+  display: block;
+  margin: auto;
+}
+
+.landingPage .instructions {
+  text-align: center;
+}
+
+.landingPage .control-label {
+  display: block;
+  text-align: center;
+}
+
+.landingPage input {
+  margin: auto;
+  text-align: center;
+}
+
+.landingPage button.leaderBoard {
+  font-size: 1.3rem;
+}
+
+.landingPage .form-group:nth-child(3) {
+  margin: auto;
+}
+
+.form-group .leaderBoard {
+  background-color: rebeccapurple;
+  color: white;
+}
+
+.modal-content {
+  background-color: #ccc;
+  border-radius: 15px 15px;
+  text-align: center;
+}
+
+.goBtn, button.leaderBoard, .modal-footer button, .button.skip, .resultsPage button {
+  border-top: 5px solid rgba(255, 255, 255, 0.1);
+  border-left: 2px solid  rgba(255, 255, 255, 0.1);
+  border-bottom: 5px solid rgba(0, 0, 0, 0.25);
+  border-right: 2px solid  rgba(0, 0, 0, 0.25);
+}
+
+.goBtn {
+  background-color: #ccc;
+}
+
+.landingPage .form-control {
+  width: 50%;
+}
+
+.cluesPage * {
+  text-align: center;
+}
+
+.cluesPage .instructions {
+  width: 75%;
+}
+
+.cluesPage .btn {
+  margin: 1%;
+}
+
+.cluesPage h4 {
+  text-align: center;
+}
+
+.cluesPage ol {
+  list-style-position: inside;
+  text-align: center;
+  list-style-type: none;
+  padding: 0;
+}
+
+.resultsPage * {
+  text-align: center;
+}
+
+.resultsPage h1 {
+  text-align: center;
+  font-size: 1.5em;
+}
+
+.resultsPage .getClue {
+  background-color: #ccc;
+}
+
+.resultsPage .leaderBoard {
+  background-color: rebeccapurple;
+  color: white;
+}
+
+.leaderBoard {
+	text-align: center;
+}
+  
+.leaderBoard button {
+  background-color: #ccc;
+  margin-top: 4%;
+}
+
+.leaderBoard button:first-of-type {
+  margin-bottom: 1%;
+} 
+
+canvas {
+  width: 0;
+}
+
+#instruction-modal {
+  color: black;
+}
+
+.carousel .item{
+  min-height: 0px;
+}
+
+.carousel .item h3 {
+  width: 75%;
+  margin: auto;
+}
+
+.carousel .item h3:last-of-type {
+  margin-top: 3%;
+}
+
+.carousel .item img{
+  margin: 0 auto; /* Align slide image horizontally center */
+}
+
+.bs-example{
+	margin: 20px;
+}
+
+#ellipsis{
+  color: white;
+  font-size: 75px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 @media (min-width: 1281px) {
   /* Desktops */
 
@@ -26,7 +209,7 @@
   }
 
   .logoImg {
-    width: 37%;
+    width: 45%;
   }
 
   .carousel .item h3, .carousel .item h4 {
@@ -56,7 +239,7 @@
   }
 
   .logoImg {
-    width: 40%;
+    width: 50%;
   }
 
   .carousel .item h3 {
@@ -79,7 +262,7 @@
   /* Low Res Tablets, Mobile Phones (Portrait) */
 
   .logoImg {
-    width: 75%;
+    width: 50%;
   }
 
   .carousel .item h3 {
@@ -183,194 +366,4 @@
     height: 60vh;
   }
 
-}
-
-* {
-  font-family: monospace;
-}
-
-body {
-  background-image: url("assets/city_of_noir.jpg");
-	background-repeat:no-repeat;
-	background-color: #000;
-  color: white;
-}
-
-.instructions {
-  text-shadow: 1px 1px  black;
-  color: white;
-  margin: auto;
-}
-
-.cluesPage {
-  text-shadow: 1px 1px black;
-  color: white;
-}
-
-.row {
-  text-shadow: 1px 1px black;
-  color: white;
-}
-
-.thumbnail>img{
-  object-fit: scale-down;
-  width: 100%;
-  height: 29vh;
-}
-#errorModal{
-  color: black;
-  text-shadow: 1px 1px white;
-}
-
-/* Page Image */
-.logoImg {
-  display: block;
-  margin: auto;
-}
-
-/* Logo Image */
-.LogoImg {
-  display: block;
-  margin: auto;
-  max-width: 65%;
-}
-
-.landingPage .instructions {
-  
-  text-align: center;
-}
-
-.landingPage .control-label {
-  display: block;
-  text-align: center;
-}
-
-.landingPage input {
-  margin: auto;
-  text-align: center;
-}
-
-.landingPage button.leaderBoard {
-  font-size: 1.3rem;
-}
-
-.landingPage .form-group:nth-child(3) {
-  margin: auto;
-}
-
-.form-group .leaderBoard {
-  background-color: rebeccapurple;
-  color: white;
-}
-
-.modal-content {
-  background-color: #ccc;
-  border-radius: 15px 15px;
-  text-align: center;
-}
-
-.goBtn, button.leaderBoard, .modal-footer button, .button.skip, .resultsPage button {
-  border-top: 5px solid rgba(255, 255, 255, 0.1);
-  border-left: 2px solid  rgba(255, 255, 255, 0.1);
-  border-bottom: 5px solid rgba(0, 0, 0, 0.25);
-  border-right: 2px solid  rgba(0, 0, 0, 0.25);
-}
-
-.goBtn {
-  background-color: #ccc;
-}
-
-.landingPage .form-control {
-  width: 50%;
-
-}
-
-.cluesPage * {
-  text-align: center;
-}
-
-.cluesPage .instructions {
-  width: 75%;
-}
-
-.cluesPage .btn {
-  margin: 1%;
-}
-
-.cluesPage h4 {
-  text-align: center;
-}
-
-.cluesPage ol {
-  list-style-position: inside;
-  text-align: center;
-  list-style-type: none;
-  padding: 0;
-}
-
-.resultsPage * {
-  text-align: center;
-}
-
-.resultsPage h1 {
-  text-align: center;
-  font-size: 1.5em;
-}
-
-.resultsPage .getClue {
-  background-color: #ccc;
-}
-
-.resultsPage .leaderBoard {
-  background-color: rebeccapurple;
-  color: white;
-}
-.leaderBoard {
-	text-align: center;
-  }
-  
-.leaderBoard button {
-  background-color: #ccc;
-  margin-top: 4%;
-}
-
-.leaderBoard button:first-of-type {
-  margin-bottom: 1%;
-} 
-
-
-canvas {
-  width: 0;
-}
-
-#instruction-modal {
-  color: black;
-}
-
-.carousel .item{
-  min-height: 0px;
-}
-
-.carousel .item h3 {
-  width: 75%;
-  margin: auto;
-}
-
-.carousel .item h3:last-of-type {
-  margin-top: 3%;
-}
-
-.carousel .item img{
-  margin: 0 auto; /* Align slide image horizontally center */
-}
-.bs-example{
-	margin: 20px;
-}
-#ellipsis{
-  color: white;
-  font-size: 75px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
 }
