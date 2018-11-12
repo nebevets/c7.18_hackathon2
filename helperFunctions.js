@@ -134,20 +134,20 @@ function destroyEllipsis(){
  * @return: true if the image is bad, false is the image is good.
  */
 function checkForImageNotFoundClues(array){
-	var badClues = [
+	const badClues = [
 	  'illustration', 
 	  'vector',
 	  'design',
 	  'desktop',
 	  'graphic'
 	];
-	var clues = [];
-	var matches = 0;
+	const clues = [];
+	let matches = 0;
 	
-	for(var index =0; index < 5; index++){
+	for(let index =0; index < 5; index++){
 	  clues.push(array[index].name);
 	}
-	for (var clue in clues){
+	for (let clue in clues){
 	  if(badClues.includes(clues[clue])){
 		matches++
 	  }
