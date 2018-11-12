@@ -128,3 +128,29 @@ function destroyEllipsis(){
 	clearTimeout(ellipsisTimeout);
 	ellipsis.empty();
 }
+/*****************************************************************************************************
+ * description: checks for an image that is "image not found" from flickr
+ * @param: array is an array of objects from clarifai's image analysis.
+ * @return: true if the image is bad, false is the image is good.
+ */
+function checkForImageNotFoundClues(array){
+	var badClues = [
+	  'illustration', 
+	  'vector',
+	  'design',
+	  'desktop',
+	  'graphic'
+	];
+	var clues = [];
+	var matches = 0;
+	
+	for(var index =0; index < 5; index++){
+	  clues.push(array[index].name);
+	}
+	for (var clue in clues){
+	  if(badClues.includes(clues[clue])){
+		matches++
+	  }
+	}
+	return (matches > 3) ? true : false;
+  }
