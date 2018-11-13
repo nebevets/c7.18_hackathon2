@@ -35,7 +35,12 @@ function getRandomImageFromFlickr(wordArray) {
 			clarifai.models.predict(Clarifai.GENERAL_MODEL, flickrImgURL).then(response => {
 				let clarifaiResponse = response;
 				clueImg = clarifaiResponse.outputs[0].data.concepts;
-				createCluesOnDom(clueImg);
+				if (checkForImageNotFoundClues(clueImg)){
+					flickrAttempts = 0;
+					$.ajax(flickrConfig);
+				}else {
+					createCluesOnDom(clueImg);
+				}
 			});
 		}
 	};
