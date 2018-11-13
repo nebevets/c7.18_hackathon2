@@ -196,6 +196,10 @@ canvas {
     font-size: 1.35em;
   }
 
+  .carousel-inner {
+    height: 52vh;
+  }
+
   .resultsPage .thumbnail img {
     height: 29vh;
   }
@@ -214,6 +218,10 @@ canvas {
 
   .carousel .item h3, .carousel .item h4 {
     font-size: 1.35em;
+  }
+
+  .carousel-inner {
+    height: 53vh;
   }
 
   .resultsPage .thumbnail > img {
@@ -246,6 +254,10 @@ canvas {
     font-size: 1.35em;
   }
 
+  .carousel-inner {
+    height: 52vh;
+  }
+
 }
 
 
@@ -266,11 +278,23 @@ canvas {
   }
 
   .carousel .item h3 {
-    font-size: 1.35em;
+    font-size: 1.25em;
+  }
+
+  .carousel .item h4 {
+    font-size: 1.25em;
+  }
+
+  .carousel .item img {
+    height: 27vh;
   }
   
   .cluesPage .instructions {
     font-size: 1.25em;
+  }
+
+  .carousel-inner {
+    height: 40vh;
   }
 
 }
@@ -288,6 +312,23 @@ canvas {
   .resultsPage .thumbnail img {
     height: 60vh;
   }
+
+  .carousel .item img {
+    height: 35vh;
+  }
+
+  .carousel-inner {
+    height: 53vh;
+  }
+
+  .carousel .item h3 {
+    font-size: 1em;
+  }
+
+  .carousel .item h4 {
+    font-size: 1em;
+  }
+
 }
 
 @media (min-width: 320px) and (max-width: 480px) {
@@ -311,7 +352,11 @@ canvas {
   }
 
   .carousel .item h3, .carousel .item h4 {
-    font-size: 1.15em;
+    font-size: .95em;
+  }
+
+  .carousel-inner {
+    height: 40vh;
   }
 
   .cluesPage .instructions {
@@ -328,7 +373,7 @@ canvas {
   }
 
   #instruction-modal .item h4, #instruction-modal .carousel h3 {
-    font-size: .85em;
+    font-size: .75em;
   }
 
 
@@ -349,6 +394,14 @@ canvas {
     height: 80vh;
   }
 
+  .carousel .item img {
+    height: 28vh;
+  }
+
+  .carousel-inner {
+    height: 45vh;
+  }
+
 }
 
 @media only screen and (min-device-width: 375px) and (max-device-height: 812px) and (orientation : landscape) and (-webkit-device-pixel-ratio: 3){
@@ -365,5 +418,18 @@ canvas {
   .resultsPage .thumbnail img {
     height: 60vh;
   }
+
+  .carousel .item img {
+    height: 35vh;
+  }
+
+  .carousel-inner {
+    height: 47vh;
+  }
+
+  #instruction-modal .item h4 {
+    font-size: .9em;
+  }
+
 
 }
