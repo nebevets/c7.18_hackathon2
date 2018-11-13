@@ -141,16 +141,12 @@ function checkForImageNotFoundClues(array){
 	  'desktop',
 	  'graphic'
 	];
-	const clues = [];
 	let matches = 0;
 	
-	for(let index =0; index < 5; index++){
-	  clues.push(array[index].name);
-	}
-	for (let clue in clues){
-	  if(badClues.includes(clues[clue])){
-		matches++
+	for (let index = 0; index < 5; index++){
+	  if (badClues.includes(array[index].name)){
+		matches++;
 	  }
 	}
 	return (matches > 3) ? true : false;
-  }
+}
