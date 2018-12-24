@@ -67,7 +67,7 @@ function retrieveFlickrUploaderInfo(userid) {
  * @param: none
  * @return: none
  */
-function handleImage() {
+function handleImage(event) {
 	emptyContainer();
 	let img;
 	let reader = new FileReader();
